@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La trampa del precio: cobras lo que crees que mereces, no lo que vales | VetConnect Pro LATAM</title>
+  <meta name="description" content="La dimensión con mayor saturación en el iScore LATAM no es el agotamiento emocional — es la relación con el dinero. El problema no está en el mercado. Está en las creencias." />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="es_LA" />
+  <meta property="og:site_name" content="VetConnect Pro LATAM" />
+  <meta property="og:url" content="https://vetconnectpro.vitalvetcrv.com.co/articulo-2.html" />
+  <meta property="og:title" content="La trampa del precio: cobras lo que crees que mereces, no lo que vales" />
+  <meta property="og:description" content="La dimensión con mayor saturación en el iScore LATAM no es el agotamiento emocional — es la relación con el dinero. Y el problema no está en el mercado. Está en las creencias que formamos durante años de ejercicio." />
+  <meta property="og:image" content="https://vetconnectpro.vitalvetcrv.com.co/logos/og-preview.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="La trampa del precio: cobras lo que crees que mereces, no lo que vales" />
+  <meta name="twitter:description" content="La dimensión Dinero/Crisis lidera el iScore LATAM. No es el mercado — son las creencias sobre el dinero que formamos durante el ejercicio." />
+  <meta name="twitter:image" content="https://vetconnectpro.vitalvetcrv.com.co/logos/og-preview.jpg" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="vetconnect.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    .article-hero {
+      position: relative; min-height: 70vh;
+      display: flex; align-items: center;
+      overflow: hidden; padding: 140px 60px 90px;
+      background-image:
+        linear-gradient(rgba(123,47,190,0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(123,47,190,0.045) 1px, transparent 1px);
+      background-size: 64px 64px;
+    }
+    .article-back {
+      display: inline-flex; align-items: center; gap: 7px;
+      color: var(--muted2); text-decoration: none; font-size: 13px; font-weight: 500;
+      margin-bottom: 28px; transition: color 0.2s;
+    }
+    .article-back:hover { color: var(--cyan); }
+    .article-back:hover svg { transform: translateX(-3px); }
+    .article-back svg { transition: transform 0.2s; }
+    .article-category-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(240,165,0,0.1); border: 1px solid rgba(240,165,0,0.35);
+      padding: 6px 16px; border-radius: 50px; margin-bottom: 22px;
+      font-size: 11.5px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: #F0A500;
+    }
+    .article-hero-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(30px, 4vw, 54px);
+      font-weight: 800; line-height: 1.1; letter-spacing: -1.5px;
+      margin-bottom: 22px; max-width: 760px;
+    }
+    .article-lead {
+      font-size: 18px; line-height: 1.75; color: var(--muted2);
+      max-width: 680px; margin-bottom: 34px;
+    }
+    .article-lead strong { color: var(--text); }
+    .article-meta {
+      display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+      padding-top: 22px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--muted);
+    }
+    .article-meta-item { display: flex; align-items: center; gap: 6px; }
+    .chart-container {
+      position: relative; max-width: 680px; margin: 0 auto; padding: 28px;
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 20px;
+    }
+    .chart-title {
+      font-family: 'Space Grotesk', sans-serif; font-size: 13px;
+      font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      margin-bottom: 16px; text-align: center;
+    }
+    .article-body { max-width: 780px; margin: 0 auto; }
+    .article-body p { font-size: 16px; color: var(--muted2); line-height: 1.85; margin-bottom: 18px; }
+    .article-body p strong { color: var(--text); }
+    .article-body h3 {
+      font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 800;
+      letter-spacing: -0.5px; margin: 36px 0 14px; color: var(--text);
+    }
+    .belief-list { list-style: none; display: flex; flex-direction: column; gap: 14px; margin: 20px 0 24px; }
+    .belief-list li {
+      display: flex; align-items: flex-start; gap: 12px;
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 14px; padding: 16px 18px;
+      font-size: 15px; color: var(--muted2); line-height: 1.6;
+      font-style: italic;
+    }
+    .belief-list li::before {
+      content: '"'; font-size: 28px; color: #F0A500;
+      font-family: Georgia, serif; line-height: 1; flex-shrink: 0; margin-top: -4px;
+    }
+    .tool-card {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 16px; padding: 22px 24px;
+      margin-bottom: 14px; display: flex; gap: 16px; align-items: flex-start;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .tool-card:hover { border-color: rgba(240,165,0,0.35); transform: translateX(4px); }
+    .tool-icon {
+      width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+      background: linear-gradient(135deg, rgba(240,165,0,0.2), rgba(123,47,190,0.15));
+      border: 1px solid rgba(240,165,0,0.3);
+      display: flex; align-items: center; justify-content: center; font-size: 18px;
+    }
+    .tool-body strong { display: block; font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .tool-body span { font-size: 13.5px; color: var(--muted); line-height: 1.55; }
+    .key-insight {
+      background: linear-gradient(135deg, rgba(240,165,0,0.08), rgba(123,47,190,0.05));
+      border: 1px solid rgba(240,165,0,0.25); border-radius: 20px;
+      padding: 28px 32px; margin: 28px 0;
+    }
+    .key-insight-label {
+      font-size: 10.5px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      color: #F0A500; margin-bottom: 12px; display: block;
+    }
+    .key-insight p { font-size: 15.5px; color: var(--muted2); line-height: 1.85; margin: 0; }
+    .key-insight p strong { color: var(--text); }
+    .cost-table {
+      width: 100%; border-collapse: collapse; margin: 24px 0;
+      font-size: 14px;
+    }
+    .cost-table th {
+      text-align: left; padding: 10px 14px;
+      background: rgba(123,47,190,0.1); border-bottom: 1px solid var(--border2);
+      font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--cyan);
+    }
+    .cost-table td { padding: 12px 14px; border-bottom: 1px solid var(--border); color: var(--muted2); line-height: 1.5; }
+    .cost-table tr:last-child td { border-bottom: none; font-weight: 700; color: var(--text); }
+    .cost-table .red { color: var(--red); font-weight: 700; }
+    .cost-table .green { color: var(--green); }
+    .bib-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .bib-list li {
+      font-size: 13.5px; color: var(--muted2); line-height: 1.7;
+      padding-left: 20px; position: relative;
+    }
+    .bib-list li::before { content: '—'; position: absolute; left: 0; color: var(--purple); }
+    .data-disclaimer {
+      background: rgba(123,47,190,0.06); border: 1px solid rgba(123,47,190,0.18);
+      border-radius: 12px; padding: 16px 20px; margin-top: 40px;
+      font-size: 12px; color: var(--muted); line-height: 1.7;
+    }
+    .data-disclaimer strong { color: var(--muted2); }
+    @media (max-width: 768px) {
+      .article-hero { padding: 120px 24px 60px; }
+      .section-inner { padding: 70px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="noise-overlay" aria-hidden="true"></div>
+
+<!-- ═══ NAV ═══ -->
+<nav id="nav">
+  <a href="index.html"><img src="logos/1.svg" alt="VetConnect Pro LATAM" class="nav-logo" /></a>
+  <ul class="nav-links">
+    <li><a href="test.html">Test Score</a></li>
+    <li><a href="programa.html">Programa</a></li>
+    <li><a href="recursos.html">Recursos</a></li>
+    <li><a href="metodologia.html">Metodología</a></li>
+    <li><a href="nosotros.html">Nosotros</a></li>
+  </ul>
+  <a href="programa.html" class="nav-cta">Ver Programa →</a>
+</nav>
+
+<!-- ═══ HERO DEL ARTÍCULO ═══ -->
+<section class="article-hero">
+  <div class="orb orb-purple" style="top:-120px; right:-80px; opacity:0.35; animation: drift2 15s ease-in-out infinite alternate;"></div>
+  <div class="orb orb-gold" style="top:30%; left:55%; opacity:0.5; animation: drift3 19s ease-in-out infinite alternate;"></div>
+
+  <div style="position:relative; z-index:2; max-width:1160px; margin:0 auto; width:100%;">
+    <a href="blog.html" class="article-back">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Volver al blog
+    </a>
+
+    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:16px;">
+      <span class="article-category-badge">💰 Finanzas Veterinarias</span>
+    </div>
+
+    <div class="eyebrow fade-up">RENTABILIDAD · CREENCIAS</div>
+
+    <h1 class="article-hero-title fade-up">
+      La trampa del precio:<br/>
+      cobras lo que <span class="grad-text">crees que mereces,</span><br/>
+      no lo que vales.
+    </h1>
+
+    <p class="article-lead fade-up">
+      La dimensión con <strong>mayor saturación en el iScore LATAM</strong> no es el agotamiento emocional — es la relación con el dinero. Y el problema no está en el mercado. Está en las creencias que formamos durante años de ejercicio.
+    </p>
+
+    <div class="article-meta fade-up">
+      <span class="article-meta-item">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        2026
+      </span>
+      <span class="article-meta-item">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        7 min lectura
+      </span>
+      <span class="article-meta-item">
+        📊 Dimensión Dinero/Crisis · iScore LATAM
+      </span>
+    </div>
+  </div>
+</section>
+
+<div class="grad-divider"></div>
+
+<!-- ═══ SECCIÓN DATOS / CHART ═══ -->
+<section class="sl">
+  <div class="section-inner">
+    <span class="eyebrow fade-up">El Dato Clave</span>
+    <h2 class="section-title fade-up">La dimensión más saturada<br/><span style="background:linear-gradient(135deg,#7B2FBE,#0099CC);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">no es el estrés clínico.</span></h2>
+    <p class="section-sub fade-up" style="color:var(--muted2);">
+      Dinero/Crisis lidera la saturación con un 36%, por encima del agotamiento emocional (32%) y de la despersonalización (26%). El veterinario no se quiebra primero por los casos difíciles — se quiebra por la presión económica.
+    </p>
+
+    <div style="margin-top:44px;" class="fade-up">
+      <div class="chart-container">
+        <div class="chart-title" style="color:var(--muted2);">Saturación por dimensión — Dinero/Crisis destacado</div>
+        <canvas id="chartArt2Bars" height="260"></canvas>
+        <p style="font-size:11.5px; color:var(--muted); text-align:center; margin-top:14px; line-height:1.6;">
+          % saturación del máximo posible por dimensión · iScore LATAM (datos preliminares)<br/>
+          * Conciencia es dimensión orientativa — no suma al puntaje total iScore
+        </p>
+      </div>
+    </div>
+
+    <!-- Dato ancla -->
+    <div class="fade-up" style="max-width:680px; margin:36px auto 0; display:flex; gap:20px; flex-wrap:wrap; align-items:stretch;">
+      <div style="flex:1; min-width:160px; background:rgba(255,69,96,0.07); border:1px solid rgba(255,69,96,0.22); border-radius:16px; padding:22px 20px; text-align:center;">
+        <span style="font-family:'Space Grotesk',sans-serif; font-size:48px; font-weight:900; color:#FF4560; line-height:1; display:block;">36%</span>
+        <span style="font-size:12px; color:var(--muted); margin-top:8px; display:block; line-height:1.5;">Saturación Dinero/Crisis<br/>— la más alta del instrumento</span>
+      </div>
+      <div style="flex:1; min-width:160px; background:rgba(123,47,190,0.07); border:1px solid rgba(123,47,190,0.22); border-radius:16px; padding:22px 20px; text-align:center;">
+        <span style="font-family:'Space Grotesk',sans-serif; font-size:48px; font-weight:900; color:#9D50E8; line-height:1; display:block;">32%</span>
+        <span style="font-size:12px; color:var(--muted); margin-top:8px; display:block; line-height:1.5;">Agotamiento emocional<br/>— segunda dimensión</span>
+      </div>
+      <div style="flex:1; min-width:160px; background:rgba(0,227,150,0.07); border:1px solid rgba(0,227,150,0.22); border-radius:16px; padding:22px 20px; text-align:center;">
+        <span style="font-family:'Space Grotesk',sans-serif; font-size:48px; font-weight:900; color:#00E396; line-height:1; display:block;">4pt</span>
+        <span style="font-size:12px; color:var(--muted); margin-top:8px; display:block; line-height:1.5;">Diferencia entre la 1.ª<br/>y 2.ª dimensión</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="grad-divider"></div>
+
+<!-- ═══ EL PROBLEMA ═══ -->
+<section style="background:var(--bg3); position:relative; overflow:hidden;">
+  <div class="orb orb-purple" style="top:-120px; left:-60px; opacity:0.28; animation:drift3 16s ease-in-out infinite alternate;"></div>
+  <div class="section-inner">
+    <div class="article-body">
+      <span class="eyebrow fade-up">El Problema</span>
+      <h2 class="section-title fade-up">El veterinario con<br/><span class="grad-text">mentalidad de escasez.</span></h2>
+
+      <p class="fade-up">
+        El veterinario con creencias de escasez no compite por valor — compite por precio. Acepta condiciones que erosionan su rentabilidad porque teme perder al cliente si establece límites económicos. El resultado es predecible: más horas, más desgaste, menos ingresos reales.
+      </p>
+
+      <p class="fade-up">
+        Hay una ecuación que muy pocos veterinarios hacen explícita. El costo real por consulta incluye: insumos directos, tiempo clínico (valorado a precio de mercado), overhead de la clínica (alquiler, servicios, equipos), y amortización de la formación profesional. Cuando se calcula de forma honesta, <strong>el gap entre costo real y precio cobrado suele ser alarmante</strong>.
+      </p>
+
+      <div class="key-insight fade-up">
+        <span class="key-insight-label">Ejemplo Ilustrativo</span>
+        <p>
+          Una consulta de 30 minutos con examen físico completo, historia clínica y orientación diagnóstica puede tener un costo real de operación que supera con creces lo que muchos veterinarios cobran por ella. <strong>La diferencia no es el mercado — es la percepción de lo que "está permitido" cobrar.</strong>
+        </p>
+      </div>
+
+      <h3 class="fade-up">El anclaje cognitivo que nadie te enseñó</h3>
+
+      <p class="fade-up">
+        Ariely (2008) documentó en <em>Predictably Irrational</em> el efecto de anclaje: el primer número que una persona escucha se convierte en la referencia inconsciente para todos los juicios de valor posteriores. En medicina veterinaria, este principio opera en dos direcciones.
+      </p>
+
+      <p class="fade-up">
+        Primero: cuando el veterinario da un descuento en la primera consulta, <strong>entrena al cliente a pedir descuento siempre</strong>. El anclaje quedó fijado en el precio reducido, y cualquier precio normal se percibirá como "caro". Segundo: el veterinario que creció viendo cobrar poco, anclará su propia referencia de precio en ese rango — sin cuestionarla.
+      </p>
+
+      <p class="fade-up">
+        Kahneman y Tversky (1979) describieron en la Teoría Prospectiva cómo las pérdidas duelen aproximadamente el doble de lo que satisfacen las ganancias equivalentes. Un veterinario que teme "perder" un cliente por subir precios sobreestima esa pérdida potencial y subestima el costo de mantener precios insostenibles.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="grad-divider"></div>
+
+<!-- ═══ LAS CREENCIAS ═══ -->
+<section class="sl">
+  <div class="section-inner">
+    <div class="article-body">
+      <span class="eyebrow fade-up">Las Creencias Limitantes</span>
+      <h2 class="section-title fade-up">Lo que el dinero<br/><span style="background:linear-gradient(135deg,#7B2FBE,#0099CC);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">"significa" en tu mente.</span></h2>
+
+      <p class="fade-up" style="color:var(--muted2);">
+        Las creencias sobre el dinero en veterinaria no se forman en un día. Se construyen a lo largo de años de práctica, de observar cómo cobran (o no cobran) los colegas, y de las reacciones emocionales de los clientes. Estas son las más frecuentes:
+      </p>
+
+      <ul class="belief-list stagger">
+        <li class="fade-up">Si cobro lo que realmente vale, me quedo sin clientes.</li>
+        <li class="fade-up">La medicina veterinaria ya es cara de por sí — no puedo subirla más.</li>
+        <li class="fade-up">El amor por los animales es suficiente retribución. El dinero no debería ser lo importante.</li>
+        <li class="fade-up">No soy un businessperson — soy médico. Lo económico no es lo mío.</li>
+        <li class="fade-up">Si un cliente no puede pagar, tengo que ayudar igual. No puedo dejar sufrir al animal.</li>
+      </ul>
+
+      <p class="fade-up" style="color:var(--muted2);">
+        Cada una de estas creencias tiene un núcleo de realidad — y una distorsión que la hace disfuncional. El amor por los animales y la rentabilidad profesional <strong>no son incompatibles</strong>. La vocación no requiere pobreza para ser auténtica.
+      </p>
+
+      <p class="fade-up" style="color:var(--muted2);">
+        Burns (1980) identificó la "falacia del deberías" como una de las distorsiones cognitivas más comunes: la idea de que hay una regla moral que dicta cómo deben ser las cosas. En veterinaria, esa regla suele ser: "el buen veterinario no cobra caro". Es una trampa narrativa, no una verdad clínica.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="grad-divider"></div>
+
+<!-- ═══ LAS HERRAMIENTAS ═══ -->
+<section style="background:var(--bg2); position:relative; overflow:hidden;">
+  <div class="orb orb-gold" style="bottom:-80px; right:-60px; opacity:0.4; animation:drift1 20s ease-in-out infinite alternate;"></div>
+  <div class="section-inner">
+    <div class="article-body">
+      <span class="eyebrow fade-up">Las Herramientas</span>
+      <h2 class="section-title fade-up">Del precio por miedo<br/><span class="grad-text">al precio por valor.</span></h2>
+
+      <p class="fade-up" style="color:var(--muted2);">
+        No se trata de cobrar caro por cobrar caro. Se trata de cobrar lo que refleja el valor real del servicio — y comunicarlo con confianza y sin disculpas.
+      </p>
+
+      <div class="stagger" style="margin-top:28px;">
+        <div class="tool-card fade-up">
+          <div class="tool-icon">📐</div>
+          <div class="tool-body">
+            <strong>Matriz de valor del servicio</strong>
+            <span>Antes de fijar un precio, calcula: costo de insumos + tiempo clínico (a tu precio hora real) + overhead prorrateable + valor de tu formación y experiencia. El precio justo para el cliente es el que cubre todos esos componentes con un margen sostenible.</span>
+          </div>
+        </div>
+        <div class="tool-card fade-up">
+          <div class="tool-icon">🧠</div>
+          <div class="tool-body">
+            <strong>Reencuadre cognitivo (PNL + TCC)</strong>
+            <span>Cambia la pregunta "¿cuánto cobra la competencia?" por "¿cuánto vale mi tiempo y expertise específicamente?". El precio basado en competencia genera una carrera hacia abajo. El precio basado en valor genera diferenciación.</span>
+          </div>
+        </div>
+        <div class="tool-card fade-up">
+          <div class="tool-icon">💬</div>
+          <div class="tool-body">
+            <strong>Comunicar el precio sin disculpas</strong>
+            <span>La forma en que dices el precio importa tanto como el número. "Son $X" dicho con seguridad produce una respuesta diferente que "serían unos $X, más o menos...". El lenguaje de disculpa invita a la negociación. La seguridad comunica valor.</span>
+          </div>
+        </div>
+        <div class="tool-card fade-up">
+          <div class="tool-icon">🚫</div>
+          <div class="tool-body">
+            <strong>Política de descuentos con criterio claro</strong>
+            <span>Los descuentos deben ser una decisión consciente y excepcional, no la respuesta automática a cualquier señal de inconformidad del cliente. Bakker &amp; Demerouti (2007) muestran que la pérdida de control sobre el trabajo propio es uno de los principales predictores de agotamiento profesional.</span>
+          </div>
+        </div>
+        <div class="tool-card fade-up">
+          <div class="tool-icon">📈</div>
+          <div class="tool-body">
+            <strong>Auditoría mensual de rentabilidad</strong>
+            <span>¿Cuánto tiempo clínico dedicaste el mes pasado? ¿Cuánto ingresó por ese tiempo? La división simple te da tu precio hora real. Compararlo con lo que debería ser según tus costos reales te da la brecha que debes cerrar.</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:40px; text-align:center;" class="fade-up">
+        <a href="programa.html" class="btn-primary">
+          Conocer el Programa Alfa
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="grad-divider"></div>
+
+<!-- ═══ BIBLIOGRAFÍA ═══ -->
+<section class="sl">
+  <div class="section-inner">
+    <div class="article-body">
+      <span class="eyebrow fade-up">Referencias</span>
+      <h2 class="section-title fade-up" style="font-size:clamp(22px,2.5vw,32px);">Bibliografía</h2>
+
+      <ul class="bib-list stagger" style="margin-top:24px;">
+        <li class="fade-up">Ariely, D. (2008). <em>Predictably Irrational: The Hidden Forces That Shape Our Decisions.</em> HarperCollins.</li>
+        <li class="fade-up">Kahneman, D., &amp; Tversky, A. (1979). Prospect theory: An analysis of decision under risk. <em>Econometrica, 47</em>(2), 263–291.</li>
+        <li class="fade-up">Kipperman, B., Morris, P., &amp; Rollin, B. (2019). Ethical dilemmas encountered by small animal veterinarians: characterisation, responses, consequences and beliefs regarding euthanasia. <em>Veterinary Record, 184</em>(8), 248.</li>
+        <li class="fade-up">Burns, D. D. (1980). <em>Feeling Good: The New Mood Therapy.</em> New American Library.</li>
+        <li class="fade-up">Bakker, A. B., &amp; Demerouti, E. (2007). The Job Demands-Resources model: State of the art. <em>Journal of Managerial Psychology, 22</em>(3), 309–328.</li>
+        <li class="fade-up">Maslach, C., &amp; Jackson, S. E. (1981). The measurement of experienced burnout. <em>Journal of Organizational Behavior, 2</em>(2), 99–113.</li>
+      </ul>
+
+      <div class="data-disclaimer fade-up">
+        <strong>Nota metodológica:</strong> Datos preliminares del instrumento iScore LATAM, adaptado de la Escala de Maslach (1981) para medicina veterinaria clínica de mascotas en Latinoamérica. Muestra voluntaria de carácter exploratorio. Los resultados reflejan tendencias preliminares y no deben interpretarse como estadísticas poblacionales definitivas. Para información completa sobre el diseño del instrumento, ver <a href="metodologia.html" style="color:var(--purple);">nota metodológica completa</a>.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <a href="index.html"><img src="logos/1.svg" alt="VetConnect Pro LATAM" class="footer-logo" /></a>
+      <p class="footer-tagline">Desarrollo profesional y empresarial para médicos veterinarios de Latinoamérica. Basado en neurociencia y metodología propia.</p>
+    </div>
+    <div class="footer-col">
+      <h4>El Ecosistema</h4>
+      <ul>
+        <li><a href="test.html">Test Score LATAM</a></li>
+        <li><a href="metodologia.html">Metodología Alfa</a></li>
+        <li><a href="programa.html">Programa Alfa</a></li>
+        <li><a href="recursos.html">Centro de Recursos</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contenido</h4>
+      <ul>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="recursos.html">Videos</a></li>
+        <li><a href="recursos.html">Masterclass</a></li>
+        <li><a href="recursos.html">Podcast</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Nosotros</h4>
+      <ul>
+        <li><a href="nosotros.html">Sobre Nosotros</a></li>
+        <li><a href="mailto:ivancho1am@gmail.com">ivancho1am@gmail.com</a></li>
+        <li><a href="#">Barbosa, Santander, Colombia</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 VetConnect Pro LATAM · Todos los derechos reservados</span>
+    <span>Fundado por Ivan Durán Monroy, MV · Universidad de La Salle</span>
+  </div>
+</footer>
+
+<script>
+  // ── Intersection Observer ──
+  const io = new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+  window.addEventListener('load', () => {
+    requestAnimationFrame(() => { document.querySelectorAll('.fade-up').forEach(el => io.observe(el)); });
+  });
+  const navEl = document.getElementById('nav');
+  window.addEventListener('scroll', () => { navEl.classList.toggle('scrolled', window.scrollY > 50); }, { passive: true });
+
+  // ── Chart: Barras con Dinero/Crisis destacado ──
+  (function() {
+    const ctx = document.getElementById('chartArt2Bars').getContext('2d');
+    const labels = ['Dinero / Crisis', 'Agotamiento emocional', 'Conciencia *', 'Despersonalización', 'Logro personal/físico'];
+    const values = [36, 32, 48, 26, 25];
+    // Dinero/Crisis (índice 0) en rojo destacado; resto en tonos apagados
+    const bgColors = [
+      'rgba(255,69,96,0.85)',
+      'rgba(123,47,190,0.55)',
+      'rgba(240,165,0,0.5)',
+      'rgba(0,212,255,0.45)',
+      'rgba(0,227,150,0.45)'
+    ];
+    const borderColors = ['#FF4560', '#9D50E8', '#F0A500', '#00D4FF', '#00E396'];
+
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [{
+          label: '% saturación',
+          data: values,
+          backgroundColor: bgColors,
+          borderColor: borderColors,
+          borderWidth: 2,
+          borderRadius: 8
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        scales: {
+          x: {
+            min: 0, max: 60,
+            ticks: {
+              color: '#7878A0', font: { size: 11 },
+              callback: v => v + '%'
+            },
+            grid: { color: 'rgba(255,255,255,0.05)' }
+          },
+          y: {
+            ticks: {
+              color: (ctx) => ctx.index === 0 ? '#FF4560' : '#A0A0C0',
+              font: { size: 12, weight: (ctx) => ctx.index === 0 ? '700' : '400' }
+            },
+            grid: { display: false }
+          }
+        },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => ` Saturación: ${ctx.parsed.x}%`
+            }
+          },
+          annotation: {}
+        }
+      }
+    });
+  })();
+</script>
+</body>
+</html>

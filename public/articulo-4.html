@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Despersonalización: cuando ya no ves animales, solo ves "casos" | VetConnect Pro LATAM</title>
+  <meta name="description" content="La despersonalización es el síntoma más silencioso del burnout veterinario. Es el mecanismo que convierte la compasión en protección emocional — y con él se pierde la razón por la que elegiste esta profesión." />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="es_LA" />
+  <meta property="og:site_name" content="VetConnect Pro LATAM" />
+  <meta property="og:url" content="https://vetconnectpro.vitalvetcrv.com.co/articulo-4.html" />
+  <meta property="og:title" content="Despersonalización: cuando ya no ves animales, solo ves 'casos'" />
+  <meta property="og:description" content="La despersonalización es el síntoma más silencioso y el más peligroso del burnout veterinario. Datos iScore LATAM y herramientas clínicas." />
+  <meta property="og:image" content="https://vetconnectpro.vitalvetcrv.com.co/logos/og-preview.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Despersonalización: cuando ya no ves animales, solo ves 'casos'" />
+  <meta name="twitter:description" content="El mecanismo que convierte la compasión en protección emocional — y cómo recuperarla." />
+  <meta name="twitter:image" content="https://vetconnectpro.vitalvetcrv.com.co/logos/og-preview.jpg" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="vetconnect.css" />
+  <style>
+    /* ── ARTICLE-SPECIFIC STYLES ── */
+    .art-hero {
+      position: relative;
+      padding: 160px 60px 100px;
+      background-image:
+        linear-gradient(rgba(123,47,190,0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(123,47,190,0.045) 1px, transparent 1px);
+      background-size: 64px 64px;
+      overflow: hidden;
+    }
+    .art-hero .orb-purple { top: -120px; left: -80px; animation: drift1 13s ease-in-out infinite alternate; }
+    .art-hero .orb-cyan   { bottom: -60px; right: 160px; animation: drift2 17s ease-in-out infinite alternate; }
+    .art-hero-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 2; }
+    .art-category-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(123,47,190,0.12); border: 1px solid rgba(123,47,190,0.35);
+      padding: 6px 16px; border-radius: 50px; margin-bottom: 22px;
+      font-size: 12px; font-weight: 600; color: var(--purple-l);
+    }
+    .art-hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(32px, 4.5vw, 58px);
+      font-weight: 800; line-height: 1.1; letter-spacing: -1.5px;
+      margin-bottom: 24px;
+    }
+    .art-lead {
+      font-size: 18px; line-height: 1.78; color: var(--muted2);
+      max-width: 720px; margin-bottom: 32px;
+    }
+    .art-meta {
+      display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+      font-size: 13px; color: var(--muted); padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .art-meta span { display: flex; align-items: center; gap: 6px; }
+    .art-back {
+      display: inline-flex; align-items: center; gap: 7px;
+      color: var(--cyan); text-decoration: none; font-size: 13.5px; font-weight: 600;
+      transition: gap 0.2s;
+    }
+    .art-back:hover { gap: 11px; }
+
+    /* ── CHART SECTION ── */
+    .chart-wrap {
+      max-width: 700px; margin: 0 auto;
+      background: rgba(255,255,255,0.80);
+      border: 1px solid rgba(12,12,38,.09);
+      border-radius: 20px; padding: 36px 32px;
+    }
+    .chart-wrap canvas { max-height: 340px; }
+    .chart-caption {
+      text-align: center; margin-top: 18px;
+      font-size: 13px; color: var(--muted2); line-height: 1.6;
+    }
+
+    /* ── CONTENT BLOCKS ── */
+    .art-body { max-width: 860px; margin: 0 auto; }
+    .art-body h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(22px, 2.8vw, 32px); font-weight: 800;
+      letter-spacing: -0.8px; margin-bottom: 18px; line-height: 1.2;
+    }
+    .art-body p { font-size: 15.5px; line-height: 1.85; margin-bottom: 16px; color: var(--muted2); }
+    .art-body p strong { color: var(--text); }
+    .art-body ul { margin: 16px 0 20px 0; display: flex; flex-direction: column; gap: 10px; }
+    .art-body ul li {
+      font-size: 15px; color: var(--muted2); line-height: 1.7;
+      padding-left: 22px; position: relative;
+    }
+    .art-body ul li::before {
+      content: '→'; position: absolute; left: 0;
+      color: var(--cyan); font-weight: 700; font-size: 13px;
+    }
+    .art-body ul li strong { color: var(--text); }
+
+    /* ── HIGHLIGHT QUOTE ── */
+    .art-quote {
+      border-left: 3px solid var(--purple-l);
+      padding: 16px 22px;
+      background: rgba(123,47,190,0.07); border-radius: 0 14px 14px 0;
+      margin: 24px 0; font-size: 16.5px; font-style: italic;
+      color: var(--text); line-height: 1.7;
+    }
+    .sl .art-quote {
+      background: rgba(123,47,190,0.07); color: #0C0C26;
+      border-left-color: var(--purple);
+    }
+
+    /* ── BELIEF CARDS ── */
+    .belief-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 24px 0; }
+    .belief-card {
+      background: rgba(255,255,255,0.80); border: 1px solid rgba(12,12,38,.09);
+      border-radius: 16px; padding: 22px 20px;
+      border-left: 3px solid var(--purple);
+    }
+    .belief-card p { font-size: 14px; font-style: italic; color: #3A3A65; margin-bottom: 8px; line-height: 1.6; }
+    .belief-card span { font-size: 12px; color: var(--muted); display: block; }
+
+    /* ── TOOL CARDS ── */
+    .tool-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-top: 28px; }
+    .tool-card {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 20px; padding: 28px 22px; position: relative; overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
+    .tool-card:hover { border-color: rgba(123,47,190,0.45); transform: translateY(-6px); box-shadow: 0 20px 56px rgba(0,0,0,0.3); }
+    .tool-top { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--purple), var(--cyan)); }
+    .tool-icon { font-size: 28px; margin-bottom: 14px; display: block; }
+    .tool-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 9px; }
+    .tool-card p { font-size: 13px; color: var(--muted); line-height: 1.7; }
+    .tool-tag {
+      display: inline-block; margin-top: 12px;
+      background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.25);
+      color: var(--cyan); font-size: 10.5px; font-weight: 600;
+      padding: 3px 11px; border-radius: 50px;
+    }
+
+    /* ── BIBLIOGRAPHY ── */
+    .biblio-list { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
+    .biblio-item {
+      font-size: 13px; line-height: 1.7; color: var(--muted2);
+      padding-left: 18px; position: relative;
+    }
+    .biblio-item::before { content: '—'; position: absolute; left: 0; color: var(--purple); font-weight: 700; }
+    .note-box {
+      margin-top: 28px; padding: 18px 22px;
+      background: rgba(123,47,190,0.07); border: 1px solid rgba(123,47,190,0.2);
+      border-radius: 14px; font-size: 12.5px; color: var(--muted2); line-height: 1.7;
+    }
+    .note-box strong { color: var(--text); display: block; margin-bottom: 4px; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; }
+    .sl .note-box strong { color: #0C0C26; }
+
+    /* ── NEURO BOX ── */
+    .neuro-box {
+      background: linear-gradient(135deg, rgba(123,47,190,0.09), rgba(0,212,255,0.05));
+      border: 1px solid rgba(123,47,190,0.28); border-radius: 18px;
+      padding: 28px 26px; margin: 24px 0;
+    }
+    .neuro-box h4 { font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 700; margin-bottom: 10px; color: var(--cyan); }
+    .neuro-box p { font-size: 14px; color: var(--muted2); line-height: 1.75; margin: 0; }
+
+    /* ── FOOTER ── */
+    .art-footer {
+      background: var(--bg2); border-top: 1px solid var(--border);
+      padding: 40px 60px 30px; text-align: center;
+    }
+    .art-footer p { font-size: 13px; color: var(--muted); }
+    .art-footer a { color: var(--cyan); text-decoration: none; }
+    .art-footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 1024px) {
+      .art-hero { padding: 120px 24px 70px; }
+      .art-body { padding: 0; }
+      .tool-grid { grid-template-columns: 1fr; }
+      .belief-grid { grid-template-columns: 1fr; }
+      .chart-wrap { padding: 24px 18px; }
+      .art-footer { padding: 30px 24px 24px; }
+    }
+    @media (max-width: 640px) {
+      .art-hero h1 { font-size: 28px; }
+      .art-lead { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="noise-overlay" aria-hidden="true"></div>
+
+<!-- ═══ NAV ═══ -->
+<nav id="nav">
+  <a href="index.html"><img src="logos/1.svg" alt="VetConnect Pro LATAM" class="nav-logo" /></a>
+  <ul class="nav-links">
+    <li><a href="test.html">Test Score</a></li>
+    <li><a href="programa.html">Programa</a></li>
+    <li><a href="recursos.html">Recursos</a></li>
+    <li><a href="metodologia.html">Metodología</a></li>
+    <li><a href="nosotros.html">Nosotros</a></li>
+  </ul>
+  <a href="programa.html" class="nav-cta">Ver Programa →</a>
+</nav>
+
+<!-- ═══ SECCIÓN 1: HERO (dark) ═══ -->
+<section class="art-hero">
+  <div class="orb orb-purple"></div>
+  <div class="orb orb-cyan"></div>
+
+  <div class="art-hero-inner">
+    <span class="eyebrow">PSICOLOGÍA CLÍNICA · BURNOUT</span>
+    <div class="art-category-badge">🔬 Neuropsicología</div>
+
+    <h1 class="fade-up">
+      Despersonalización: cuando ya no ves<br/>
+      animales, solo ves <span class="grad-text">"casos"</span>
+    </h1>
+
+    <p class="art-lead fade-up">
+      La despersonalización es el síntoma más silencioso y el más peligroso del burnout veterinario.
+      Es el mecanismo que convierte la compasión en protección emocional — y con él se pierde
+      la razón por la que elegiste esta profesión.
+    </p>
+
+    <div class="art-meta fade-up">
+      <span>🕒 Lectura: ~5 min</span>
+      <span>📊 Datos: iScore LATAM</span>
+      <span>🧠 Maslach · ACT · Neurociencia</span>
+      <a href="blog.html" class="art-back">← Volver al blog</a>
+    </div>
+  </div>
+</section>
+
+<div class="grad-divider"></div>
+
+<!-- ═══ SECCIÓN 2: CHART (light) ═══ -->
+<section class="sl">
+  <div class="section-inner" style="padding-top:80px; padding-bottom:80px;">
+    <div class="art-body fade-up">
+      <span class="eyebrow">DATOS iSCORE LATAM</span>
+      <h2 class="section-title" style="margin-bottom:10px;">
+        ¿Cómo se distribuye el desgaste?<br/>
+        <span class="grad-text">Las 5 dimensiones del burnout veterinario</span>
+      </h2>
+      <p style="color:var(--muted2); font-size:15px; margin-bottom:32px;">
+        El instrumento iScore LATAM mide cinco dimensiones. La despersonalización ocupa el tercer lugar
+        en saturación — pero es la que más silencio genera dentro de la profesión.
+      </p>
+
+      <div class="chart-wrap">
+        <canvas id="chartDimensiones"></canvas>
+        <p class="chart-caption">
+          % de saturación por dimensión. Barras expresan nivel de afectación promedio en la muestra exploratoria.<br/>
+          La despersonalización aparece resaltada en rojo.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="grad-divider"></div>
+
+<!-- ═══ SECCIÓN 3: EL PROBLEMA (dark) ═══ -->
+<section>
+  <div class="section-inner">
+    <div class="art-body">
+      <span class="eyebrow fade-up">EL PROBLEMA</span>
+      <h2 class="fade-up">
+        Distanciarse para sobrevivir —<br/>el costo de esa <span class="grad-text">estrategia invisible</span>
+      </h2>
+
+      <p class="fade-up">
+        La despersonalización es el segundo componente del burnout según la escala de Maslach (1981).
+        No es frialdad de carácter. Es una <strong>respuesta adaptativa del sistema nervioso</strong>
+        frente a la sobrecarga emocional acumulada.
+      </p>
+
+      <p class="fade-up">
+        El problema es que el cerebro no distingue entre "me protejo hoy" y "me desconecto para siempre".
+        Lo que empieza como una estrategia de supervivencia se convierte en un patrón crónico
+        que afecta la calidad clínica, la relación con los tutores — y la identidad profesional.
+      </p>
+
+      <h2 class="fade-up" style="margin-top: 40px;">¿Cómo se manifiesta en la consulta?</h2>
+
+      <ul class="stagger fade-up">
+        <li><strong>Consultas más cortas:</strong> el veterinario reduce el tiempo de contacto emocional con el tutor sin darse cuenta.</li>
+        <li><strong>Lenguaje clínico frío:</strong> "el caso del gato de la tarde" en vez de recordar el nombre del paciente o del tutor.</li>
+        <li><strong>Irritabilidad ante preguntas básicas:</strong> lo que antes era una oportunidad de educar, ahora se siente como una carga.</li>
+        <li><strong>Cinismo sobre el sistema:</strong> "esto no tiene solución", "los dueños no valoran el trabajo", "para qué esforzarse".</li>
+        <li><strong>El trabajo como "solo un trabajo":</strong> la vocación deja de ser el motor y se convierte en una obligación.</li>
+      </ul>
+
+      <div class="art-quote fade-up">
+        "El veterinario que ya no siente nada ante un caso difícil no ha aprendido a ser profesional.
+        Ha aprendido a sobrevivir — y eso es muy diferente."
+      </div>
+
+      <h2 class="fade-up" style="margin-top: 40px;">La consecuencia clínica y comercial</h2>
+
+      <p class="fade-up">
+        La despersonalización no solo daña al veterinario. Daña el negocio con consecuencias
+        concretas y medibles:
+      </p>
+
+      <ul class="stagger fade-up">
+        <li><strong>Errores de comunicación</strong> con tutores → conflictos → malas reseñas en Google.</li>
+        <li><strong>Menos seguimiento post-consulta</strong> → tutores que no regresan → pérdida de pacientes activos.</li>
+        <li><strong>Menor capacidad de persuadir</strong> en diagnósticos preventivos → ingreso reducido por consulta.</li>
+        <li><strong>Rotación de personal</strong> → equipos que replican la cultura emocional del médico a cargo.</li>
+      </ul>
+
+      <p class="fade-up">
+        Según datos preliminares del iScore LATAM, la dimensión de despersonalización muestra una
+        saturación del <strong>26%</strong> — pero su impacto en la experiencia de la consulta es desproporcionado
+        respecto a ese número.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="grad-divider"></div>
+
+<!-- ═══ SECCIÓN 4: CREENCIAS + NEUROCIENCIA (light) ═══ -->
+<section class="sl">
+  <div class="section-inner" style="padding-top:80px; padding-bottom:80px;">
+    <div class="art-body">
+      <span class="eyebrow fade-up">LAS CREENCIAS</span>
+      <h2 class="section-title fade-up">
+        Lo que el veterinario<br/>
+        <span class="grad-text">se dice a sí mismo</span>
+      </h2>
+
+      <p class="fade-up" style="color:var(--muted2); font-size:15.5px; margin-bottom:28px;">
+        Las creencias que sostienen la despersonalización no son verdades — son mecanismos
+        de defensa que el sistema nervioso presenta como lógica. Reconocerlas es el primer paso.
+      </p>
+
+      <div class="belief-grid stagger fade-up">
+        <div class="belief-card fade-up">
+          <p>"Me acostumbré a desconectarme. Es la única forma de aguantar."</p>
+          <span>Habituación defensiva — confundida con resiliencia</span>
+        </div>
+        <div class="belief-card fade-up">
+          <p>"El que no siente no sufre. Así me cuido yo."</p>
+          <span>Protección emocional a corto plazo — costo identitario a largo plazo</span>
+        </div>
+        <div class="belief-card fade-up">
+          <p>"La medicina no tiene que ser emocional. Soy científico, no terapeuta."</p>
+          <span>Disociación entre rol clínico y habilidad comunicacional</span>
+        </div>
+        <div class="belief-card fade-up">
+          <p>"Si me importa demasiado, no voy a poder trabajar."</p>
+          <span>Miedo a la fatiga por compasión — sin herramientas para gestionarla</span>
+        </div>
+      </div>
+
+      <div class="neuro-box fade-up" style="margin-top:36px; background: rgba(123,47,190,0.07); border-color: rgba(123,47,190,0.22);">
+        <h4>La Neurociencia detrás del "no sentir"</h4>
+        <p>
+          La fatiga por compasión (Figley, 1995) activa el eje HPA (hipotálamo-hipófisis-adrenal)
+          de forma crónica, elevando los niveles de <strong>cortisol</strong> y generando
+          <strong>desregulación del sistema dopaminérgico</strong>. El cerebro aprende que
+          involucrarse emocionalmente genera malestar — y adapta su respuesta atenuando
+          la empatía como mecanismo de autoprotección. Van der Kolk (2014) describe este proceso
+          como la forma en que el cuerpo "recuerda" el trauma de la sobrecarga sostenida.
+          No es debilidad. Es neurobiología.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="grad-divider"></div>
+
+<!-- ═══ SECCIÓN 5: HERRAMIENTAS (dark) ═══ -->
+<section>
+  <div class="section-inner">
+    <div class="art-body">
+      <span class="eyebrow fade-up">LAS HERRAMIENTAS</span>
+      <h2 class="fade-up">
+        Cómo reconectar con la<br/>
+        <span class="grad-text">razón por la que elegiste esto</span>
+      </h2>
+
+      <p class="fade-up">
+        Recuperar la conexión emocional no significa exponerse sin límites. Significa
+        aprender a estar presente con recursos — no sin ellos.
+        Las herramientas a continuación tienen base clínica y son aplicables
+        en el contexto real del veterinario latinoamericano.
+      </p>
+
+      <div class="tool-grid stagger">
+        <div class="tool-card fade-up">
+          <div class="tool-top"></div>
+          <span class="tool-icon">🧭</span>
+          <h3>Protocolo ACT de valores</h3>
+          <p>
+            La Terapia de Aceptación y Compromiso (Hayes et al., 2006) trabaja la
+            clarificación de valores como ancla ante la despersonalización.
+            Pregunta clave: <em>"¿Para qué entré a esta profesión?"</em>
+            No para sentirte culpable — para re-orientar la acción.
+          </p>
+          <span class="tool-tag">ACT · Hayes 2006</span>
+        </div>
+
+        <div class="tool-card fade-up">
+          <div class="tool-top"></div>
+          <span class="tool-icon">📓</span>
+          <h3>Journaling clínico</h3>
+          <p>
+            5 minutos al final del día. Registrar un caso que tuvo impacto emocional —
+            positivo o negativo. No para analizarlo, sino para <em>procesarlo</em>.
+            La escritura activa el córtex prefrontal y reduce la activación del sistema
+            de amenaza.
+          </p>
+          <span class="tool-tag">Mindfulness · Escritura terapéutica</span>
+        </div>
+
+        <div class="tool-card fade-up">
+          <div class="tool-top"></div>
+          <span class="tool-icon">🤝</span>
+          <h3>Comunicación empática en consulta</h3>
+          <p>
+            Técnica de presencia plena: 30 segundos de contacto genuino antes de
+            entrar al "modo clínico". Mirar al tutor, preguntar cómo está, usar el nombre
+            del paciente. Pequeño acto — alto impacto en la relación y en el ingreso.
+          </p>
+          <span class="tool-tag">Neff 2011 · Autocompasión</span>
+        </div>
+      </div>
+
+      <div class="art-quote fade-up" style="margin-top: 40px;">
+        La autocompasión (Neff, 2011) no es autoindulgencia. Es la capacidad de tratarte
+        con la misma calidez que le ofrecerías a un colega que está agotado.
+        Esa habilidad es lo que sostiene la vocación a largo plazo.
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="grad-divider"></div>
+
+<!-- ═══ SECCIÓN 6: BIBLIOGRAFÍA (light) ═══ -->
+<section class="sl">
+  <div class="section-inner" style="padding-top:70px; padding-bottom:80px;">
+    <div class="art-body">
+      <span class="eyebrow fade-up">REFERENCIAS ACADÉMICAS</span>
+      <h2 class="section-title fade-up" style="font-size: clamp(22px, 2.5vw, 30px);">
+        Bibliografía
+      </h2>
+
+      <div class="biblio-list fade-up">
+        <div class="biblio-item">Maslach, C. & Jackson, S.E. (1981). <em>The measurement of experienced burnout.</em> Journal of Occupational Behavior, 2(2), 99–113.</div>
+        <div class="biblio-item">Figley, C.R. (1995). <em>Compassion Fatigue: Coping with Secondary Traumatic Stress Disorder in Those Who Treat the Traumatized.</em> Brunner/Mazel.</div>
+        <div class="biblio-item">Kipperman, B., Morris, P. & Rollin, B.E. (2018). <em>Ethical dilemmas encountered by small animal veterinarians.</em> Veterinary Record, 182(19), 548.</div>
+        <div class="biblio-item">Neff, K.D. (2011). <em>Self-Compassion: The Proven Power of Being Kind to Yourself.</em> William Morrow.</div>
+        <div class="biblio-item">van der Kolk, B. (2014). <em>The Body Keeps the Score: Brain, Mind, and Body in the Healing of Trauma.</em> Viking.</div>
+        <div class="biblio-item">Hayes, S.C., Luoma, J.B., Bond, F.W., Masuda, A. & Lillis, J. (2006). <em>Acceptance and Commitment Therapy: Model, processes and outcomes.</em> Behaviour Research and Therapy, 44(1), 1–25.</div>
+      </div>
+
+      <div class="note-box fade-up">
+        <strong>Nota metodológica</strong>
+        Datos preliminares del instrumento iScore LATAM, adaptado de la escala de Maslach (1981)
+        para medicina veterinaria clínica de mascotas en LATAM. Muestra voluntaria, carácter exploratorio.
+        Los porcentajes presentados corresponden a distribuciones de saturación por dimensión y no deben
+        interpretarse como datos de prevalencia clínica.
+      </div>
+
+      <div style="margin-top:36px; text-align:center;">
+        <a href="blog.html" class="btn-primary" style="background: linear-gradient(135deg, var(--purple), var(--purple-l));">
+          ← Volver al Blog
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="art-footer">
+  <p>© 2025 VetConnect Pro LATAM · <a href="blog.html">Blog</a> · <a href="programa.html">Programa Alfa</a> · <a href="nosotros.html">Nosotros</a></p>
+  <p style="margin-top:8px; font-size:12px;">Contenido con fines educativos. No sustituye orientación clínica ni psicológica profesional.</p>
+</footer>
+
+<!-- ═══ CHART.JS ═══ -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  // ── CHART: DIMENSIONES iSCORE ──
+  const ctxDim = document.getElementById('chartDimensiones').getContext('2d');
+  new Chart(ctxDim, {
+    type: 'bar',
+    data: {
+      labels: ['Dinero', 'Conciencia', 'Agotamiento', 'Despersonalización', 'Logro'],
+      datasets: [{
+        label: '% Saturación',
+        data: [36, 48, 32, 26, 25],
+        backgroundColor: [
+          'rgba(123,47,190,0.55)',
+          'rgba(0,212,255,0.55)',
+          'rgba(123,47,190,0.55)',
+          'rgba(255,69,96,0.75)',
+          'rgba(123,47,190,0.55)'
+        ],
+        borderColor: [
+          'rgba(123,47,190,1)',
+          'rgba(0,212,255,1)',
+          'rgba(123,47,190,1)',
+          'rgba(255,69,96,1)',
+          'rgba(123,47,190,1)'
+        ],
+        borderWidth: 2,
+        borderRadius: 8,
+        borderSkipped: false
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => ` ${ctx.parsed.y}% saturación`
+          }
+        },
+        annotation: {}
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 60,
+          ticks: {
+            callback: v => v + '%',
+            color: '#55558A',
+            font: { size: 12 }
+          },
+          grid: { color: 'rgba(12,12,38,0.07)' }
+        },
+        x: {
+          ticks: {
+            color: '#3A3A65',
+            font: { size: 12, weight: '600' }
+          },
+          grid: { display: false }
+        }
+      }
+    }
+  });
+
+  // ── NAV SCROLL ──
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // ── FADE-UP OBSERVER ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

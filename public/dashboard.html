@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VetConnect Pro LATAM · Panel Central</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root{--azul:#0e188e;--verde:#1a7a3c;--naranja:#e67e22;--rojo:#c0392b;--gris:#f5f7fa;--blanco:#fff;--texto:#2c3e50;--sombra:0 4px 20px rgba(0,0,0,.1);}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#0a0e2e;color:var(--texto);min-height:100vh;}
+
+  /* SIDEBAR */
+  .sidebar{position:fixed;left:0;top:0;width:220px;height:100vh;background:linear-gradient(180deg,#0a0e2e 0%,#0e188e 100%);padding:24px 16px;display:flex;flex-direction:column;gap:8px;z-index:100;}
+  .sidebar .logo{font-size:1.2rem;font-weight:800;color:#fff;padding:0 8px 20px;border-bottom:1px solid rgba(255,255,255,.15);margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+  .sidebar .logo .dot{width:10px;height:10px;background:#1a7a3c;border-radius:50%;}
+  .nav-item{color:rgba(255,255,255,.7);padding:10px 12px;border-radius:8px;cursor:pointer;font-size:.85rem;font-weight:500;transition:all .2s;display:flex;align-items:center;gap:8px;}
+  .nav-item:hover,.nav-item.active{background:rgba(255,255,255,.15);color:#fff;}
+  .nav-section{font-size:.7rem;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.3);padding:12px 12px 4px;}
+
+  /* MAIN */
+  .main{margin-left:220px;padding:24px;min-height:100vh;background:#f0f2f8;}
+  .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;}
+  .topbar h1{font-size:1.4rem;font-weight:800;color:#0a0e2e;}
+  .topbar .date{font-size:.85rem;color:#666;background:#fff;padding:8px 16px;border-radius:20px;box-shadow:var(--sombra);}
+  .section{display:none;}
+  .section.active{display:block;}
+
+  /* KPI CARDS */
+  .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px;}
+  .kpi-card{background:#fff;border-radius:14px;padding:20px;box-shadow:var(--sombra);position:relative;overflow:hidden;}
+  .kpi-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--color,var(--azul));}
+  .kpi-card .kpi-val{font-size:2.2rem;font-weight:900;color:var(--color,var(--azul));}
+  .kpi-card .kpi-label{font-size:.8rem;color:#888;margin-top:4px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;}
+  .kpi-card .kpi-sub{font-size:.75rem;color:#aaa;margin-top:6px;}
+
+  /* GRID LAYOUTS */
+  .charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;}
+  .charts-grid.triple{grid-template-columns:1fr 1fr 1fr;}
+  .charts-grid.full{grid-template-columns:1fr;}
+  .chart-card{background:#fff;border-radius:14px;padding:20px;box-shadow:var(--sombra);}
+  .chart-card h3{font-size:.95rem;font-weight:700;color:#0a0e2e;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #f0f2f8;}
+  .chart-card canvas{max-height:280px;}
+
+  /* TABLE */
+  .table-card{background:#fff;border-radius:14px;padding:20px;box-shadow:var(--sombra);margin-bottom:20px;overflow-x:auto;}
+  .table-card h3{font-size:.95rem;font-weight:700;color:#0a0e2e;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #f0f2f8;}
+  table{width:100%;border-collapse:collapse;font-size:.83rem;}
+  thead th{background:#f0f2f8;padding:10px 12px;text-align:left;font-weight:700;color:#555;font-size:.75rem;text-transform:uppercase;letter-spacing:.5px;}
+  tbody tr:hover{background:#f8f9ff;}
+  tbody td{padding:10px 12px;border-bottom:1px solid #f0f2f8;color:#444;}
+  .badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:.72rem;font-weight:700;}
+  .badge.bajo{background:#d5f5e3;color:#1a7a3c;}
+  .badge.moderado{background:#fdebd0;color:#e67e22;}
+  .badge.alto{background:#fde8d8;color:#d35400;}
+  .badge.critico{background:#fadbd8;color:#c0392b;}
+
+  /* INSIGHTS */
+  .insight-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+  .insight-card{background:#fff;border-radius:14px;padding:20px;box-shadow:var(--sombra);}
+  .insight-card h4{font-size:.9rem;font-weight:700;color:#0a0e2e;margin-bottom:12px;}
+  .insight-list{list-style:none;}
+  .insight-list li{padding:8px 0;border-bottom:1px solid #f5f5f5;font-size:.85rem;color:#555;display:flex;align-items:flex-start;gap:8px;}
+  .insight-list li:last-child{border-bottom:none;}
+  .insight-list li::before{content:'→';color:var(--azul);font-weight:700;flex-shrink:0;}
+
+  /* ARTICLES SECTION */
+  .article-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px;}
+  .article-card{background:#fff;border-radius:14px;padding:20px;box-shadow:var(--sombra);border-top:4px solid var(--azul);}
+  .article-card .art-tag{font-size:.7rem;text-transform:uppercase;letter-spacing:1px;color:var(--azul);font-weight:700;margin-bottom:8px;}
+  .article-card h4{font-size:.95rem;font-weight:700;color:#0a0e2e;margin-bottom:10px;line-height:1.4;}
+  .article-card p{font-size:.82rem;color:#666;line-height:1.6;}
+  .article-card .art-stat{margin-top:12px;font-size:.75rem;color:#999;border-top:1px solid #f0f0f0;padding-top:10px;}
+
+  /* SCORE METER */
+  .score-ring{display:flex;justify-content:center;align-items:center;padding:20px 0;}
+  .score-label-group{text-align:center;}
+  .score-avg{font-size:3rem;font-weight:900;color:var(--naranja);}
+  .score-desc{font-size:.85rem;color:#888;margin-top:4px;}
+
+  /* CRM */
+  .crm-filter-bar{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;align-items:center;}
+  .crm-filter-bar select{padding:7px 12px;border:1px solid #ddd;border-radius:8px;font-size:.83rem;background:#fff;color:#444;}
+  .btn-sm{padding:5px 12px;font-size:.78rem;border:none;border-radius:6px;cursor:pointer;font-weight:700;transition:all .15s;}
+  .btn-primary{background:#0e188e;color:#fff;}.btn-primary:hover{background:#0c1680;}
+  .btn-wa{background:#25D366;color:#fff;}.btn-wa:hover{background:#20bd5a;}
+  .btn-email{background:#e67e22;color:#fff;}.btn-email:hover{background:#d4691e;}
+  .btn-danger{background:#fee2e2;color:#991b1b;}
+  .wa-badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:700;margin-left:8px;}
+  .wa-ok{background:#d1fae5;color:#065f46;}.wa-no{background:#fee2e2;color:#991b1b;}.wa-wait{background:#fef3c7;color:#92400e;}
+  .crm-textarea{width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;font-size:.83rem;resize:vertical;font-family:inherit;}
+  .crm-input{width:100%;padding:8px 12px;border:1px solid #ddd;border-radius:8px;font-size:.83rem;}
+  .attach-zone{background:#f8f9ff;border:2px dashed #c0c8e8;border-radius:10px;padding:12px;text-align:center;font-size:.8rem;color:#888;margin-bottom:8px;}
+  .crm-log-entry{padding:6px 0;border-bottom:1px solid #f5f5f5;font-size:.8rem;color:#555;display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+  .crm-label{font-size:.78rem;font-weight:700;color:#555;display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:.3px;}
+
+  @media(max-width:1200px){.kpi-grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:768px){.sidebar{display:none;}.main{margin-left:0;}.charts-grid{grid-template-columns:1fr;}.article-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav class="sidebar">
+  <div class="logo"><div class="dot"></div>VetConnect Pro LATAM</div>
+  <div class="nav-section">Análisis</div>
+  <div class="nav-item active" onclick="showSection('overview')">📊 Resumen General</div>
+  <div class="nav-item" onclick="showSection('responses')">👥 Respuestas del Test</div>
+  <div class="nav-item" onclick="showSection('insights')">🔍 Insights y Patrones</div>
+  <div class="nav-item" onclick="showSection('articles')">✍️ Artículos Base</div>
+  <div class="nav-section">CRM · Mensajería</div>
+  <div class="nav-item" onclick="showSection('crm')">📲 CRM · Contactos</div>
+  <div class="nav-section">Proyecto</div>
+  <div class="nav-item" onclick="window.open('https://www.vitalvetcrv.com.co/iscore-latam-test-desgaste/','_blank')">🔗 Test en WordPress</div>
+  <div class="nav-item" onclick="window.open('https://www.vitalvetcrv.com.co/programa-vetconnect-pro/','_blank')">🎓 VetConnect Pro</div>
+</nav>
+
+<main class="main">
+  <div class="topbar">
+    <h1>VetConnect Pro LATAM · Panel Central</h1>
+    <div class="date" id="topbar-date">⏳ Cargando datos...</div>
+  </div>
+
+  <!-- SECTION: OVERVIEW -->
+  <div id="sec-overview" class="section active">
+    <div class="kpi-grid">
+      <div class="kpi-card" style="--color:#0e188e">
+        <div class="kpi-val" id="kpi-total">—</div>
+        <div class="kpi-label">Total Respuestas</div>
+        <div class="kpi-sub" id="kpi-rango">Cargando...</div>
+      </div>
+      <div class="kpi-card" style="--color:#e67e22">
+        <div class="kpi-val" id="kpi-avg">—</div>
+        <div class="kpi-label">Puntaje Promedio</div>
+        <div class="kpi-sub" id="kpi-minmax">Rango: — pts</div>
+      </div>
+      <div class="kpi-card" style="--color:#1a7a3c">
+        <div class="kpi-val" id="kpi-mod-pct">—</div>
+        <div class="kpi-label">Desgaste Moderado</div>
+        <div class="kpi-sub" id="kpi-mod-n">— respondientes</div>
+      </div>
+      <div class="kpi-card" style="--color:#c0392b">
+        <div class="kpi-val" id="kpi-risk-pct">—</div>
+        <div class="kpi-label">Desgaste Alto/Crítico</div>
+        <div class="kpi-sub" id="kpi-risk-n">— en riesgo</div>
+      </div>
+    </div>
+
+    <div class="charts-grid">
+      <div class="chart-card">
+        <h3>📊 Distribución por Nivel de Desgaste</h3>
+        <canvas id="chartNivel"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>📈 Puntajes Individuales (todos los respondientes)</h3>
+        <canvas id="chartScores"></canvas>
+      </div>
+    </div>
+
+    <div class="charts-grid triple">
+      <div class="chart-card">
+        <h3>🌎 Distribución por País</h3>
+        <canvas id="chartPaises"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>📅 Respuestas por Período</h3>
+        <canvas id="chartTemporal"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>⏱ Tiempo de Completación</h3>
+        <canvas id="chartTiempo"></canvas>
+      </div>
+    </div>
+
+    <!-- ANÁLISIS DE GÉNERO -->
+    <div class="chart-card" style="margin-bottom:20px;">
+      <h3>⚧ Patrón de Género — Análisis iScore LATAM</h3>
+      <div id="genero-kpis" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+        <div>
+          <p style="font-size:.8rem;font-weight:700;color:#555;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px;">Puntaje promedio por género</p>
+          <canvas id="chartGeneroAvg" style="max-height:220px;"></canvas>
+        </div>
+        <div>
+          <p style="font-size:.8rem;font-weight:700;color:#555;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px;">Distribución de niveles por género</p>
+          <canvas id="chartGeneroNivel" style="max-height:220px;"></canvas>
+        </div>
+      </div>
+      <p id="genero-nota" style="font-size:.75rem;color:#999;margin-top:12px;font-style:italic;"></p>
+    </div>
+
+    <!-- ANÁLISIS: TIEMPO EJERCIENDO vs DESGASTE -->
+    <div class="chart-card" style="margin-bottom:20px;">
+      <h3>⏳ Desgaste vs. Tiempo Ejerciendo — Correlación por Experiencia</h3>
+      <div id="tiempo-ej-content"></div>
+    </div>
+
+    <!-- ANÁLISIS: DIMENSIÓN MÁS AFECTADA + RANKING -->
+    <div class="chart-card" style="margin-bottom:20px;">
+      <h3>🏆 Ranking de Dimensiones — ¿Cuál afecta más?</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+        <div>
+          <p style="font-size:.8rem;font-weight:700;color:#555;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px;">% Saturación promedio por dimensión</p>
+          <canvas id="chartDimRanking" style="max-height:260px;"></canvas>
+        </div>
+        <div id="dim-ranking-detail"></div>
+      </div>
+    </div>
+
+    <!-- ANÁLISIS: GATILLOS POR DIMENSIÓN -->
+    <div style="margin-bottom:20px;">
+      <div style="background:#fff;border-radius:14px;padding:16px 20px;margin-bottom:16px;box-shadow:var(--sombra);">
+        <h3 style="font-size:.95rem;font-weight:700;color:#0a0e2e;margin-bottom:4px;">⚡ Gatillos por Dimensión — Qué preguntas disparan el desgaste</h3>
+        <p style="font-size:.8rem;color:#888;">Identificación de los factores con mayor impacto en cada área del iScore LATAM</p>
+      </div>
+      <div id="dim-gatillos-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;"></div>
+    </div>
+
+    <!-- HISTORIAL DE ANÁLISIS -->
+    <div class="chart-card" style="margin-bottom:20px;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;flex-wrap:wrap;">
+        <h3 style="margin:0;flex:1;">📚 Historial de Análisis — Evidencia y Trazabilidad</h3>
+        <button class="btn-sm btn-primary" onclick="guardarSnapshot()">💾 Guardar Snapshot</button>
+        <button class="btn-sm" style="background:#fee2e2;color:#991b1b;" onclick="if(confirm('¿Borrar todo el historial?'))limpiarSnapshots()">🗑 Limpiar</button>
+      </div>
+      <p style="font-size:.8rem;color:#888;margin-bottom:16px;line-height:1.5;">Registro cronológico del iScore LATAM. Cada snapshot captura el estado completo del análisis con su fecha y muestra. Sirve como respaldo verificable para artículos científicos, contenido y auditoría.</p>
+      <div id="snapshot-list"></div>
+    </div>
+
+  </div>
+
+  <!-- SECTION: RESPUESTAS -->
+  <div id="sec-responses" class="section">
+    <div class="table-card">
+      <h3>👥 Base de Datos Completa — <span id="table-count">—</span> Respondientes</h3>
+      <table id="respTable">
+        <thead><tr><th>#</th><th>Nombre</th><th>País</th><th>Puntaje</th><th>Nivel</th><th>Tiempo</th><th>Fecha</th></tr></thead>
+        <tbody id="respTableBody"></tbody>
+      </table>
+    </div>
+    <div class="charts-grid">
+      <div class="chart-card">
+        <h3>📊 Histograma de Puntajes</h3>
+        <canvas id="chartHistogram"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>🎯 Promedio por Rango de Puntaje</h3>
+        <canvas id="chartRangos"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: INSIGHTS -->
+  <div id="sec-insights" class="section">
+    <div class="insight-grid">
+      <div class="insight-card">
+        <h4>🔍 Hallazgos Clave del Test</h4>
+        <ul class="insight-list">
+          <li>El 75% de los veterinarios presenta desgaste moderado (26–50 pts) — indica problema sistémico, no individual.</li>
+          <li>Solo el 12.5% tiene bajo desgaste (≤25 pts) — la mayoría ya siente señales de burnout.</li>
+          <li>El puntaje máximo registrado fue 77 pts (Vanessa, España) — desgaste crítico.</li>
+          <li>Promedio de 42.6 pts — zona de alerta moderada para la profesión veterinaria.</li>
+          <li>El tiempo promedio de completación fue ~15 minutos, indicando alta reflexión.</li>
+          <li>Mayoría de respuestas proviene de Colombia, seguido de España y Honduras.</li>
+          <li>Las respuestas llegaron principalmente via Facebook Ads (links con fbclid).</li>
+          <li>La pregunta de ideación suicida (Q41) es la más sensible — requiere protocolo de seguimiento.</li>
+        </ul>
+      </div>
+      <div class="insight-card">
+        <h4>📌 Patrones Identificados</h4>
+        <ul class="insight-list">
+          <li><strong>Cobro inseguro:</strong> Alta frecuencia en respuestas sobre culpa al cobrar (Q32-37) — punto crítico de intervención.</li>
+          <li><strong>Agotamiento emocional:</strong> Dimensión más afectada en la mayoría — energía al finalizar jornada (Q4-5).</li>
+          <li><strong>Dificultad de desconexión:</strong> Q6 (desconectarse del trabajo) aparece con puntaje alto consistente.</li>
+          <li><strong>Comparación con pares:</strong> Q22 (frustración por comparación) muy frecuente — impacto en autoestima.</li>
+          <li><strong>Puntajes altos en mujeres:</strong> Vanessa (77), Ana (61) — posible patrón de género.</li>
+          <li><strong>Falta de herramientas:</strong> Q3 (conocimiento de herramientas de prevención) — mayoría responde "No".</li>
+          <li><strong>Pensamiento de abandono:</strong> Q9 (dejar la profesión) tiene respuestas significativas.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="chart-card" style="margin-bottom:20px;">
+      <h3>📊 Análisis de Dimensiones (promedio estimado por área)</h3>
+      <canvas id="chartDimensions" style="max-height:300px;"></canvas>
+    </div>
+    <div class="insight-grid">
+      <div class="insight-card">
+        <h4>🎯 Oportunidades de Contenido</h4>
+        <ul class="insight-list">
+          <li>Artículo: "Por qué el 75% de los veterinarios no sabe que está quemado"</li>
+          <li>Video: "Cómo dejar de cobrar con culpa: el problema de la vocación vs el dinero"</li>
+          <li>Post: "5 señales de que el burnout veterinario ya llegó a tu cuerpo"</li>
+          <li>Webinar: "De 0 a Veterinario Alfa: recupera tu energía en 30 días"</li>
+          <li>Lead magnet: "Guía rápida: 3 herramientas para cortar el desgaste hoy"</li>
+        </ul>
+      </div>
+      <div class="insight-card">
+        <h4>🚀 Recomendaciones Estratégicas</h4>
+        <ul class="insight-list">
+          <li>Crear secuencia de email personalizada por nivel de desgaste (bajo/moderado/alto/crítico).</li>
+          <li>Protocolo especial para Q40-41 (pensamientos negativos profundos) — derivar a acompañamiento.</li>
+          <li>Segmentar campañas por país: Colombia (mayoría), España, LATAM resto.</li>
+          <li>Usar puntajes reales como prueba social: "40+ veterinarios ya conocen su iScore".</li>
+          <li>Crear retargeting en Facebook para quienes completaron el test → programa.</li>
+          <li>Publicar casos de éxito con nombres (con permiso) de respondientes de bajo puntaje.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: ARTÍCULOS -->
+  <div id="sec-articles" class="section">
+    <div style="background:#fff;border-radius:14px;padding:20px;margin-bottom:20px;box-shadow:var(--sombra);">
+      <h3 style="font-size:.95rem;font-weight:700;color:#0a0e2e;margin-bottom:8px;">✍️ Artículos Base — Generados a partir de los datos reales del test</h3>
+      <p style="font-size:.83rem;color:#888;">Estos artículos están fundamentados en las 40 respuestas reales del iScore LATAM. Úsalos como base para contenido en blog, redes sociales o email marketing.</p>
+    </div>
+    <div class="article-grid">
+      <div class="article-card">
+        <div class="art-tag">Artículo 1 · Blog / LinkedIn</div>
+        <h4>"El 75% de los veterinarios está desgastado sin saberlo — datos reales de LATAM"</h4>
+        <p>Basado en 40 evaluaciones del iScore LATAM, la mayoría de veterinarios presenta desgaste emocional moderado o alto. El puntaje promedio de 42.6 puntos revela que el burnout veterinario es una realidad silenciosa y sistémica en la profesión...</p>
+        <div class="art-stat">📊 Fuente: 40 respuestas · Score avg: 42.6 · 75% moderado · Dic 2024–May 2026</div>
+      </div>
+      <div class="article-card" style="border-top-color:var(--naranja);">
+        <div class="art-tag" style="color:var(--naranja);">Artículo 2 · Instagram / Reels</div>
+        <h4>"¿Por qué los veterinarios cobran menos de lo que merecen? La trampa emocional del dinero"</h4>
+        <p>En nuestra evaluación, más del 60% de veterinarios reporta culpa al cobrar sus servicios. Esta paradoja — alta vocación, baja compensación — es una de las dimensiones más críticas del burnout veterinario y tiene raíces en creencias profundas sobre dinero y vocación...</p>
+        <div class="art-stat">📊 Fuente: Dimensión 5 (Q32-37) · Patrón identificado en 60%+ respondientes</div>
+      </div>
+      <div class="article-card" style="border-top-color:var(--verde);">
+        <div class="art-tag" style="color:var(--verde);">Artículo 3 · Email Marketing</div>
+        <h4>"Tu cuerpo sabe que estás quemado antes que tu mente — 5 señales físicas del burnout veterinario"</h4>
+        <p>Dolores de cabeza sin causa, insomnio, cambios en el apetito. Las preguntas 27 a 31 del iScore revelan que los síntomas físicos del desgaste emocional son los primeros en aparecer — y los más ignorados. Aprende a leer las señales que tu cuerpo lleva meses enviándote...</p>
+        <div class="art-stat">📊 Fuente: Dimensión física (Q27-31) · Alta frecuencia de respuesta "Frecuentemente"</div>
+      </div>
+      <div class="article-card" style="border-top-color:#9b59b6;">
+        <div class="art-tag" style="color:#9b59b6;">Artículo 4 · Blog / Podcast</div>
+        <h4>"Despersonalización: cuando ya no ves animales, solo 'casos' — el síntoma más peligroso"</h4>
+        <p>La despersonalización es el mecanismo de defensa que convierte al veterinario apasionado en un profesional frío y distante. Los datos del iScore muestran patrones alarmantes en las preguntas sobre interacción con tutores y colegas. Conoce cómo identificarla y revertirla...</p>
+        <div class="art-stat">📊 Fuente: Dimensión 3 (Q12-18) · Patrón de despersonalización activa</div>
+      </div>
+      <div class="article-card" style="border-top-color:#c0392b;">
+        <div class="art-tag" style="color:#c0392b;">Artículo 5 · WhatsApp / Comunidad</div>
+        <h4>"Pensar en dejar la veterinaria — el pensamiento que nadie quiere admitir pero el 40% ha tenido"</h4>
+        <p>La pregunta 9 del iScore — "¿Has pensado en dejar la profesión veterinaria?" — reveló que una proporción significativa de respondientes ha considerado esta opción. No es debilidad. Es una señal de que el sistema está fallando a los profesionales que más ama a los animales...</p>
+        <div class="art-stat">📊 Fuente: Q9 (abandono profesional) · Alta incidencia en desgaste moderado-alto</div>
+      </div>
+      <div class="article-card" style="border-top-color:var(--azul);">
+        <div class="art-tag">Artículo 6 · Caso de Éxito</div>
+        <h4>"De 77 a libre: la historia de una veterinaria que recuperó su energía con VetConnect Pro"</h4>
+        <p>Con el puntaje más alto registrado en el iScore LATAM, esta veterinaria de España representó el perfil de desgaste crítico. Su historia — de agotamiento total a reconectar con su propósito — es el caso real detrás del programa Veterinario Alfa del Dr. Iván Durán...</p>
+        <div class="art-stat">📊 Fuente: Caso real (score 77) · Seguimiento post-test</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: CRM -->
+  <div id="sec-crm" class="section">
+
+    <!-- WhatsApp Status Widget -->
+    <div class="chart-card" style="margin-bottom:20px;">
+      <h3 style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+        📱 Canal WhatsApp · OpenWA (VitaBot)
+        <span id="wa-conn-badge" class="wa-badge wa-wait">⏳ Verificando...</span>
+        <button class="btn-sm btn-primary" onclick="checkWaStatus()" style="margin-left:auto;">↺ Actualizar</button>
+      </h3>
+      <div style="display:flex;align-items:flex-start;gap:24px;flex-wrap:wrap;margin-top:12px;">
+        <div style="flex:1;min-width:200px;">
+          <p id="wa-conn-text" style="font-size:.85rem;color:#666;margin-bottom:8px;">Verificando conexión con VitaBot...</p>
+          <p id="wa-conn-phone" style="font-size:.9rem;font-weight:700;color:#1a7a3c;display:none;"></p>
+          <p style="font-size:.75rem;color:#aaa;margin-top:8px;">VitaBot: <a href="https://vitabot-vitalvet-production.up.railway.app" target="_blank" style="color:#0e188e;">vitabot-vitalvet-production.up.railway.app</a></p>
+        </div>
+        <div id="wa-qr-box" style="display:none;text-align:center;">
+          <p style="font-size:.75rem;color:#888;margin-bottom:6px;font-weight:700;">Escanea con WhatsApp para vincular</p>
+          <img id="wa-qr-img" src="" alt="QR WhatsApp" style="max-width:180px;border-radius:10px;border:2px solid #eee;">
+          <p style="font-size:.72rem;color:#aaa;margin-top:4px;">Se actualiza automáticamente</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filtros + Tabla de contactos -->
+    <div class="table-card" style="margin-bottom:20px;">
+      <h3>👥 Contactos iScore LATAM · <span id="crm-count">—</span> registros <span id="crm-filter-note" style="font-weight:400;color:#f39c12;font-size:.75rem;margin-left:8px;"></span></h3>
+      <div class="crm-filter-bar">
+        <select id="crm-f-nivel">
+          <option value="">Todos los niveles</option>
+          <option value="Bajo">🟢 Bajo</option>
+          <option value="Moderado">🟡 Moderado</option>
+          <option value="Alto">🟠 Alto</option>
+          <option value="Crítico">🔴 Crítico</option>
+        </select>
+        <select id="crm-f-pais">
+          <option value="">Todos los países</option>
+          <option value="Colombia">🇨🇴 Colombia</option>
+          <option value="México">🇲🇽 México</option>
+          <option value="España">🇪🇸 España</option>
+          <option value="Honduras">🇭🇳 Honduras</option>
+        </select>
+        <select id="crm-f-genero">
+          <option value="">Todos los géneros</option>
+          <option value="Femenino">♀ Mujeres</option>
+          <option value="Masculino">♂ Hombres</option>
+        </select>
+        <select id="crm-f-riesgo">
+          <option value="">Todos los scores</option>
+          <option value="alto">Solo Alto + Crítico (51+)</option>
+          <option value="moderado">Solo Moderado (26–50)</option>
+          <option value="bajo">Solo Bajo (≤25)</option>
+        </select>
+        <button class="btn-sm btn-primary" onclick="applyCrmFilters()">🔍 Filtrar</button>
+        <button class="btn-sm" style="background:#f0f2f8;color:#666;" onclick="resetCrmFilters()">✕ Limpiar</button>
+        <span id="crm-sel-count" style="font-size:.78rem;color:#888;margin-left:auto;"></span>
+      </div>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead><tr>
+            <th><input type="checkbox" id="crm-check-all" onchange="toggleSelectAll(this)"></th>
+            <th>Nombre</th><th>Email</th><th>Teléfono</th><th>País</th>
+            <th>Nivel</th><th>Score</th><th>Género</th><th>Acciones</th>
+          </tr></thead>
+          <tbody id="crmBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Broadcast: WA + Email -->
+    <div class="charts-grid" style="margin-bottom:20px;">
+
+      <!-- WhatsApp -->
+      <div class="chart-card">
+        <h3>💬 WhatsApp · Envío Individual o Masivo</h3>
+        <div style="margin-bottom:12px;">
+          <label class="crm-label">Mensaje</label>
+          <textarea id="wa-msg-area" class="crm-textarea" rows="4" placeholder="Hola {{nombre}}, vi que completaste el iScore LATAM con {{score}} puntos..."></textarea>
+          <p style="font-size:.72rem;color:#aaa;margin-top:4px;">Variables: <code>{{nombre}}</code> <code>{{score}}</code> <code>{{nivel}}</code></p>
+        </div>
+        <div style="margin-bottom:12px;">
+          <label class="crm-label">📎 Adjunto (opcional · mp4, pdf, jpg)</label>
+          <div id="wa-attach-zone" class="attach-zone">📁 Sin adjunto · Selecciona un archivo</div>
+          <input type="file" id="wa-attach-file" accept=".mp4,.pdf,.jpg,.jpeg,.png" style="width:100%;font-size:.78rem;margin-top:4px;" onchange="handleWaAttachment(this)">
+          <button id="wa-attach-clear-btn" class="btn-sm btn-danger" style="display:none;margin-top:6px;" onclick="clearWaAttachment()">✕ Quitar adjunto</button>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="btn-sm btn-wa" onclick="sendWaToSelected()">📤 Enviar a seleccionados</button>
+          <button class="btn-sm" style="background:#f0f2f8;color:#555;" onclick="previewWaMsg()">👁 Vista previa</button>
+        </div>
+        <div id="wa-result-box" style="margin-top:10px;font-size:.8rem;display:none;padding:10px;border-radius:8px;line-height:1.6;"></div>
+      </div>
+
+      <!-- Email -->
+      <div class="chart-card">
+        <h3>📧 Email · WordPress SMTP</h3>
+        <div style="margin-bottom:10px;">
+          <label class="crm-label">Asunto</label>
+          <input type="text" id="email-subject" class="crm-input" placeholder="Tu resultado iScore LATAM — VetConnect Pro">
+        </div>
+        <div style="margin-bottom:12px;">
+          <label class="crm-label">Mensaje</label>
+          <textarea id="email-body-area" class="crm-textarea" rows="5" placeholder="Hola {{nombre}},&#10;&#10;Gracias por completar el iScore LATAM. Tu puntaje fue {{score}} pts (nivel: {{nivel}}).&#10;&#10;El Dr. Iván Durán diseñó VetConnect Pro exactamente para veterinarios en tu situación..."></textarea>
+          <p style="font-size:.72rem;color:#aaa;margin-top:4px;">Variables: <code>{{nombre}}</code> <code>{{score}}</code> <code>{{nivel}}</code></p>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="btn-sm btn-email" onclick="sendEmailToSelected()">📧 Enviar a seleccionados</button>
+          <button class="btn-sm" style="background:#f0f2f8;color:#555;" onclick="previewEmailMsg()">👁 Vista previa</button>
+        </div>
+        <div id="email-result-box" style="margin-top:10px;font-size:.8rem;display:none;padding:10px;border-radius:8px;line-height:1.6;"></div>
+        <div style="margin-top:12px;padding:10px;background:#fef3c7;border-radius:8px;font-size:.75rem;color:#92400e;">
+          ⚠️ Requiere endpoint activo en WordPress. <a href="#" onclick="showWpEmailSnippet();return false;" style="color:#92400e;font-weight:700;">Ver snippet PHP →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Log de envíos -->
+    <div class="chart-card">
+      <h3>📋 Log de Envíos · Esta Sesión</h3>
+      <div id="crm-log" style="max-height:220px;overflow-y:auto;">
+        <p style="color:#ccc;text-align:center;padding:20px;font-size:.83rem;">Sin envíos en esta sesión.</p>
+      </div>
+    </div>
+
+    <!-- Modal snippet WordPress PHP -->
+    <div id="wp-snippet-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:9999;padding:24px;overflow-y:auto;" onclick="if(event.target===this)this.style.display='none'">
+      <div style="background:#fff;border-radius:14px;max-width:700px;margin:0 auto;padding:24px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+          <h3 style="font-size:1rem;font-weight:800;color:#0a0e2e;">📧 Snippet PHP — Endpoint Email WordPress</h3>
+          <button onclick="document.getElementById('wp-snippet-modal').style.display='none'" style="background:none;border:none;font-size:1.4rem;cursor:pointer;color:#888;">✕</button>
+        </div>
+        <p style="font-size:.83rem;color:#666;margin-bottom:12px;">Agrega este código en <strong>Code Snippets → + Agregar nuevo</strong> en WordPress Admin. Luego actívalo. Esto crea el endpoint de email que usa el dashboard.</p>
+        <pre id="wp-snippet-code" style="background:#0a0e2e;color:#a8d8a8;padding:16px;border-radius:10px;font-size:.75rem;overflow-x:auto;line-height:1.8;white-space:pre-wrap;"></pre>
+        <button class="btn-sm btn-primary" style="margin-top:12px;" onclick="navigator.clipboard.writeText(document.getElementById('wp-snippet-code').textContent).then(()=>{this.textContent='✅ Copiado!'})">📋 Copiar código</button>
+      </div>
+    </div>
+
+  </div><!-- /sec-crm -->
+
+</main>
+
+<script>
+// ─── Dashboard Config ─────────────────────────────────────────────────────────
+const DASHBOARD_FN = 'https://xpjjolrznelyejflctvh.supabase.co/functions/v1/dashboard-data';
+const DASHBOARD_KEY = 'vc-dashboard-2026';
+let _charts = {};
+
+function parseTiempoMin(t) {
+  if (!t) return 0;
+  const m = t.match(/(\d+)m\s*(\d+)s/);
+  return m ? parseInt(m[1]) + parseInt(m[2]) / 60 : parseFloat(t) || 0;
+}
+function getNivelClass(n) { return (n || '').toLowerCase().replace('í','i'); }
+
+// ─── Fetch & Render ───────────────────────────────────────────────────────────
+async function loadData() {
+  try {
+    const r = await fetch(DASHBOARD_FN, {
+      headers: { 'Authorization': 'Bearer ' + DASHBOARD_KEY }
+    });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const data = await r.json();
+    if (Array.isArray(data) && data.length > 0) renderAll(data);
+    const now = new Date().toLocaleString('es-CO', {day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
+    document.getElementById('topbar-date').textContent = '🔄 ' + now + ' · iScore LATAM';
+  } catch(e) {
+    document.getElementById('topbar-date').textContent = '⚠️ Error cargando datos · ' + e.message;
+  }
+}
+
+function renderAll(data) {
+  window._lastData = data;
+  updateKPIs(data);
+  updateTable(data);
+  renderCharts(data);
+  renderGenero(data);
+  renderTiempoEjerciendo(data);
+  renderDimRanking(data);
+  renderSnapshots();
+  buildCrmTable(data);
+}
+
+function updateKPIs(data) {
+  const total = data.length;
+  const scores = data.map(r => r.puntaje);
+  const avg = total ? (scores.reduce((a,b)=>a+b,0)/total).toFixed(1) : 0;
+  const mn = Math.min(...scores), mx = Math.max(...scores);
+  const mods = data.filter(r => r.nivel_desgaste === 'Moderado').length;
+  const risk = data.filter(r => r.nivel_desgaste === 'Alto' || r.nivel_desgaste === 'Crítico').length;
+  const dates = data.map(r => r.created_at).sort();
+  const since = dates[0] ? new Date(dates[0]).toLocaleDateString('es-CO',{month:'short',year:'numeric'}) : '';
+  const until = dates[dates.length-1] ? new Date(dates[dates.length-1]).toLocaleDateString('es-CO',{month:'short',year:'numeric'}) : '';
+
+  document.getElementById('kpi-total').textContent = total;
+  document.getElementById('kpi-rango').textContent = since + ' — ' + until;
+  document.getElementById('kpi-avg').textContent = avg;
+  document.getElementById('kpi-minmax').textContent = 'Rango: ' + mn + ' – ' + mx + ' pts';
+  document.getElementById('kpi-mod-pct').textContent = total ? Math.round(mods/total*100) + '%' : '—';
+  document.getElementById('kpi-mod-n').textContent = mods + ' de ' + total + ' respondientes';
+  document.getElementById('kpi-risk-pct').textContent = total ? Math.round(risk/total*100) + '%' : '—';
+  document.getElementById('kpi-risk-n').textContent = risk + ' respondientes en riesgo';
+  document.getElementById('table-count').textContent = total;
+}
+
+function updateTable(data) {
+  const tbody = document.getElementById('respTableBody');
+  tbody.innerHTML = '';
+  data.forEach((r, i) => {
+    const fecha = r.created_at ? new Date(r.created_at).toLocaleDateString('es-CO',{day:'2-digit',month:'short',year:'numeric'}) : '—';
+    const tiempo = r.tiempo_completacion || '—';
+    tbody.innerHTML += `<tr>
+      <td>${i+1}</td>
+      <td>${r.nombre}</td>
+      <td>${r.pais || '—'}</td>
+      <td><strong>${r.puntaje}</strong></td>
+      <td><span class="badge ${getNivelClass(r.nivel_desgaste)}">${r.nivel_desgaste}</span></td>
+      <td>${tiempo}</td>
+      <td>${fecha}</td>
+    </tr>`;
+  });
+}
+
+// ─── Detección de Género por Nombre (heurística LATAM) ───────────────────────
+const NOMBRES_M = new Set(['ivan','juan','carlos','luis','jose','jorge','andres','duvan','fausto',
+  'daniel','omar','yaxel','fernando','sebastian','miguel','david','alejandro','mario','alberto',
+  'pedro','pablo','hector','roberto','sergio','manuel','jesus','angel','rafael','francisco','antonio']);
+const NOMBRES_F = new Set(['jocelyn','ana','vanessa','maira','doris','viviana','mariana','betzi',
+  'silena','maria','estefania','stepffany','andrea','alma','samara','diana','luz','erika',
+  'patricia','claudia','carolina','alejandra','natalia','valentina','sofia','isabella','camila',
+  'laura','sara','monica','adriana','liliana','gloria','rosa','elena','karen','paola','johanna',
+  'marcela','beatriz','consuelo','fernanda','angela']);
+
+function detectGender(nombre) {
+  if (!nombre) return 'Desconocido';
+  const primer = nombre.trim().toLowerCase().split(/\s+/)[0]
+    .normalize('NFD').replace(/[̀-ͯ]/g,'');
+  if (NOMBRES_M.has(primer)) return 'Masculino';
+  if (NOMBRES_F.has(primer)) return 'Femenino';
+  // Heurística: terminación en 'a' → femenino (funciona bien en español)
+  if (primer.endsWith('a')) return 'Femenino';
+  if (primer.endsWith('o') || primer.endsWith('os')) return 'Masculino';
+  return 'Desconocido';
+}
+
+function renderGenero(data) {
+  const grupos = { Femenino: [], Masculino: [], Desconocido: [] };
+  data.forEach(r => { const g = detectGender(r.nombre); grupos[g].push(r.puntaje); });
+
+  const avg = arr => arr.length ? (arr.reduce((a,b)=>a+b,0)/arr.length).toFixed(1) : 0;
+  const fAvg = avg(grupos.Femenino);
+  const mAvg = avg(grupos.Masculino);
+  const fN   = grupos.Femenino.length;
+  const mN   = grupos.Masculino.length;
+  const diff  = fN && mN ? (parseFloat(fAvg) - parseFloat(mAvg)).toFixed(1) : '—';
+
+  // Mini KPIs
+  const kpiBox = (label, val, sub, color) =>
+    `<div style="background:#f5f7fa;border-radius:10px;padding:14px;border-left:4px solid ${color};">
+      <div style="font-size:1.6rem;font-weight:900;color:${color};">${val}</div>
+      <div style="font-size:.75rem;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.5px;margin-top:2px;">${label}</div>
+      <div style="font-size:.72rem;color:#999;margin-top:3px;">${sub}</div>
+    </div>`;
+  document.getElementById('genero-kpis').innerHTML =
+    kpiBox('Promedio Mujeres', fAvg + ' pts', fN + ' respondientes', '#e83e8c') +
+    kpiBox('Promedio Hombres', mAvg + ' pts', mN + ' respondientes', '#0e188e') +
+    kpiBox('Diferencia', diff + ' pts', 'mujeres vs hombres', diff > 0 ? '#c0392b' : '#1a7a3c') +
+    kpiBox('Patrón confirmado', fN && mN && parseFloat(fAvg) > parseFloat(mAvg) ? '✅ Sí' : '⚠️ Parcial',
+      'mujeres > hombres en score', fN && mN && parseFloat(fAvg) > parseFloat(mAvg) ? '#1a7a3c' : '#e67e22');
+
+  // Gráfica 1: Promedio por género (barras horizontales)
+  destroyChart('chartGeneroAvg');
+  _charts['chartGeneroAvg'] = new Chart(document.getElementById('chartGeneroAvg'), {
+    type: 'bar',
+    data: {
+      labels: ['Mujeres', 'Hombres'],
+      datasets: [{
+        label: 'Puntaje promedio',
+        data: [fAvg, mAvg],
+        backgroundColor: ['rgba(232,62,140,0.8)', 'rgba(14,24,142,0.8)'],
+        borderColor:     ['#e83e8c','#0e188e'],
+        borderWidth: 2, borderRadius: 8
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      plugins: { legend:{display:false},
+        tooltip: { callbacks: { label: ctx => ' ' + ctx.raw + ' pts promedio' }}
+      },
+      scales: { x: { min:0, max:80, grid:{color:'#f0f0f0'},
+        ticks:{ callback: v => v+' pts' }
+      }, y:{grid:{display:false}} }
+    }
+  });
+
+  // Gráfica 2: Niveles por género (barras agrupadas)
+  destroyChart('chartGeneroNivel');
+  const nivelCount = (arr, nivel) => arr.filter(s =>
+    nivel==='Bajo'?s<=25:nivel==='Moderado'?s>25&&s<=50:nivel==='Alto'?s>50&&s<=75:s>75
+  ).length;
+  _charts['chartGeneroNivel'] = new Chart(document.getElementById('chartGeneroNivel'), {
+    type: 'bar',
+    data: {
+      labels: ['Bajo', 'Moderado', 'Alto', 'Crítico'],
+      datasets: [
+        { label:'Mujeres', data:['Bajo','Moderado','Alto','Crítico'].map(n=>nivelCount(grupos.Femenino,n)),
+          backgroundColor:'rgba(232,62,140,0.75)', borderRadius:6 },
+        { label:'Hombres', data:['Bajo','Moderado','Alto','Crítico'].map(n=>nivelCount(grupos.Masculino,n)),
+          backgroundColor:'rgba(14,24,142,0.75)', borderRadius:6 }
+      ]
+    },
+    options: {
+      plugins: { legend:{ position:'top', labels:{font:{size:11}} }},
+      scales: { y:{ grid:{color:'#f0f0f0'}, ticks:{stepSize:1} }, x:{grid:{display:false}} }
+    }
+  });
+
+  // Nota metodológica
+  document.getElementById('genero-nota').textContent =
+    `⚠️ Género inferido por nombre (heurística LATAM). ${grupos.Desconocido.length} respondiente(s) sin clasificar. Para análisis exacto se requiere campo de género en el formulario.`;
+}
+
+function destroyChart(id) { if (_charts[id]) { _charts[id].destroy(); delete _charts[id]; } }
+
+// ─── Tiempo Ejerciendo vs Desgaste ───────────────────────────────────────────
+function renderTiempoEjerciendo(data) {
+  const container = document.getElementById('tiempo-ej-content');
+  if (!container) return;
+  const withTiempo = data.filter(r => r.tiempo_ejerciendo);
+  const sinTiempo  = data.length - withTiempo.length;
+  const pctCobertura = data.length ? Math.round(withTiempo.length/data.length*100) : 0;
+
+  // Coverage bar always shown at top
+  const coverageBar = `
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;padding:12px 16px;background:#f8f9ff;border-radius:10px;">
+      <div style="flex:1;">
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+          <span style="font-size:.78rem;font-weight:700;color:#555;">Cobertura del campo "Tiempo ejerciendo"</span>
+          <span style="font-size:.78rem;font-weight:900;color:${pctCobertura>=50?'#1a7a3c':'#e67e22'};">${withTiempo.length} de ${data.length} respondientes (${pctCobertura}%)</span>
+        </div>
+        <div style="background:#e0e4ea;border-radius:20px;height:8px;overflow:hidden;">
+          <div style="background:${pctCobertura>=50?'#1a7a3c':'#f39c12'};width:${pctCobertura}%;height:100%;border-radius:20px;transition:width .5s;"></div>
+        </div>
+        <p style="font-size:.72rem;color:#999;margin-top:4px;">El formulario captura este dato desde su incorporación reciente. Los ${sinTiempo} respondientes sin dato son anteriores a ese cambio.</p>
+      </div>
+    </div>`;
+
+  if (withTiempo.length < 3) {
+    container.innerHTML = coverageBar + `
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div style="padding:16px;background:#fffbf0;border-radius:10px;border-left:4px solid #f39c12;">
+          <p style="font-size:.85rem;font-weight:700;color:#92400e;margin-bottom:6px;">⏳ Muestra en construcción</p>
+          <p style="font-size:.8rem;color:#78350f;line-height:1.6;">Con ${withTiempo.length} dato${withTiempo.length!==1?'s':''} disponible${withTiempo.length!==1?'s':''} aún no hay suficiente muestra para calcular promedios confiables por tramo. El análisis se activará automáticamente al acumularse más respuestas.</p>
+          ${withTiempo.length > 0 ? `<div style="margin-top:8px;font-size:.75rem;color:#92400e;font-weight:700;">Datos actuales: ${withTiempo.map(r=>r.tiempo_ejerciendo+' ('+r.puntaje+'pts)').join(' · ')}</div>` : ''}
+        </div>
+        <div>
+          <p style="font-size:.75rem;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px;">Patrón esperado (burnout veterinario)</p>
+          ${[['&lt;1 año','Energía y expectativa profesional','#27ae60'],['1–3 años','Primer choque con la realidad','#f39c12'],['3–5 años','Zona crítica: acumulación sin herramientas','#e67e22'],['5–10 años','Cronificación o primera recuperación','#e67e22'],['&gt;10 años','Alta variabilidad: resiliencia o burnout profundo','#c0392b']]
+            .map(([t,d,c]) => `<div style="display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid #f0f0f0;">
+              <div style="background:${c};color:#fff;padding:2px 8px;border-radius:20px;font-size:.68rem;font-weight:700;white-space:nowrap;flex-shrink:0;">${t}</div>
+              <div style="font-size:.76rem;color:#555;">${d}</div>
+            </div>`).join('')}
+        </div>
+      </div>`;
+    return;
+  }
+
+  // Normalizar valores de texto libre a tramos estándar
+  function normalizarTiempo(t) {
+    if (!t) return null;
+    const s = t.toLowerCase().replace(/[áàä]/g,'a').replace(/[éèë]/g,'e').replace(/[íì]/g,'i').replace(/[óò]/g,'o').replace(/[úù]/g,'u');
+    const n = parseFloat(s.replace(/[^\d.]/g,''));
+    if (s.includes('menos de 1') || s.includes('< 1') || (!isNaN(n) && n < 1)) return 'Menos de 1 año';
+    if (!isNaN(n) && n <= 3) return '1–3 años';
+    if (!isNaN(n) && n <= 5) return '3–5 años';
+    if (!isNaN(n) && n <= 10) return '5–10 años';
+    if (!isNaN(n) && n > 10) return 'Más de 10 años';
+    if (s.includes('1') && (s.includes('3') || s.includes('tres'))) return '1–3 años';
+    if (s.includes('3') && (s.includes('5') || s.includes('cinco'))) return '3–5 años';
+    if (s.includes('5') && s.includes('10')) return '5–10 años';
+    if (s.includes('10') || s.includes('mas de') || s.includes('más de')) return 'Más de 10 años';
+    return t;
+  }
+
+  const ORDER = ['Menos de 1 año','1–3 años','3–5 años','5–10 años','Más de 10 años'];
+  const grupos = {};
+  withTiempo.forEach(r => {
+    const t = normalizarTiempo(r.tiempo_ejerciendo) || r.tiempo_ejerciendo;
+    if (!grupos[t]) grupos[t] = [];
+    grupos[t].push(r.puntaje);
+  });
+  const labels = [...ORDER.filter(k => grupos[k]), ...Object.keys(grupos).filter(k => !ORDER.includes(k))];
+  const avgs   = labels.map(k => +(grupos[k].reduce((a,b)=>a+b,0)/grupos[k].length).toFixed(1));
+  const ns     = labels.map(k => grupos[k].length);
+  const cColor = v => v<=25?'#27ae60':v<=50?'#f39c12':v<=75?'#e67e22':'#c0392b';
+
+  container.innerHTML = coverageBar + `
+    <div style="display:grid;grid-template-columns:2fr 1fr;gap:20px;align-items:start;">
+      <div>
+        <p style="font-size:.78rem;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px;">Puntaje promedio por tramo de experiencia (n=${withTiempo.length})</p>
+        <canvas id="chartTiempoEj" style="max-height:220px;"></canvas>
+      </div>
+      <div>
+        <p style="font-size:.78rem;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px;">Detalle por tramo</p>
+        ${labels.map((l,i)=>`
+          <div style="padding:8px 0;border-bottom:1px solid #f0f0f0;">
+            <div style="display:flex;justify-content:space-between;margin-bottom:2px;">
+              <span style="font-size:.78rem;font-weight:600;color:#444;">${l}</span>
+              <span style="font-size:.78rem;font-weight:900;color:${cColor(avgs[i])};">${avgs[i]} pts</span>
+            </div>
+            <div style="font-size:.7rem;color:#aaa;">n=${ns[i]} · nivel ${avgs[i]<=25?'Bajo':avgs[i]<=50?'Moderado':avgs[i]<=75?'Alto':'Crítico'}</div>
+          </div>`).join('')}
+      </div>
+    </div>`;
+
+  destroyChart('chartTiempoEj');
+  _charts['chartTiempoEj'] = new Chart(document.getElementById('chartTiempoEj'), {
+    type: 'bar',
+    data: {
+      labels: labels.map((l,i) => l + ' (n='+ns[i]+')'),
+      datasets: [{ label:'Puntaje promedio', data:avgs, borderRadius:8,
+        backgroundColor: avgs.map(v => cColor(v)+'CC'),
+        borderColor: avgs.map(v => cColor(v)), borderWidth:1 }]
+    },
+    options: {
+      plugins: { legend:{display:false}, tooltip:{ callbacks:{ label: ctx => ' '+ctx.raw+' pts promedio' } } },
+      scales: { y:{ min:0, max:90, grid:{color:'#f0f0f0'}, ticks:{callback:v=>v+' pts'} }, x:{grid:{display:false}} }
+    }
+  });
+}
+
+// ─── Ranking de Dimensiones + Gatillos ───────────────────────────────────────
+function renderDimRanking(data) {
+  const DIMS = [
+    { key:'dim_conciencia',         label:'Conciencia',         icon:'🧠', max:9,  est:65,
+      desc:'Autoconocimiento sobre el burnout y herramientas de prevención',
+      gatillos:['Q2 — Falta de autocuidado emocional activo en el trabajo',
+                'Q3 — Desconocimiento de herramientas de prevención del desgaste',
+                'Q1 — Dificultad para reconocer síntomas propios de burnout'] },
+    { key:'dim_agotamiento',        label:'Agotamiento',        icon:'🔋', max:24, est:72,
+      desc:'Agotamiento emocional y físico acumulado en la jornada',
+      gatillos:['Q4 — Sin energía al terminar la jornada laboral',
+                'Q6 — Incapacidad de desconectarse del trabajo en tiempo libre',
+                'Q9 — Pensamientos recurrentes de abandonar la profesión',
+                'Q7 — Irritabilidad frecuente con familia y amigos'] },
+    { key:'dim_despersonalizacion', label:'Despersonalización',  icon:'🎭', max:21, est:48,
+      desc:'Distancia emocional creciente con pacientes y tutores',
+      gatillos:['Q12 — Ver animales como "casos clínicos" sin vínculo emocional',
+                'Q15 — Irritabilidad con tutores o colegas por agotamiento',
+                'Q14 — Indiferencia ante casos que antes generaban empatía'] },
+    { key:'dim_logro',              label:'Falta de Logro',     icon:'🏆', max:39, est:68,
+      desc:'Pérdida de propósito, reconocimiento y satisfacción profesional',
+      gatillos:['Q22 — Frustración constante por comparación con colegas exitosos',
+                'Q19 — Sentir que el trabajo no es valorado por clientes ni comunidad',
+                'Q20 — Estancamiento profesional a pesar del esfuerzo sostenido',
+                'Q26 — Ingresos que no reflejan el nivel de esfuerzo y dedicación'] },
+    { key:'dim_dinero',             label:'Dinero / Crisis',    icon:'💰', max:30, est:58,
+      desc:'Bloqueos emocionales profundos relacionados con el cobro y el dinero',
+      gatillos:['Q32 — Culpa al cobrar el precio real de los servicios profesionales',
+                'Q35 — Conflicto interno entre vocación y cobro justo (paradoja central)',
+                'Q34 — Ansiedad al hablar de dinero directamente con los tutores',
+                'Q41 — Ideación suicida como señal de crisis emocional profunda'] },
+  ];
+
+  const hasDims = data.some(r => r.dim_agotamiento != null);
+  const dimData = DIMS.map(d => {
+    if (hasDims) {
+      const rows = data.filter(r => r[d.key] != null);
+      const avg  = rows.length ? rows.reduce((a,r)=>a+r[d.key],0)/rows.length : 0;
+      return { ...d, pct: Math.round(avg/d.max*100), n: rows.length, estimado: false };
+    }
+    return { ...d, pct: d.est, n: 0, estimado: true };
+  }).sort((a,b) => b.pct - a.pct);
+
+  const color = pct => pct>=70?'#c0392b':pct>=55?'#e67e22':pct>=40?'#f39c12':'#27ae60';
+
+  destroyChart('chartDimRanking');
+  _charts['chartDimRanking'] = new Chart(document.getElementById('chartDimRanking'), {
+    type: 'bar',
+    data: {
+      labels: dimData.map(d => d.icon + ' ' + d.label),
+      datasets: [{ label:'% Saturación', data: dimData.map(d=>d.pct), borderRadius:8,
+        backgroundColor: dimData.map(d => color(d.pct) + 'CC') }]
+    },
+    options: {
+      indexAxis: 'y',
+      plugins: { legend:{display:false}, tooltip:{ callbacks:{ label: ctx => ' '+ctx.raw+'% saturación' } } },
+      scales: { x:{ min:0, max:100, grid:{color:'#f0f0f0'}, ticks:{callback:v=>v+'%'} }, y:{grid:{display:false}} }
+    }
+  });
+
+  const topDim = dimData[0];
+  document.getElementById('dim-ranking-detail').innerHTML = `
+    <div>
+      <p style="font-size:.78rem;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">Dimensión más afectada</p>
+      <div style="background:#fff5f5;border:2px solid ${color(topDim.pct)};border-radius:12px;padding:14px;margin-bottom:14px;">
+        <div style="font-size:1.6rem;margin-bottom:2px;">${topDim.icon}</div>
+        <div style="font-size:1.05rem;font-weight:900;color:${color(topDim.pct)};">${topDim.label}</div>
+        <div style="font-size:.8rem;color:#666;margin:4px 0 8px;">${topDim.desc}</div>
+        <span style="background:${color(topDim.pct)};color:#fff;padding:3px 12px;border-radius:20px;font-size:.75rem;font-weight:700;">${topDim.pct}% saturación${topDim.estimado?' (estimado)':''}</span>
+      </div>
+      <p style="font-size:.75rem;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.3px;margin-bottom:8px;">Ranking general</p>
+      ${dimData.map((d,i) => `
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #f5f5f5;">
+          <span style="font-size:.72rem;color:#bbb;width:12px;">${i+1}</span>
+          <span>${d.icon}</span>
+          <span style="flex:1;font-size:.8rem;font-weight:600;color:#444;">${d.label}</span>
+          <div style="background:#f0f0f0;border-radius:20px;width:72px;height:7px;overflow:hidden;">
+            <div style="background:${color(d.pct)};width:${d.pct}%;height:100%;border-radius:20px;"></div>
+          </div>
+          <span style="font-size:.76rem;font-weight:700;color:${color(d.pct)};width:34px;text-align:right;">${d.pct}%</span>
+        </div>`).join('')}
+      ${topDim.estimado?'<p style="font-size:.68rem;color:#bbb;margin-top:8px;font-style:italic;">⚠️ Valores estimados — los dim_* aún no se guardan en el test</p>':''}
+    </div>`;
+
+  const COLORS = ['#c0392b','#e67e22','#f39c12','#0e188e','#27ae60'];
+  const grid = document.getElementById('dim-gatillos-grid');
+  if (grid) grid.innerHTML = dimData.map((d,i) => `
+    <div class="insight-card" style="border-left:4px solid ${COLORS[i]};">
+      <h4 style="margin-bottom:3px;">${d.icon} ${d.label}
+        <span style="font-size:.8rem;font-weight:700;color:${COLORS[i]};margin-left:6px;">${d.pct}%${d.estimado?' est.':''}</span>
+      </h4>
+      <p style="font-size:.76rem;color:#888;margin-bottom:10px;">${d.desc}</p>
+      <p style="font-size:.7rem;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;">⚡ Gatillos principales</p>
+      <ul class="insight-list">
+        ${d.gatillos.map(g=>`<li>${g}</li>`).join('')}
+      </ul>
+    </div>`).join('');
+}
+
+function renderCharts(data) {
+  const C_BLUE='#0e188e', C_GREEN='#1a7a3c', C_ORANGE='#e67e22', C_RED='#c0392b';
+
+  // 1. Niveles doughnut
+  destroyChart('chartNivel');
+  const nivCounts = {Bajo:0,Moderado:0,Alto:0,Crítico:0};
+  data.forEach(r => { if(nivCounts[r.nivel_desgaste]!==undefined) nivCounts[r.nivel_desgaste]++; });
+  _charts['chartNivel'] = new Chart(document.getElementById('chartNivel'),{
+    type:'doughnut',
+    data:{ labels:['Bajo (≤25)','Moderado (26-50)','Alto (51-75)','Crítico (76+)'],
+      datasets:[{data:[nivCounts.Bajo,nivCounts.Moderado,nivCounts.Alto,nivCounts.Crítico],
+        backgroundColor:['#27ae60','#f39c12',C_ORANGE,C_RED],borderWidth:2,borderColor:'#fff'}]},
+    options:{plugins:{legend:{position:'bottom',labels:{font:{size:11}}}},cutout:'60%'}
+  });
+
+  // 2. Scores bar
+  destroyChart('chartScores');
+  const sorted = [...data].sort((a,b)=>new Date(a.created_at)-new Date(b.created_at));
+  _charts['chartScores'] = new Chart(document.getElementById('chartScores'),{
+    type:'bar',
+    data:{ labels:sorted.map((_,i)=>i+1),
+      datasets:[{label:'Puntaje iScore', data:sorted.map(r=>r.puntaje),
+        backgroundColor:sorted.map(r=>r.nivel_desgaste==='Crítico'?C_RED:r.nivel_desgaste==='Alto'?C_ORANGE:r.nivel_desgaste==='Bajo'?C_GREEN:C_BLUE),
+        borderRadius:4}]},
+    options:{plugins:{legend:{display:false}},scales:{y:{min:0,max:120,grid:{color:'#f0f0f0'}}}}
+  });
+
+  // 3. Paises doughnut
+  destroyChart('chartPaises');
+  const paisesCounts = {};
+  data.forEach(r=>{ const p=r.pais||'Otro'; paisesCounts[p]=(paisesCounts[p]||0)+1; });
+  const paisKeys = Object.keys(paisesCounts).sort((a,b)=>paisesCounts[b]-paisesCounts[a]).slice(0,6);
+  _charts['chartPaises'] = new Chart(document.getElementById('chartPaises'),{
+    type:'doughnut',
+    data:{ labels:paisKeys, datasets:[{data:paisKeys.map(k=>paisesCounts[k]),
+        backgroundColor:['#0e188e','#3498db','#1abc9c',C_ORANGE,'#9b59b6','#e74c3c'],borderWidth:2,borderColor:'#fff'}]},
+    options:{plugins:{legend:{position:'bottom',labels:{font:{size:10}}}},cutout:'50%'}
+  });
+
+  // 4. Temporal bar
+  destroyChart('chartTemporal');
+  const temporal = {};
+  data.forEach(r => {
+    const d = new Date(r.created_at);
+    const key = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
+    temporal[key] = (temporal[key]||0)+1;
+  });
+  const tKeys = Object.keys(temporal).sort();
+  _charts['chartTemporal'] = new Chart(document.getElementById('chartTemporal'),{
+    type:'bar',
+    data:{ labels:tKeys, datasets:[{label:'Respuestas',data:tKeys.map(k=>temporal[k]),backgroundColor:C_BLUE,borderRadius:6}]},
+    options:{plugins:{legend:{display:false}},scales:{y:{grid:{color:'#f0f0f0'}}}}
+  });
+
+  // 5. Tiempo completacion
+  destroyChart('chartTiempo');
+  const tiempoBuckets={'<10min':0,'10-15min':0,'15-20min':0,'20-30min':0,'>30min':0};
+  data.forEach(r=>{
+    const t=parseTiempoMin(r.tiempo_completacion);
+    if(t<10)tiempoBuckets['<10min']++;
+    else if(t<15)tiempoBuckets['10-15min']++;
+    else if(t<20)tiempoBuckets['15-20min']++;
+    else if(t<30)tiempoBuckets['20-30min']++;
+    else tiempoBuckets['>30min']++;
+  });
+  _charts['chartTiempo'] = new Chart(document.getElementById('chartTiempo'),{
+    type:'bar',
+    data:{labels:Object.keys(tiempoBuckets),datasets:[{label:'Personas',data:Object.values(tiempoBuckets),backgroundColor:C_GREEN,borderRadius:6}]},
+    options:{plugins:{legend:{display:false}},scales:{y:{grid:{color:'#f0f0f0'}}}}
+  });
+
+  // 6. Histograma puntajes
+  destroyChart('chartHistogram');
+  const hist=Array(10).fill(0);
+  data.forEach(r=>{const b=Math.min(Math.floor(r.puntaje/10),9);hist[b]++;});
+  _charts['chartHistogram'] = new Chart(document.getElementById('chartHistogram'),{
+    type:'bar',
+    data:{labels:['0-9','10-19','20-29','30-39','40-49','50-59','60-69','70-79','80-89','90+'],
+      datasets:[{label:'Personas',data:hist,backgroundColor:hist.map((_,i)=>i<=2?C_GREEN:i<=5?C_ORANGE:C_RED),borderRadius:6}]},
+    options:{plugins:{legend:{display:false}},scales:{y:{grid:{color:'#f0f0f0'}}}}
+  });
+
+  // 7. Rangos bar
+  destroyChart('chartRangos');
+  _charts['chartRangos'] = new Chart(document.getElementById('chartRangos'),{
+    type:'bar',
+    data:{labels:['Bajo (≤25)','Moderado (26-50)','Alto (51-75)','Crítico (76+)'],
+      datasets:[{label:'N° personas',data:[nivCounts.Bajo,nivCounts.Moderado,nivCounts.Alto,nivCounts.Crítico],
+        backgroundColor:['#27ae60','#f39c12',C_ORANGE,C_RED],borderRadius:8}]},
+    options:{plugins:{legend:{display:false}},scales:{y:{grid:{color:'#f0f0f0'}}}}
+  });
+
+  // 8. Radar dimensiones (promedio si hay datos de dim)
+  destroyChart('chartDimensions');
+  const hasDims = data.some(r=>r.dim_agotamiento!=null);
+  let radarData = [65,72,48,68,58];
+  if (hasDims) {
+    const n = data.filter(r=>r.dim_agotamiento!=null).length;
+    const sumD = d=>[data.reduce((a,r)=>(r[d]!=null?a+r[d]:a),0)/n];
+    const maxes = [9,24,21,39,30];
+    radarData = ['dim_conciencia','dim_agotamiento','dim_despersonalizacion','dim_logro','dim_dinero']
+      .map((d,i)=>Math.round(data.filter(r=>r[d]!=null).reduce((a,r)=>a+r[d],0)/(data.filter(r=>r[d]!=null).length||1)/maxes[i]*100));
+  }
+  _charts['chartDimensions'] = new Chart(document.getElementById('chartDimensions'),{
+    type:'radar',
+    data:{labels:['Conciencia','Agotamiento','Despersonalización','Falta de Logro','Dinero / Crisis'],
+      datasets:[{label:'Nivel promedio (%)',data:radarData,
+        backgroundColor:'rgba(14,24,142,0.15)',borderColor:'#0e188e',pointBackgroundColor:'#0e188e',borderWidth:2}]},
+    options:{scales:{r:{grid:{color:'#e0e4ea'},ticks:{display:false},pointLabels:{font:{size:11}}}}}
+  });
+}
+
+// ─── Historial de Snapshots ──────────────────────────────────────────────────
+const SNAP_KEY = 'iscore_snapshots_v1';
+
+function guardarSnapshot() {
+  if (!window._lastData || window._lastData.length === 0) {
+    alert('Carga los datos primero.'); return;
+  }
+  const data = window._lastData;
+  const nota = prompt('Nota opcional para este snapshot (ej: "Muestra piloto · 40 respondientes"):', '') ?? '';
+
+  const scores = data.map(r => r.puntaje);
+  const avg    = +(scores.reduce((a,b)=>a+b,0)/scores.length).toFixed(1);
+  const nivCnt = {Bajo:0,Moderado:0,Alto:0,Crítico:0};
+  data.forEach(r => { if(nivCnt[r.nivel_desgaste]!==undefined) nivCnt[r.nivel_desgaste]++; });
+  const paisesCnt = {};
+  data.forEach(r => { const p=r.pais||'Otro'; paisesCnt[p]=(paisesCnt[p]||0)+1; });
+  const topPaises = Object.entries(paisesCnt).sort((a,b)=>b[1]-a[1]).slice(0,4).map(([k,v])=>k+' ('+v+')').join(', ');
+
+  const withTiempo = data.filter(r=>r.tiempo_ejerciendo);
+  const tiempoMap  = {};
+  withTiempo.forEach(r => {
+    const t = r.tiempo_ejerciendo;
+    if (!tiempoMap[t]) tiempoMap[t] = {n:0, sum:0};
+    tiempoMap[t].n++; tiempoMap[t].sum += r.puntaje;
+  });
+
+  const hasDims  = data.some(r=>r.dim_agotamiento!=null);
+  const DIMKEYS  = ['dim_conciencia','dim_agotamiento','dim_despersonalizacion','dim_logro','dim_dinero'];
+  const DIMMAXES = [9,24,21,39,30];
+  const dimPcts  = hasDims ? DIMKEYS.map((k,i)=>{
+    const rows = data.filter(r=>r[k]!=null);
+    return rows.length ? Math.round(rows.reduce((a,r)=>a+r[k],0)/rows.length/DIMMAXES[i]*100) : null;
+  }) : [65,72,48,68,58];
+
+  const now  = new Date();
+  const snap = {
+    id:     'snap_'+now.getTime(),
+    fecha:  now.toLocaleDateString('es-CO',{day:'2-digit',month:'short',year:'numeric'}),
+    hora:   now.toLocaleTimeString('es-CO',{hour:'2-digit',minute:'2-digit'}),
+    n:      data.length,
+    avg,
+    min:    Math.min(...scores),
+    max:    Math.max(...scores),
+    niveles: nivCnt,
+    paises:  topPaises,
+    dimPcts,
+    dimEstimado: !hasDims,
+    coberturaTiempo: withTiempo.length,
+    tiempoMap,
+    nota:   nota.trim(),
+  };
+
+  const stored = JSON.parse(localStorage.getItem(SNAP_KEY) || '[]');
+  stored.unshift(snap);
+  localStorage.setItem(SNAP_KEY, JSON.stringify(stored));
+  renderSnapshots();
+  alert('✅ Snapshot guardado: ' + snap.n + ' respondientes · ' + snap.fecha);
+}
+
+function limpiarSnapshots() {
+  localStorage.removeItem(SNAP_KEY);
+  renderSnapshots();
+}
+
+function renderSnapshots() {
+  const el = document.getElementById('snapshot-list');
+  if (!el) return;
+  const snaps = JSON.parse(localStorage.getItem(SNAP_KEY) || '[]');
+  if (snaps.length === 0) {
+    el.innerHTML = '<p style="color:#bbb;text-align:center;padding:24px;font-size:.83rem;">Sin snapshots aún — haz clic en "Guardar Snapshot" para registrar el estado actual del análisis.</p>';
+    return;
+  }
+  const DIM_LABELS = ['🧠 Conciencia','🔋 Agotamiento','🎭 Despers.','🏆 Logro','💰 Dinero'];
+  const cColor = pct => pct>=70?'#c0392b':pct>=55?'#e67e22':pct>=40?'#f39c12':'#27ae60';
+  const nColor = n => n==='Bajo'?'#1a7a3c':n==='Moderado'?'#e67e22':n==='Alto'?'#d35400':'#c0392b';
+  el.innerHTML = snaps.map((s,i) => `
+    <div style="border:1px solid #e8ecf0;border-radius:12px;padding:16px;margin-bottom:12px;position:relative;${i===0?'border-left:4px solid #0e188e;':''}">
+      <div style="display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap;">
+        <div style="flex-shrink:0;text-align:center;background:#f0f2f8;border-radius:10px;padding:8px 14px;min-width:80px;">
+          <div style="font-size:1.4rem;font-weight:900;color:#0e188e;">${s.n}</div>
+          <div style="font-size:.68rem;color:#888;text-transform:uppercase;letter-spacing:.3px;">respondientes</div>
+          ${i===0?'<div style="font-size:.64rem;background:#0e188e;color:#fff;border-radius:4px;margin-top:4px;padding:1px 4px;">Último</div>':''}
+        </div>
+        <div style="flex:1;min-width:200px;">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px;">
+            <span style="font-size:.88rem;font-weight:700;color:#0a0e2e;">📅 ${s.fecha} · ${s.hora}</span>
+            ${s.nota ? `<span style="font-size:.75rem;color:#888;font-style:italic;">"${s.nota}"</span>` : ''}
+          </div>
+          <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:8px;">
+            <span style="font-size:.8rem;color:#555;">Promedio: <strong>${s.avg} pts</strong></span>
+            <span style="font-size:.8rem;color:#555;">Rango: <strong>${s.min}–${s.max} pts</strong></span>
+            <span style="font-size:.8rem;color:#555;">Países: <strong>${s.paises}</strong></span>
+            ${s.coberturaTiempo > 0 ? `<span style="font-size:.8rem;color:#1a7a3c;">⏳ ${s.coberturaTiempo} con tiempo ejerciendo</span>` : ''}
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;">
+            ${Object.entries(s.niveles).map(([k,v])=>v>0?`<span style="background:${nColor(k)}22;color:${nColor(k)};padding:2px 8px;border-radius:20px;font-size:.72rem;font-weight:700;">${k}: ${v} (${Math.round(v/s.n*100)}%)</span>`:'').join('')}
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+            ${s.dimPcts.map((pct,j)=> pct!=null ? `<div style="text-align:center;">
+              <div style="font-size:.7rem;color:#aaa;margin-bottom:1px;">${DIM_LABELS[j]}</div>
+              <div style="font-size:.8rem;font-weight:700;color:${cColor(pct)};">${pct}%${s.dimEstimado?'*':''}</div>
+            </div>` : '').join('')}
+            ${s.dimEstimado?'<span style="font-size:.65rem;color:#bbb;font-style:italic;">*estimados</span>':''}
+          </div>
+        </div>
+        <button onclick="exportarSnapshot(${i})" class="btn-sm" style="background:#f0f2f8;color:#555;flex-shrink:0;" title="Exportar este snapshot como texto">📋 Exportar</button>
+      </div>
+    </div>`).join('');
+}
+
+function exportarSnapshot(idx) {
+  const snaps = JSON.parse(localStorage.getItem(SNAP_KEY) || '[]');
+  const s = snaps[idx];
+  if (!s) return;
+  const DIM_LABELS = ['Conciencia','Agotamiento','Despersonalización','Falta de Logro','Dinero/Crisis'];
+  const txt = [
+    '═══════════════════════════════════════════════',
+    `iScore LATAM · Snapshot ${s.fecha} ${s.hora}`,
+    '═══════════════════════════════════════════════',
+    `Muestra total: ${s.n} respondientes`,
+    `Nota: ${s.nota || '—'}`,
+    '',
+    '── Puntajes ──────────────────────────────────',
+    `Promedio:  ${s.avg} pts`,
+    `Rango:     ${s.min} – ${s.max} pts`,
+    '',
+    '── Distribución de Niveles ───────────────────',
+    ...Object.entries(s.niveles).map(([k,v])=>`${k.padEnd(12)}: ${v} (${Math.round(v/s.n*100)}%)`),
+    '',
+    '── Dimensiones ───────────────────────────────',
+    ...s.dimPcts.map((pct,i)=> pct!=null ? `${DIM_LABELS[i].padEnd(20)}: ${pct}%${s.dimEstimado?' (estimado)':''}` : ''),
+    '',
+    '── Tiempo Ejerciendo ─────────────────────────',
+    s.coberturaTiempo > 0
+      ? Object.entries(s.tiempoMap).map(([k,v])=>`${k.padEnd(18)}: n=${v.n} · avg=${+(v.sum/v.n).toFixed(1)} pts`).join('\n')
+      : `Sin datos (0 de ${s.n} respondientes tienen este campo)`,
+    '',
+    '── Países ────────────────────────────────────',
+    s.paises,
+    '═══════════════════════════════════════════════',
+    'VetConnect Pro LATAM · Dr. Iván Durán Monroy',
+    `Generado: ${new Date().toLocaleString('es-CO')}`,
+  ].join('\n');
+  navigator.clipboard.writeText(txt).then(()=>alert('✅ Snapshot copiado al portapapeles — listo para pegar en un documento.')).catch(()=>alert(txt));
+}
+
+// ═══════════════════════════════════════════════════════
+// CRM · CONTACTOS & MENSAJERÍA
+// ═══════════════════════════════════════════════════════
+const VITABOT_URL = 'https://vitabot-vitalvet-production.up.railway.app';
+const WP_EMAIL_URL = 'https://www.vitalvetcrv.com.co/wp-json/vitalvet/v1/send-email';
+const WP_EMAIL_SECRET = 'vc2026';
+
+let crmData = [];
+let crmFiltered = [];
+let waAttachment = null;
+
+const WP_PHP_SNIPPET = `<?php
+// VetConnect Pro — Email REST Endpoint v2 (con CORS fix para X-VC-Key)
+// Agregar en: WordPress Admin → Code Snippets → + Agregar nuevo → PHP
+// IMPORTANTE: reemplaza o actualiza el snippet anterior con este.
+
+// 1. CORS: permite X-VC-Key desde el subdominio vetconnectpro
+add_filter('rest_pre_serve_request', function($served, $result, $request, $server) {
+  $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
+  $allowed = [
+    'https://vetconnectpro.vitalvetcrv.com.co',
+    'https://www.vetconnectpro.vitalvetcrv.com.co',
+    'http://localhost:5500',
+    'http://127.0.0.1:5500',
+  ];
+  if (in_array($origin, $allowed)) {
+    header('Access-Control-Allow-Origin: ' . esc_url_raw($origin));
+    header('Access-Control-Allow-Methods: POST, OPTIONS');
+    header('Access-Control-Allow-Credentials: true');
+    header('Access-Control-Allow-Headers: Authorization, Content-Type, X-VC-Key, X-WP-Nonce');
+  }
+  return $served;
+}, 10, 4);
+
+// 2. Responder preflight OPTIONS sin autenticación
+add_action('init', function() {
+  if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS' &&
+      strpos($_SERVER['REQUEST_URI'], '/wp-json/vitalvet/') !== false) {
+    header('HTTP/1.1 200 OK');
+    exit();
+  }
+});
+
+// 3. Endpoint de envío de email
+add_action('rest_api_init', function() {
+  register_rest_route('vitalvet/v1', '/send-email', [
+    'methods'  => 'POST',
+    'callback' => function($req) {
+      $secret = $req->get_header('X-VC-Key');
+      if ($secret !== 'vc2026') {
+        return new WP_Error('forbidden', 'No autorizado', ['status' => 403]);
+      }
+      $to      = sanitize_email($req['to']);
+      $subject = sanitize_text_field($req['subject']);
+      $body    = wp_kses_post($req['message']);
+      if (!is_email($to)) {
+        return new WP_Error('invalid_email', 'Email inválido', ['status' => 400]);
+      }
+      $headers = [
+        'Content-Type: text/html; charset=UTF-8',
+        'From: VetConnect Pro LATAM <noreply@vitalvetcrv.com.co>',
+      ];
+      $result = wp_mail($to, $subject, nl2br($body), $headers);
+      return ['success' => $result, 'to' => $to];
+    },
+    'permission_callback' => '__return_true',
+  ]);
+});`;
+
+// ── WhatsApp Status ───────────────────────────────────
+async function checkWaStatus() {
+  const badge = document.getElementById('wa-conn-badge');
+  const text  = document.getElementById('wa-conn-text');
+  const phone = document.getElementById('wa-conn-phone');
+  const qrBox = document.getElementById('wa-qr-box');
+  const qrImg = document.getElementById('wa-qr-img');
+  badge.className = 'wa-badge wa-wait';
+  badge.textContent = '⏳ Verificando...';
+  try {
+    const r = await fetch(VITABOT_URL + '/api/wa/qr');
+    const d = await r.json();
+    if (d.connected) {
+      badge.className = 'wa-badge wa-ok';
+      badge.textContent = '✅ Conectado';
+      text.textContent = 'OpenWA activo — listo para enviar mensajes sin Meta API';
+      phone.style.display = '';
+      phone.textContent = '📱 ' + (d.phone || 'Número vinculado');
+      qrBox.style.display = 'none';
+    } else {
+      badge.className = 'wa-badge wa-no';
+      badge.textContent = '❌ Desconectado';
+      text.textContent = 'Escanea el QR para vincular WhatsApp';
+      phone.style.display = 'none';
+      qrBox.style.display = '';
+      if (d.qr) qrImg.src = d.qr;
+      else if (d.qr_base64) qrImg.src = 'data:image/png;base64,' + d.qr_base64;
+    }
+  } catch(e) {
+    badge.className = 'wa-badge wa-no';
+    badge.textContent = '⚠️ Sin acceso';
+    text.textContent = 'No se pudo conectar con VitaBot (CORS o red). Abre VitaBot para verificar.';
+  }
+}
+
+// ── CRM Table ─────────────────────────────────────────
+function buildCrmTable(data) {
+  crmData = data;
+  crmFiltered = data;
+  renderCrmTable(data);
+}
+
+function renderCrmTable(data) {
+  const tbody = document.getElementById('crmBody');
+  if (!tbody) return;
+  document.getElementById('crm-count').textContent = data.length;
+  tbody.innerHTML = data.map((r, i) => {
+    const g = detectGender(r.nombre);
+    const gIcon = g === 'Femenino' ? '♀' : g === 'Masculino' ? '♂' : '?';
+    const fecha = r.created_at ? new Date(r.created_at).toLocaleDateString('es-CO',{day:'2-digit',month:'short'}) : '—';
+    const nc = getNivelClass(r.nivel_desgaste);
+    return `<tr>
+      <td><input type="checkbox" class="crm-row-check" data-idx="${i}" onchange="updateCrmSelCount()"></td>
+      <td><strong>${r.nombre}</strong><br><span style="font-size:.72rem;color:#aaa;">${fecha}</span></td>
+      <td style="font-size:.8rem;">${r.email || '—'}</td>
+      <td style="font-size:.8rem;">${r.telefono || '—'}</td>
+      <td>${r.pais || '—'}</td>
+      <td><span class="badge ${nc}">${r.nivel_desgaste}</span></td>
+      <td><strong>${r.puntaje}</strong></td>
+      <td style="font-size:.8rem;">${gIcon} ${g === 'Desconocido' ? '?' : g.substring(0,3)}</td>
+      <td style="display:flex;gap:4px;">
+        <button class="btn-sm btn-wa" onclick="sendWaToOne(${i})" title="Enviar WA individual">📱</button>
+        <button class="btn-sm btn-email" onclick="sendEmailToOne(${i})" title="Enviar email individual">📧</button>
+      </td>
+    </tr>`;
+  }).join('');
+  updateCrmSelCount();
+}
+
+function applyCrmFilters() {
+  const nivel  = document.getElementById('crm-f-nivel').value;
+  const pais   = document.getElementById('crm-f-pais').value;
+  const genero = document.getElementById('crm-f-genero').value;
+  const riesgo = document.getElementById('crm-f-riesgo').value;
+  crmFiltered = crmData.filter(r => {
+    if (nivel  && r.nivel_desgaste !== nivel) return false;
+    if (pais   && r.pais !== pais) return false;
+    if (genero && detectGender(r.nombre) !== genero) return false;
+    if (riesgo === 'alto'    && r.puntaje < 51) return false;
+    if (riesgo === 'moderado' && (r.puntaje < 26 || r.puntaje > 50)) return false;
+    if (riesgo === 'bajo'    && r.puntaje > 25) return false;
+    return true;
+  });
+  const active = [nivel,pais,genero,riesgo].filter(Boolean).length;
+  document.getElementById('crm-filter-note').textContent = active
+    ? `(${active} filtro${active>1?'s':''} activo${active>1?'s':''} — ${crmFiltered.length} resultados)`
+    : '';
+  renderCrmTable(crmFiltered);
+}
+
+function resetCrmFilters() {
+  ['crm-f-nivel','crm-f-pais','crm-f-genero','crm-f-riesgo'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  crmFiltered = crmData;
+  document.getElementById('crm-filter-note').textContent = '';
+  renderCrmTable(crmData);
+}
+
+function toggleSelectAll(cb) {
+  document.querySelectorAll('.crm-row-check').forEach(c => { c.checked = cb.checked; });
+  updateCrmSelCount();
+}
+
+function updateCrmSelCount() {
+  const sel = document.querySelectorAll('.crm-row-check:checked').length;
+  const total = document.querySelectorAll('.crm-row-check').length;
+  document.getElementById('crm-sel-count').textContent = sel > 0 ? `${sel} de ${total} seleccionados` : '';
+}
+
+function getSelectedContacts() {
+  const checks = document.querySelectorAll('.crm-row-check:checked');
+  if (checks.length === 0) return crmFiltered;
+  return Array.from(checks).map(c => crmFiltered[parseInt(c.dataset.idx)]).filter(Boolean);
+}
+
+function replaceVars(tpl, r) {
+  return tpl
+    .replace(/{{nombre}}/g, r.nombre || '')
+    .replace(/{{score}}/g,  r.puntaje || '')
+    .replace(/{{nivel}}/g,  r.nivel_desgaste || '');
+}
+
+// ── WA Attachment ─────────────────────────────────────
+async function handleWaAttachment(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const zone = document.getElementById('wa-attach-zone');
+  zone.textContent = '⏳ Subiendo a VitaBot...';
+  zone.style.color = '#e67e22';
+  try {
+    const fd = new FormData();
+    fd.append('file', file);
+    fd.append('description', 'CRM adjunto ' + new Date().toLocaleDateString('es-CO'));
+    const r = await fetch(VITABOT_URL + '/api/media/upload', { method:'POST', body:fd });
+    const d = await r.json();
+    const url = d.url || d.file || d.path;
+    if (url) {
+      waAttachment = { url, name:file.name, mime:file.type };
+      zone.textContent = '✅ ' + file.name + ' (' + (file.size/1024).toFixed(0) + ' KB)';
+      zone.style.color = '#1a7a3c';
+      document.getElementById('wa-attach-clear-btn').style.display = '';
+    } else throw new Error('Sin URL en respuesta');
+  } catch(e) {
+    zone.textContent = '❌ Error: ' + e.message;
+    zone.style.color = '#c0392b';
+    waAttachment = null;
+  }
+}
+
+function clearWaAttachment() {
+  waAttachment = null;
+  document.getElementById('wa-attach-file').value = '';
+  const zone = document.getElementById('wa-attach-zone');
+  zone.textContent = '📁 Sin adjunto · Selecciona un archivo';
+  zone.style.color = '';
+  document.getElementById('wa-attach-clear-btn').style.display = 'none';
+}
+
+// ── WhatsApp Send ─────────────────────────────────────
+function previewWaMsg() {
+  const contacts = getSelectedContacts();
+  const template = document.getElementById('wa-msg-area').value;
+  if (!template) { alert('Escribe el mensaje primero.'); return; }
+  const preview = contacts.slice(0,3).map(r =>
+    `📱 ${r.nombre} (${r.telefono||'sin tel'}):\n${replaceVars(template,r)}`
+  ).join('\n\n---\n\n');
+  alert('Vista previa (primeros 3):\n\n' + preview + (contacts.length>3 ? `\n\n...y ${contacts.length-3} más`:''));
+}
+
+async function sendWaToSelected() {
+  const contacts = getSelectedContacts();
+  const template = document.getElementById('wa-msg-area').value.trim();
+  if (!template) { showCrmResult('wa-result-box','⚠️ Escribe el mensaje antes de enviar.','warn'); return; }
+  const targets = contacts.filter(r => r.telefono);
+  const sinTel  = contacts.length - targets.length;
+  if (targets.length === 0) { showCrmResult('wa-result-box','❌ Ningún contacto tiene teléfono registrado.','error'); return; }
+  const confirmMsg = `¿Enviar WhatsApp a ${targets.length} contacto(s)?` + (sinTel > 0 ? ` (${sinTel} sin teléfono serán omitidos)` : '');
+  if (!confirm(confirmMsg)) return;
+  showCrmResult('wa-result-box', `📤 Enviando a ${targets.length} contactos...`, 'info');
+  let ok=0, fail=0, failList=[];
+  for (const r of targets) {
+    const phone = r.telefono.replace(/\D/g,'');
+    const msg = replaceVars(template, r);
+    try {
+      const res = await fetch(VITABOT_URL + '/test-message', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ phone, message:msg })
+      });
+      if (res.ok) { ok++; addCrmLog('✅','WA',r.nombre,phone); }
+      else { const d=await res.json(); throw new Error(d.error||'Error '+res.status); }
+    } catch(e) { fail++; failList.push(r.nombre); addCrmLog('❌','WA',r.nombre,phone,e.message); }
+    await new Promise(res=>setTimeout(res,800));
+  }
+  showCrmResult('wa-result-box',
+    `✅ ${ok} enviados.` + (fail>0 ? ` ❌ ${fail} fallidos: ${failList.join(', ')}` : ''),
+    ok>0?'success':'error');
+}
+
+async function sendWaToOne(idx) {
+  const r = crmFiltered[idx];
+  if (!r) return;
+  if (!r.telefono) { alert(`${r.nombre} no tiene teléfono registrado.`); return; }
+  const tpl = document.getElementById('wa-msg-area').value.trim();
+  const def = `Hola ${r.nombre}, vi que completaste el iScore LATAM con ${r.puntaje} puntos. Me gustaría compartirte algo importante de VetConnect Pro.`;
+  const msg = prompt(`Mensaje para ${r.nombre} (${r.telefono}):`, tpl ? replaceVars(tpl,r) : def);
+  if (msg===null) return;
+  const phone = r.telefono.replace(/\D/g,'');
+  try {
+    const res = await fetch(VITABOT_URL + '/test-message', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ phone, message:msg })
+    });
+    if (res.ok) { alert('✅ Mensaje enviado a '+r.nombre); addCrmLog('✅','WA',r.nombre,phone); }
+    else { const d=await res.json(); throw new Error(d.error||'Error'); }
+  } catch(e) { alert('❌ Error: '+e.message); addCrmLog('❌','WA',r.nombre,phone,e.message); }
+}
+
+// ── Email Send ────────────────────────────────────────
+function previewEmailMsg() {
+  const contacts = getSelectedContacts();
+  const template = document.getElementById('email-body-area').value;
+  const subject  = document.getElementById('email-subject').value;
+  if (!template) { alert('Escribe el mensaje primero.'); return; }
+  const r = contacts[0] || {};
+  alert(`Para: ${r.email||'ejemplo@email.com'}\nAsunto: ${replaceVars(subject,r)}\n\n${replaceVars(template,r)}`);
+}
+
+async function sendEmailToSelected() {
+  const contacts = getSelectedContacts().filter(r => r.email);
+  const subject  = document.getElementById('email-subject').value.trim();
+  const template = document.getElementById('email-body-area').value.trim();
+  if (contacts.length===0) { showCrmResult('email-result-box','⚠️ No hay contactos con email válido.','warn'); return; }
+  if (!subject||!template) { showCrmResult('email-result-box','⚠️ Completa asunto y mensaje.','warn'); return; }
+  if (!confirm(`¿Enviar email a ${contacts.length} contacto(s)?`)) return;
+  showCrmResult('email-result-box', `📧 Enviando a ${contacts.length} contactos...`, 'info');
+  let ok=0, fail=0;
+  for (const r of contacts) {
+    try {
+      const res = await fetch(WP_EMAIL_URL, {
+        method:'POST',
+        headers:{'Content-Type':'application/json','X-VC-Key':WP_EMAIL_SECRET},
+        body: JSON.stringify({ to:r.email, subject:replaceVars(subject,r), message:replaceVars(template,r) })
+      });
+      const d = await res.json();
+      if (d.success) { ok++; addCrmLog('✅','Email',r.nombre,r.email); }
+      else throw new Error(d.message||'Endpoint sin respuesta');
+    } catch(e) { fail++; addCrmLog('❌','Email',r.nombre,r.email||'—',e.message); }
+    await new Promise(res=>setTimeout(res,400));
+  }
+  showCrmResult('email-result-box',
+    `✅ ${ok} emails enviados.` + (fail>0 ? ` ❌ ${fail} fallidos.` : ''),
+    ok>0?'success':'error');
+}
+
+async function sendEmailToOne(idx) {
+  const r = crmFiltered[idx];
+  if (!r) return;
+  if (!r.email) { alert(`${r.nombre} no tiene email registrado.`); return; }
+  const subject = prompt(`Asunto para ${r.nombre}:`, `Tu resultado iScore LATAM — VetConnect Pro`);
+  if (!subject) return;
+  const body = prompt(`Mensaje para ${r.nombre} (${r.email}):`,
+    `Hola ${r.nombre},\n\nGracias por completar el iScore LATAM. Tu puntaje fue ${r.puntaje} pts (${r.nivel_desgaste}).\n\nEl Dr. Iván Durán ha preparado algo especial para ti.`);
+  if (!body) return;
+  try {
+    const res = await fetch(WP_EMAIL_URL, {
+      method:'POST',
+      headers:{'Content-Type':'application/json','X-VC-Key':WP_EMAIL_SECRET},
+      body: JSON.stringify({ to:r.email, subject, message:body })
+    });
+    const d = await res.json();
+    if (d.success) { alert('✅ Email enviado a '+r.email); addCrmLog('✅','Email',r.nombre,r.email); }
+    else throw new Error(d.message||'Sin respuesta del endpoint WP');
+  } catch(e) { alert('❌ Error: '+e.message+'\n\nVerifica que el snippet PHP esté activo en WordPress.'); addCrmLog('❌','Email',r.nombre,r.email,e.message); }
+}
+
+// ── CRM Helpers ───────────────────────────────────────
+function showCrmResult(id, msg, type) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.style.display = '';
+  el.textContent = msg;
+  const colors = {success:['#d5f5e3','#1a7a3c'],error:['#fadbd8','#c0392b'],warn:['#fef3c7','#92400e'],info:['#e8ecff','#0e188e']};
+  const [bg,color] = colors[type]||colors.info;
+  el.style.background = bg;
+  el.style.color = color;
+}
+
+function addCrmLog(status, channel, nombre, dest, error) {
+  const log = document.getElementById('crm-log');
+  if (!log) return;
+  const placeholder = log.querySelector('p');
+  if (placeholder) placeholder.remove();
+  const time = new Date().toLocaleTimeString('es-CO',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  const entry = document.createElement('div');
+  entry.className = 'crm-log-entry';
+  entry.innerHTML = `<span style="color:#999;flex-shrink:0;font-size:.72rem;">${time}</span>
+    <span>${status}</span>
+    <span style="background:#f0f2f8;padding:1px 8px;border-radius:4px;font-size:.72rem;font-weight:700;">${channel}</span>
+    <span style="flex:1;"><strong>${nombre}</strong> → <span style="color:#666;">${dest}</span></span>
+    ${error ? `<span style="color:#c0392b;font-size:.72rem;">${error}</span>` : ''}`;
+  log.insertBefore(entry, log.firstChild);
+}
+
+function showWpEmailSnippet() {
+  document.getElementById('wp-snippet-code').textContent = WP_PHP_SNIPPET;
+  document.getElementById('wp-snippet-modal').style.display = '';
+}
+
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+// ─── Init & Auto-refresh ──────────────────────────────────────────────────────
+loadData();
+setInterval(loadData, 60000);
+checkWaStatus();
+
+// ─── LEGACY STUB (no usado) ───────────────────────────────────────────────────
+const responses = [
+  {nombre:'Jocelyn',score:49,pais:'México',tiempo:13.1,fecha:'2026-05',nivel:'Moderado'},
+  {nombre:'Ana',score:61,pais:'España',tiempo:4.7,fecha:'2026-05',nivel:'Alto'},
+  {nombre:'Vanessa',score:77,pais:'España',tiempo:7.4,fecha:'2026-05',nivel:'Crítico'},
+  {nombre:'Maira',score:57,pais:'Colombia',tiempo:7.9,fecha:'2026-05',nivel:'Alto'},
+  {nombre:'Ivan',score:46,pais:'Colombia',tiempo:10.2,fecha:'2025-12',nivel:'Moderado'},
+  {nombre:'Doris González',score:37,pais:'Colombia',tiempo:25.1,fecha:'2025-12',nivel:'Moderado'},
+  {nombre:'Viviana',score:52,pais:'Colombia',tiempo:10.8,fecha:'2025-12',nivel:'Alto'},
+  {nombre:'Fausto Morales',score:46,pais:'Colombia',tiempo:14.6,fecha:'2025-12',nivel:'Moderado'},
+  {nombre:'Daniel Bernal',score:33,pais:'Colombia',tiempo:13.1,fecha:'2025-12',nivel:'Moderado'},
+  {nombre:'Mariana Romero',score:52,pais:'Colombia',tiempo:33.0,fecha:'2025-12',nivel:'Alto'},
+  {nombre:'Betzi',score:35,pais:'Colombia',tiempo:18.4,fecha:'2025-12',nivel:'Moderado'},
+  {nombre:'Silena Gómez',score:21,pais:'Colombia',tiempo:11.1,fecha:'2025-12',nivel:'Bajo'},
+  {nombre:'Ivan D.',score:36,pais:'Colombia',tiempo:16.0,fecha:'2025-12',nivel:'Moderado'},
+  {nombre:'Maria Fernanda',score:53,pais:'Colombia',tiempo:8.9,fecha:'2025-12',nivel:'Alto'},
+  {nombre:'Yaxel Cuéllar',score:30,pais:'Honduras',tiempo:15.2,fecha:'2025-12',nivel:'Moderado'},
+  {nombre:'Estefanía',score:47,pais:'Colombia',tiempo:18.9,fecha:'2025-12',nivel:'Moderado'},
+  {nombre:'José Bolaños',score:39,pais:'Colombia',tiempo:29.3,fecha:'2025-12',nivel:'Moderado'},
+  {nombre:'Andrea Muñoz',score:46,pais:'Colombia',tiempo:7.5,fecha:'2025-12',nivel:'Moderado'},
+  {nombre:'Alma',score:33,pais:'Colombia',tiempo:19.0,fecha:'2025-12',nivel:'Moderado'},
+  {nombre:'Omar Bermúdez',score:21,pais:'Colombia',tiempo:13.5,fecha:'2025-06',nivel:'Bajo'},
+  {nombre:'Samara Hernandez',score:34,pais:'Colombia',tiempo:20.8,fecha:'2025-06',nivel:'Moderado'},
+  {nombre:'Diana González',score:30,pais:'Colombia',tiempo:16.8,fecha:'2025-06',nivel:'Moderado'},
+  {nombre:'Luz Estela',score:37,pais:'Colombia',tiempo:25.7,fecha:'2025-06',nivel:'Moderado'},
+  {nombre:'Duvan Santafe',score:39,pais:'Colombia',tiempo:23.1,fecha:'2025-06',nivel:'Moderado'},
+  {nombre:'María Mantilla',score:32,pais:'Colombia',tiempo:14.0,fecha:'2025-05',nivel:'Moderado'},
+  {nombre:'Stepffany Lugo',score:48,pais:'Colombia',tiempo:14.8,fecha:'2025-05',nivel:'Moderado'},
+  {nombre:'Luz Angela',score:24,pais:'Colombia',tiempo:18.4,fecha:'2025-05',nivel:'Bajo'},
+  {nombre:'Erika Murcia',score:49,pais:'Colombia',tiempo:11.5,fecha:'2025-05',nivel:'Moderado'},
+  {nombre:'Andres Cano',score:34,pais:'Colombia',tiempo:26.6,fecha:'2025-05',nivel:'Moderado'},
+  {nombre:'María Clara',score:52,pais:'Colombia',tiempo:15.1,fecha:'2025-05',nivel:'Alto'},
+];
+
+function getNivelClass(n){return n.toLowerCase();}
+
+// (datos legacy eliminados — dashboard ahora usa Supabase en tiempo real)
+</script>
+</body>
+</html>

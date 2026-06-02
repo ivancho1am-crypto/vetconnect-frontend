@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tres palancas que cambian la rentabilidad veterinaria sin sacrificar tu bienestar | VetConnect Pro LATAM</title>
+  <meta name="description" content="Reducir el desgaste no es solo descansar más. Es rediseñar cómo trabajas, cómo cobras y cómo te comunicas. Las tres palancas con más impacto en la rentabilidad sostenible del veterinario clínico." />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="es_LA" />
+  <meta property="og:site_name" content="VetConnect Pro LATAM" />
+  <meta property="og:url" content="https://vetconnectpro.vitalvetcrv.com.co/articulo-6.html" />
+  <meta property="og:title" content="Tres palancas que cambian la rentabilidad veterinaria sin sacrificar tu bienestar" />
+  <meta property="og:description" content="Precio con convicción, protocolo de cliente difícil y gestión de energía. Las tres palancas del veterinario rentable y sostenible." />
+  <meta property="og:image" content="https://vetconnectpro.vitalvetcrv.com.co/logos/og-preview.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Tres palancas que cambian la rentabilidad veterinaria sin sacrificar tu bienestar" />
+  <meta name="twitter:description" content="Precio con convicción, protocolo de cliente difícil y gestión de energía. Herramientas reales para el veterinario clínico." />
+  <meta name="twitter:image" content="https://vetconnectpro.vitalvetcrv.com.co/logos/og-preview.jpg" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="vetconnect.css" />
+  <style>
+    /* ── ARTICLE-SPECIFIC STYLES ── */
+    .art-hero {
+      position: relative;
+      padding: 160px 60px 100px;
+      background-image:
+        linear-gradient(rgba(123,47,190,0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(123,47,190,0.045) 1px, transparent 1px);
+      background-size: 64px 64px;
+      overflow: hidden;
+    }
+    .art-hero .orb-purple { top: -80px; left: -60px; animation: drift1 12s ease-in-out infinite alternate; }
+    .art-hero .orb-cyan   { bottom: -60px; right: 100px; animation: drift2 16s ease-in-out infinite alternate; }
+    .art-hero .orb-gold   { top: 30%; right: 10%; animation: drift3 20s ease-in-out infinite alternate; }
+    .art-hero-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 2; }
+    .art-category-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(240,165,0,0.1); border: 1px solid rgba(240,165,0,0.35);
+      padding: 6px 16px; border-radius: 50px; margin-bottom: 22px;
+      font-size: 12px; font-weight: 600; color: var(--gold);
+    }
+    .art-hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(30px, 4.2vw, 54px);
+      font-weight: 800; line-height: 1.1; letter-spacing: -1.5px;
+      margin-bottom: 24px;
+    }
+    .art-lead {
+      font-size: 18px; line-height: 1.78; color: var(--muted2);
+      max-width: 720px; margin-bottom: 32px;
+    }
+    .art-meta {
+      display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+      font-size: 13px; color: var(--muted); padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .art-back {
+      display: inline-flex; align-items: center; gap: 7px;
+      color: var(--cyan); text-decoration: none; font-size: 13.5px; font-weight: 600;
+      transition: gap 0.2s;
+    }
+    .art-back:hover { gap: 11px; }
+
+    /* ── CHART ── */
+    .chart-wrap {
+      max-width: 700px; margin: 0 auto;
+      background: rgba(255,255,255,0.80);
+      border: 1px solid rgba(12,12,38,.09);
+      border-radius: 20px; padding: 36px 32px;
+    }
+    .chart-wrap canvas { max-height: 320px; }
+    .chart-caption {
+      text-align: center; margin-top: 18px;
+      font-size: 13px; color: var(--muted2); line-height: 1.6;
+    }
+
+    /* ── CONTENT BLOCKS ── */
+    .art-body { max-width: 860px; margin: 0 auto; }
+    .art-body h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(22px, 2.8vw, 32px); font-weight: 800;
+      letter-spacing: -0.8px; margin-bottom: 18px; line-height: 1.2;
+    }
+    .art-body p { font-size: 15.5px; line-height: 1.85; margin-bottom: 16px; color: var(--muted2); }
+    .art-body p strong { color: var(--text); }
+    .art-body ul { margin: 16px 0 20px 0; display: flex; flex-direction: column; gap: 10px; }
+    .art-body ul li {
+      font-size: 15px; color: var(--muted2); line-height: 1.7;
+      padding-left: 22px; position: relative;
+    }
+    .art-body ul li::before {
+      content: '→'; position: absolute; left: 0;
+      color: var(--cyan); font-weight: 700; font-size: 13px;
+    }
+    .art-body ul li strong { color: var(--text); }
+
+    /* ── QUOTE ── */
+    .art-quote {
+      border-left: 3px solid var(--purple-l);
+      padding: 16px 22px;
+      background: rgba(123,47,190,0.07); border-radius: 0 14px 14px 0;
+      margin: 24px 0; font-size: 16.5px; font-style: italic;
+      color: var(--text); line-height: 1.7;
+    }
+    .sl .art-quote {
+      background: rgba(123,47,190,0.07); color: #0C0C26;
+      border-left-color: var(--purple);
+    }
+
+    /* ── PALANCA CARDS (big) ── */
+    .palanca-section {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 24px; padding: 40px 36px; margin-bottom: 28px;
+      position: relative; overflow: hidden;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .palanca-section:hover { border-color: rgba(123,47,190,0.35); box-shadow: 0 18px 50px rgba(0,0,0,0.2); }
+    .palanca-top { position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+    .palanca-top-1 { background: linear-gradient(90deg, #F0A500, #FF4560); }
+    .palanca-top-2 { background: linear-gradient(90deg, var(--purple), var(--cyan)); }
+    .palanca-top-3 { background: linear-gradient(90deg, #00E396, var(--cyan)); }
+    .palanca-num {
+      font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px;
+    }
+    .palanca-num-1 { color: var(--gold); }
+    .palanca-num-2 { color: var(--purple-l); }
+    .palanca-num-3 { color: var(--green); }
+    .palanca-section h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(20px, 2.2vw, 26px); font-weight: 800;
+      letter-spacing: -0.5px; margin-bottom: 18px; line-height: 1.2;
+    }
+    .palanca-section p { font-size: 15px; color: var(--muted2); line-height: 1.8; margin-bottom: 14px; }
+    .palanca-section p strong { color: var(--text); }
+    .palanca-section ul { margin: 14px 0 16px; display: flex; flex-direction: column; gap: 9px; }
+    .palanca-section ul li {
+      font-size: 14.5px; color: var(--muted2); line-height: 1.65;
+      padding-left: 20px; position: relative;
+    }
+    .palanca-section ul li::before {
+      content: '✦'; position: absolute; left: 0;
+      font-size: 9px; top: 4px;
+    }
+    .palanca-section ul li strong { color: var(--text); }
+    .palanca-num-1 + * ul li::before { color: var(--gold); }
+    .palanca-num-2 + * ul li::before { color: var(--purple-l); }
+
+    /* ── TOOL PILL ── */
+    .tool-pill {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 8px 16px; border-radius: 50px;
+      font-size: 12px; font-weight: 600; margin-top: 14px;
+    }
+    .tool-pill-gold { background: rgba(240,165,0,0.1); border: 1px solid rgba(240,165,0,0.3); color: var(--gold); }
+    .tool-pill-purple { background: rgba(123,47,190,0.1); border: 1px solid rgba(123,47,190,0.3); color: var(--purple-l); }
+    .tool-pill-green { background: rgba(0,227,150,0.1); border: 1px solid rgba(0,227,150,0.3); color: var(--green); }
+
+    /* ── SCRIPT BOX ── */
+    .script-box {
+      background: rgba(123,47,190,0.07); border: 1px solid rgba(123,47,190,0.22);
+      border-radius: 14px; padding: 18px 22px; margin: 16px 0;
+      font-size: 14.5px; font-style: italic; color: var(--text); line-height: 1.75;
+    }
+    .script-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--purple-l); margin-bottom: 8px; display: block;
+    }
+
+    /* ── CIERRE ── */
+    .cierre-box {
+      background: linear-gradient(135deg, rgba(123,47,190,0.13), rgba(0,212,255,0.06));
+      border: 1px solid rgba(123,47,190,0.3); border-radius: 24px;
+      padding: 40px 36px; text-align: center; margin-top: 40px;
+    }
+    .cierre-box h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(22px, 2.5vw, 30px); font-weight: 800;
+      letter-spacing: -0.8px; margin-bottom: 14px;
+    }
+    .cierre-box p { font-size: 15.5px; color: var(--muted2); line-height: 1.8; max-width: 620px; margin: 0 auto 24px; }
+
+    /* ── BIBLIOGRAPHY ── */
+    .biblio-list { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
+    .biblio-item {
+      font-size: 13px; line-height: 1.7; color: var(--muted2);
+      padding-left: 18px; position: relative;
+    }
+    .biblio-item::before { content: '—'; position: absolute; left: 0; color: var(--purple); font-weight: 700; }
+    .note-box {
+      margin-top: 28px; padding: 18px 22px;
+      background: rgba(123,47,190,0.07); border: 1px solid rgba(123,47,190,0.2);
+      border-radius: 14px; font-size: 12.5px; color: var(--muted2); line-height: 1.7;
+    }
+    .note-box strong { color: var(--text); display: block; margin-bottom: 4px; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; }
+    .sl .note-box strong { color: #0C0C26; }
+
+    /* ── FOOTER ── */
+    .art-footer {
+      background: var(--bg2); border-top: 1px solid var(--border);
+      padding: 40px 60px 30px; text-align: center;
+    }
+    .art-footer p { font-size: 13px; color: var(--muted); }
+    .art-footer a { color: var(--cyan); text-decoration: none; }
+    .art-footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 1024px) {
+      .art-hero { padding: 120px 24px 70px; }
+      .palanca-section { padding: 28px 22px; }
+      .chart-wrap { padding: 24px 18px; }
+      .art-footer { padding: 30px 24px 24px; }
+    }
+    @media (max-width: 640px) {
+      .art-hero h1 { font-size: 26px; }
+      .art-lead { font-size: 16px; }
+      .palanca-section { padding: 22px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="noise-overlay" aria-hidden="true"></div>
+
+<!-- ═══ NAV ═══ -->
+<nav id="nav">
+  <a href="index.html"><img src="logos/1.svg" alt="VetConnect Pro LATAM" class="nav-logo" /></a>
+  <ul class="nav-links">
+    <li><a href="test.html">Test Score</a></li>
+    <li><a href="programa.html">Programa</a></li>
+    <li><a href="recursos.html">Recursos</a></li>
+    <li><a href="metodologia.html">Metodología</a></li>
+    <li><a href="nosotros.html">Nosotros</a></li>
+  </ul>
+  <a href="programa.html" class="nav-cta">Ver Programa →</a>
+</nav>
+
+<!-- ═══ SECCIÓN 1: HERO (dark) ═══ -->
+<section class="art-hero">
+  <div class="orb orb-purple"></div>
+  <div class="orb orb-cyan"></div>
+  <div class="orb orb-gold"></div>
+
+  <div class="art-hero-inner">
+    <span class="eyebrow">HERRAMIENTAS · RENTABILIDAD</span>
+    <div class="art-category-badge">🚀 Transformación Profesional</div>
+
+    <h1 class="fade-up">
+      Tres palancas que cambian<br/>
+      la rentabilidad veterinaria<br/>
+      sin <span class="grad-text">sacrificar tu bienestar</span>
+    </h1>
+
+    <p class="art-lead fade-up">
+      Reducir el desgaste no es solo descansar más. Es rediseñar cómo trabajas, cómo cobras
+      y cómo te comunicas. Las tres palancas que más impacto tienen en la rentabilidad sostenible
+      del veterinario clínico — con base en los datos preliminares del iScore LATAM y herramientas
+      de psicología aplicada.
+    </p>
+
+    <div class="art-meta fade-up">
+      <span>🕒 Lectura: ~7 min</span>
+      <span>📊 Datos: iScore LATAM</span>
+      <span>💡 JD-R · TCC · Job Crafting</span>
+      <a href="blog.html" class="art-back">← Volver al blog</a>
+    </div>
+  </div>
+</section>
+
+<div class="grad-divider"></div>
+
+<!-- ═══ SECCIÓN 2: CHART (light) ═══ -->
+<section class="sl">
+  <div class="section-inner" style="padding-top:80px; padding-bottom:80px;">
+    <div class="art-body fade-up">
+      <span class="eyebrow">IMPACTO ESTIMADO</span>
+      <h2 class="section-title" style="margin-bottom:10px;">
+        Las 3 palancas:<br/>
+        <span class="grad-text">impacto en bienestar profesional</span>
+      </h2>
+      <p style="color:var(--muted2); font-size:15px; margin-bottom:32px;">
+        Las tres palancas actúan sobre dimensiones distintas del desgaste. Juntas, cubren
+        la mayor parte del ciclo que genera el burnout en el veterinario clínico latinoamericano.
+      </p>
+
+      <div class="chart-wrap">
+        <canvas id="chartPalancas"></canvas>
+        <p class="chart-caption">
+          Impacto estimado en bienestar profesional — escala conceptual basada en el modelo JD-R
+          (Bakker &amp; Demerouti, 2007) y los datos preliminares del iScore LATAM.<br/>
+          No constituye dato clínico ni pronóstico individual.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="grad-divider"></div>
+
+<!-- ═══ SECCIÓN 3: LAS PALANCAS (dark) ═══ -->
+<section>
+  <div class="section-inner">
+    <div class="art-body">
+      <span class="eyebrow fade-up">LAS TRES PALANCAS</span>
+      <h2 class="fade-up">
+        No es trabajar menos.<br/>
+        Es <span class="grad-text">trabajar diferente.</span>
+      </h2>
+
+      <p class="fade-up">
+        El modelo Job Demands-Resources (Bakker &amp; Demerouti, 2007) es claro:
+        cuando los <strong>recursos no compensan las demandas</strong>, el burnout es inevitable.
+        Estas tres palancas actúan directamente sobre ese desbalance.
+      </p>
+
+      <!-- PALANCA 1 -->
+      <div class="palanca-section fade-up" style="margin-top:40px;">
+        <div class="palanca-top palanca-top-1"></div>
+        <div class="palanca-num palanca-num-1">Palanca 1</div>
+        <h3>Precio con convicción</h3>
+
+        <p>
+          La dimensión "Dinero" es la que muestra <strong>mayor saturación en el iScore LATAM: 36%</strong>.
+          No es casualidad — es el resultado de años cobrando por debajo del valor real del servicio,
+          por miedo al rechazo o por creencia de que el cliente "no puede pagar".
+        </p>
+
+        <p>
+          El <strong>modelo JD-R</strong> lo explica: cuando la remuneración (recurso clave)
+          no compensa la carga emocional y cognitiva de la consulta (demanda),
+          el desgaste es matemáticamente inevitable.
+        </p>
+
+        <ul>
+          <li><strong>Técnica del valor anclado:</strong> presentar el precio antes de que el cliente pregunte — no como respuesta defensiva, sino como parte natural de la propuesta clínica.</li>
+          <li><strong>El precio de no cobrar bien:</strong> tiempo extra no remunerado = salud mental sacrificada = ciclo que se retroalimenta sin salida.</li>
+          <li><strong>Herramienta:</strong> Matriz de Valor del Servicio — tiempo clínico + riesgo + conocimiento + equipamiento + seguimiento = precio justo.</li>
+        </ul>
+
+        <div class="art-quote" style="font-size:14.5px;">
+          "No es lo que cobras lo que cansa. Es cobrar sin convicción,
+          justificándote ante el cliente antes de que te lo pida."
+        </div>
+
+        <span class="tool-pill tool-pill-gold">Bakker &amp; Demerouti 2007 · JD-R Model</span>
+      </div>
+
+      <!-- PALANCA 2 -->
+      <div class="palanca-section fade-up">
+        <div class="palanca-top palanca-top-2"></div>
+        <div class="palanca-num palanca-num-2">Palanca 2</div>
+        <h3>Protocolo de cliente difícil</h3>
+
+        <p>
+          La interacción con tutores conflictivos es uno de los principales drenajes de energía
+          en la consulta veterinaria — y también uno de los menos sistematizados.
+          Sin un protocolo claro, cada consulta difícil consume recursos cognitivos y emocionales
+          que no se recuperan.
+        </p>
+
+        <p>
+          La <strong>TCC aplicada</strong> (Beck, 1979) permite identificar el esquema cognitivo
+          del cliente para elegir la respuesta más efectiva — sin perder autoridad clínica
+          ni entrar en confrontación.
+        </p>
+
+        <ul>
+          <li><strong>El ansioso:</strong> necesita certeza y estructura. Respuesta: protocolo visible, pasos claros, seguimiento confirmado.</li>
+          <li><strong>El cuestionador:</strong> necesita ser escuchado antes de ser convencido. Respuesta: validar su pregunta antes de responderla.</li>
+          <li><strong>El regatero:</strong> está probando límites, no negociando valor. Respuesta: precio firme + desglose del valor, sin negociar el ítem.</li>
+          <li><strong>El que buscó en Google:</strong> necesita reconocimiento, no corrección. Respuesta: "Eso que encontraste aplica cuando... en este caso, lo que veo es..."</li>
+        </ul>
+
+        <div class="script-box">
+          <span class="script-label">Script recomendado</span>
+          "Entiendo su preocupación — y tiene sentido que quiera asegurarse.
+          Mi recomendación profesional, basada en lo que estoy viendo hoy, es..."
+        </div>
+
+        <p>
+          <strong>Límites:</strong> el veterinario no está en el rol de gestionar la ansiedad
+          del tutor de forma ilimitada. Eso es trabajo clínico específico — y tiene un límite
+          legítimo dentro de la consulta. Definirlo de antemano reduce el agotamiento
+          por más de un 30% según el modelo de recursos de Bakker.
+        </p>
+
+        <span class="tool-pill tool-pill-purple">Beck 1979 · TCC · Fisher &amp; Ury 1981</span>
+      </div>
+
+      <!-- PALANCA 3 -->
+      <div class="palanca-section fade-up">
+        <div class="palanca-top palanca-top-3"></div>
+        <div class="palanca-num" style="color: var(--green); font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:700; letter-spacing:2px; text-transform:uppercase; margin-bottom:10px;">Palanca 3</div>
+        <h3>Gestión de energía, no de tiempo</h3>
+
+        <p>
+          La agenda veterinaria típica no está diseñada según la <strong>cronobiología del médico</strong>.
+          Está diseñada para llenar horas. El resultado: las consultas más complejas caen
+          en los momentos de menor rendimiento cognitivo — y la calidad clínica sufre.
+        </p>
+
+        <p>
+          El modelo de <strong>job crafting</strong> (Wrzesniewski &amp; Dutton, 2001) propone
+          rediseñar las tareas diarias para aumentar el sentido y reducir el agotamiento.
+          No es cambiar la profesión — es cambiar cómo la profesión se organiza dentro del día.
+        </p>
+
+        <ul>
+          <li><strong>Picos cognitivos:</strong> reservar las consultas complejas para las primeras horas del turno, cuando el córtex prefrontal está más activo.</li>
+          <li><strong>Estandarización como alivio:</strong> los protocolos repetibles liberan energía cognitiva para lo que requiere creatividad clínica real.</li>
+          <li><strong>Herramienta — Audit de Energía Semanal (30 min):</strong> identificar qué tareas drenan energía sin proporcional valor, y cuáles la generan. Diseñar la semana desde esa información.</li>
+          <li><strong>Inteligencia emocional aplicada</strong> (Goleman, 1995): la autoconciencia sobre el propio estado energético es la habilidad base de la sostenibilidad profesional.</li>
+        </ul>
+
+        <div class="art-quote" style="font-size:14.5px;">
+          "No tenemos problemas de tiempo. Tenemos problemas de energía mal distribuida.
+          Un veterinario con energía gestionada vale más en 4 horas que uno agotado en 10."
+        </div>
+
+        <span class="tool-pill tool-pill-green">Wrzesniewski &amp; Dutton 2001 · Job Crafting</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="grad-divider"></div>
+
+<!-- ═══ SECCIÓN 4: CIERRE (light) ═══ -->
+<section class="sl">
+  <div class="section-inner" style="padding-top:80px; padding-bottom:80px;">
+    <div class="art-body">
+      <span class="eyebrow fade-up">EL PUNTO CENTRAL</span>
+      <h2 class="section-title fade-up">
+        Bienestar y rentabilidad<br/>
+        <span class="grad-text">son la misma cosa</span>
+      </h2>
+
+      <p class="fade-up" style="color:var(--muted2); font-size:16px; max-width:720px;">
+        Estas tres palancas no son módulos de un curso. Son cambios de perspectiva
+        que se convierten en hábitos — y los hábitos construyen una práctica sostenible.
+      </p>
+
+      <div class="cierre-box fade-up">
+        <h3>No es trabajar menos.<br/>Es trabajar <span class="grad-text">mejor.</span></h3>
+        <p>
+          El bienestar profesional y la rentabilidad no son opuestos.
+          Son la misma cosa vista desde dos ángulos distintos.
+          Un veterinario que cobra bien, gestiona sus clientes con protocolo y administra
+          su energía con inteligencia — no solo gana más. Dura más. Y sirve mejor.
+        </p>
+        <a href="iscore.html" class="btn-primary">
+          Conocer mi nivel de desgaste →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="grad-divider"></div>
+
+<!-- ═══ SECCIÓN 5: BIBLIOGRAFÍA (dark) ═══ -->
+<section>
+  <div class="section-inner" style="padding-top:70px; padding-bottom:80px;">
+    <div class="art-body">
+      <span class="eyebrow fade-up">REFERENCIAS ACADÉMICAS</span>
+      <h2 class="fade-up" style="font-family:'Space Grotesk',sans-serif; font-size:clamp(22px,2.5vw,30px); font-weight:800; letter-spacing:-0.8px; margin-bottom:20px;">
+        Bibliografía
+      </h2>
+
+      <div class="biblio-list fade-up">
+        <div class="biblio-item">Bakker, A.B. &amp; Demerouti, E. (2007). <em>The Job Demands-Resources model: State of the art.</em> Journal of Managerial Psychology, 22(3), 309–328.</div>
+        <div class="biblio-item">Wrzesniewski, A. &amp; Dutton, J.E. (2001). <em>Crafting a job: Revisioning employees as active crafters of their work.</em> Academy of Management Review, 26(2), 179–201.</div>
+        <div class="biblio-item">Fisher, R. &amp; Ury, W. (1981). <em>Getting to Yes: Negotiating Agreement Without Giving In.</em> Penguin Books.</div>
+        <div class="biblio-item">Beck, A.T. (1979). <em>Cognitive Therapy and the Emotional Disorders.</em> Meridian.</div>
+        <div class="biblio-item">Goleman, D. (1995). <em>Emotional Intelligence: Why It Can Matter More Than IQ.</em> Bantam Books.</div>
+        <div class="biblio-item">Maslach, C. &amp; Leiter, M.P. (2016). <em>Burnout: The Cost of Caring</em> (2nd ed.). Malor Books.</div>
+      </div>
+
+      <div class="note-box fade-up" style="background: rgba(255,255,255,0.035); border-color: rgba(255,255,255,0.07); color: var(--muted2);">
+        <strong style="color: var(--muted2);">Nota metodológica</strong>
+        Datos preliminares del instrumento iScore LATAM, adaptado de la escala de Maslach (1981)
+        para medicina veterinaria clínica de mascotas en LATAM. Muestra voluntaria, carácter exploratorio.
+        Los impactos estimados presentados en la gráfica son conceptuales y no constituyen
+        resultados clínicos validados.
+      </div>
+
+      <div style="margin-top:36px; text-align:center;">
+        <a href="blog.html" class="btn-primary" style="background: linear-gradient(135deg, var(--purple), var(--cyan-d));">
+          ← Volver al Blog
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="art-footer">
+  <p>© 2025 VetConnect Pro LATAM · <a href="blog.html">Blog</a> · <a href="programa.html">Programa Alfa</a> · <a href="nosotros.html">Nosotros</a></p>
+  <p style="margin-top:8px; font-size:12px;">Contenido con fines educativos. No sustituye orientación clínica ni psicológica profesional.</p>
+</footer>
+
+<!-- ═══ CHART.JS ═══ -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  // ── CHART: LAS 3 PALANCAS (horizontal paired) ──
+  const ctxPalancas = document.getElementById('chartPalancas').getContext('2d');
+  new Chart(ctxPalancas, {
+    type: 'bar',
+    data: {
+      labels: ['Precio con Convicción', 'Protocolo Cliente Difícil', 'Gestión de Energía'],
+      datasets: [
+        {
+          label: 'Sin palanca (nivel de desgaste estimado)',
+          data: [72, 61, 68],
+          backgroundColor: 'rgba(255,69,96,0.35)',
+          borderColor: 'rgba(255,69,96,0.8)',
+          borderWidth: 2,
+          borderRadius: 6,
+          borderSkipped: false
+        },
+        {
+          label: 'Con palanca (nivel de bienestar estimado)',
+          data: [55, 44, 50],
+          backgroundColor: 'rgba(0,227,150,0.45)',
+          borderColor: 'rgba(0,227,150,0.9)',
+          borderWidth: 2,
+          borderRadius: 6,
+          borderSkipped: false
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      indexAxis: 'y',
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            color: '#55558A',
+            font: { size: 12 },
+            boxWidth: 14,
+            padding: 16
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: ctx => ` ${ctx.parsed.x} pts (índice conceptual)`
+          }
+        }
+      },
+      scales: {
+        x: {
+          beginAtZero: true,
+          max: 100,
+          ticks: {
+            callback: v => v + ' pts',
+            color: '#55558A',
+            font: { size: 11 }
+          },
+          grid: { color: 'rgba(12,12,38,0.07)' }
+        },
+        y: {
+          ticks: {
+            color: '#3A3A65',
+            font: { size: 12, weight: '600' }
+          },
+          grid: { display: false }
+        }
+      }
+    }
+  });
+
+  // ── NAV SCROLL ──
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // ── FADE-UP OBSERVER ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+# Secrets — NUNCA al repo
+.env
+.env.local
+.env.*.local
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Large media / archivos temporales
+*.pdf
+7B7EBF97-*.png
+2602e66e29cf6534e53bb160f826fdc6.jpg
+619hNDuaHPL._AC_UY1000_.jpg
+
+# SVG sin usar (typo en nombre)
+"vetconmect prolatamlogo.svg"
+vetconmect*
+
+# Archivos de otros proyectos (no son parte del sitio web)
+"app vetpro latam/"
+"gestor vetlab pro/"
+"gestor vetpro/"
+"pagina web vetconnect pro/"
+"veterinario alfa/"
+"vetpet pro tutor/"
+"vitalvet clinica regional/"
+"assets logos/"
+.claude/
+
+# Scripts de desarrollo no relacionados
+claude-code-mcp-stack.js
+generar-imagen.js
+
+# Railway / build
+.railway/
+dist/

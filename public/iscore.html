@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iScore LATAM · Test de Desgaste Profesional — VetConnect Pro</title>
+<meta name="description" content="Test iScore: 41 preguntas para medir tu nivel de burnout veterinario. Resultado inmediato, gratuito y confidencial. ¿Cuánto te está costando ser veterinario?" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="es_LA" />
+<meta property="og:site_name" content="VetConnect Pro LATAM" />
+<meta property="og:url" content="https://vetconnectpro.vitalvetcrv.com.co/iscore.html" />
+<meta property="og:title" content="iScore — Test de Desgaste Profesional Veterinario" />
+<meta property="og:description" content="41 preguntas para medir tu nivel de burnout. Resultado inmediato, gratuito y confidencial. ¿Cuánto te está costando ser veterinario?" />
+<meta property="og:image" content="https://vetconnectpro.vitalvetcrv.com.co/logos/og-preview.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="iScore — Test de Desgaste Profesional Veterinario" />
+<meta name="twitter:description" content="41 preguntas para medir tu nivel de burnout. Resultado inmediato, gratuito y confidencial." />
+<meta name="twitter:image" content="https://vetconnectpro.vitalvetcrv.com.co/logos/og-preview.jpg" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="stylesheet" href="vetconnect.css">
+<style>
+/* ── Test-specific overrides ── */
+.test-hero{padding:60px 20px 40px;text-align:center;background:var(--bg2);border-bottom:1px solid var(--border)}
+.test-hero h1{font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:800;margin-bottom:12px}
+.test-hero p{color:var(--muted);max-width:560px;margin:0 auto;font-size:1.05rem;line-height:1.6}
+
+/* Progress */
+.progress-bar-outer{width:100%;height:6px;background:var(--bg3);border-radius:3px;overflow:hidden;margin:24px 0 8px}
+.progress-bar-inner{height:100%;background:linear-gradient(90deg,var(--purple),var(--cyan));border-radius:3px;transition:width .4s ease}
+.progress-label{display:flex;justify-content:space-between;font-size:.78rem;color:var(--muted2);margin-bottom:28px}
+
+/* Steps */
+.test-main{max-width:720px;margin:0 auto;padding:32px 20px 80px}
+.test-step{display:none}
+.test-step.active{display:block}
+
+/* Section header */
+.dim-header{margin-bottom:28px}
+.dim-badge{display:inline-block;padding:4px 14px;border-radius:20px;font-size:.75rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-bottom:10px}
+.dim-header h2{font-size:1.3rem;font-weight:700;margin-bottom:6px}
+.dim-header p{color:var(--muted);font-size:.92rem;line-height:1.5}
+
+/* Question card */
+.q-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:22px 24px;margin-bottom:16px;transition:border-color .2s}
+.q-card.answered{border-color:var(--purple)}
+.q-num{font-size:.72rem;font-weight:700;color:var(--muted2);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+.q-text{font-size:.97rem;font-weight:600;color:var(--text);line-height:1.5;margin-bottom:16px}
+
+/* Radio options */
+.q-opts{display:flex;flex-direction:column;gap:8px}
+.q-opt{position:relative}
+.q-opt input[type="radio"]{position:absolute;opacity:0;width:0;height:0}
+.q-opt label{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 14px;
+  border:1px solid var(--border2);
+  border-radius:8px;
+  cursor:pointer;
+  font-size:.88rem;
+  color:var(--muted);
+  transition:all .15s;
+  line-height:1.4
+}
+.q-opt label:before{
+  content:'';width:16px;height:16px;flex-shrink:0;
+  border:2px solid var(--border);border-radius:50%;
+  transition:all .15s
+}
+.q-opt input[type="radio"]:checked + label{
+  background:rgba(139,92,246,.12);
+  border-color:var(--purple);
+  color:var(--text);
+  font-weight:600
+}
+.q-opt input[type="radio"]:checked + label:before{
+  background:var(--purple);border-color:var(--purple)
+}
+.q-opt label:hover{border-color:var(--muted2);color:var(--text)}
+
+/* Contact form */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:540px){.form-grid{grid-template-columns:1fr}}
+.form-field label{display:block;font-size:.8rem;font-weight:600;color:var(--muted2);margin-bottom:5px;letter-spacing:.03em;text-transform:uppercase}
+.form-field input,.form-field select{
+  width:100%;padding:11px 14px;
+  background:var(--bg3);
+  border:1px solid var(--border);
+  border-radius:8px;
+  color:var(--text);
+  font-size:.93rem;
+  font-family:inherit;
+  outline:none;transition:border .15s
+}
+.form-field input:focus,.form-field select:focus{border-color:var(--purple)}
+.form-field input::placeholder{color:var(--muted2)}
+.checkbox-group{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+.chk-opt{display:flex;align-items:center;gap:6px;cursor:pointer;font-size:.88rem;color:var(--muted)}
+.chk-opt input[type="checkbox"]{accent-color:var(--purple);width:15px;height:15px}
+
+/* Navigation buttons */
+.test-nav{display:flex;justify-content:space-between;align-items:center;margin-top:32px;gap:12px}
+.btn-prev{
+  padding:12px 24px;background:transparent;
+  border:1px solid var(--border);border-radius:8px;
+  color:var(--muted);font-size:.9rem;font-weight:600;
+  cursor:pointer;transition:all .15s
+}
+.btn-prev:hover{border-color:var(--muted2);color:var(--text)}
+.btn-next{
+  padding:12px 28px;
+  background:linear-gradient(135deg,var(--purple),var(--cyan-d));
+  border:none;border-radius:8px;
+  color:#fff;font-size:.93rem;font-weight:700;
+  cursor:pointer;transition:opacity .15s;flex:1;max-width:260px
+}
+.btn-next:hover{opacity:.9}
+.btn-next:disabled{opacity:.5;cursor:not-allowed}
+
+/* Validation notice */
+.val-notice{
+  background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);
+  border-radius:8px;padding:10px 14px;
+  font-size:.83rem;color:#ef4444;
+  margin-top:12px;display:none
+}
+
+/* Loader */
+.test-loader{text-align:center;padding:60px 20px}
+.spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--purple);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 20px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Result page */
+.result-hero{text-align:center;padding:40px 0 32px}
+.result-score{
+  display:inline-flex;flex-direction:column;align-items:center;
+  width:140px;height:140px;border-radius:50%;
+  background:var(--card-bg);border:4px solid var(--purple);
+  justify-content:center;margin-bottom:20px
+}
+.result-score .score-num{font-size:2.6rem;font-weight:900;line-height:1}
+.result-score .score-max{font-size:.78rem;color:var(--muted2)}
+.result-nivel{
+  display:inline-block;padding:8px 24px;border-radius:24px;
+  font-size:1rem;font-weight:700;letter-spacing:.04em;
+  text-transform:uppercase;margin-bottom:16px
+}
+.result-hero h2{font-size:1.5rem;font-weight:800;margin-bottom:8px}
+.result-hero p{color:var(--muted);max-width:520px;margin:0 auto;line-height:1.6}
+
+.dims-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:32px 0}
+@media(max-width:520px){.dims-grid{grid-template-columns:1fr}}
+.dim-card{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:16px}
+.dim-card-name{font-size:.75rem;font-weight:700;color:var(--muted2);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px}
+.dim-bar-outer{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden;margin-bottom:6px}
+.dim-bar-inner{height:100%;border-radius:3px;transition:width .6s ease}
+.dim-card-val{font-size:.8rem;color:var(--muted)}
+
+.result-rec{
+  background:var(--card-bg);border:1px solid var(--border);
+  border-radius:14px;padding:28px 24px;margin-bottom:20px
+}
+.result-rec h3{font-size:1.1rem;font-weight:700;margin-bottom:10px}
+.result-rec p{color:var(--muted);font-size:.93rem;line-height:1.65;margin-bottom:14px}
+.result-rec ul{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.result-rec ul li{display:flex;align-items:flex-start;gap:8px;color:var(--muted);font-size:.9rem}
+.result-rec ul li:before{content:'→';color:var(--cyan);font-weight:700;flex-shrink:0}
+
+.result-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.btn-cta-prim{
+  padding:13px 28px;background:linear-gradient(135deg,var(--purple),var(--cyan-d));
+  border:none;border-radius:8px;color:#fff;font-weight:700;font-size:.95rem;
+  cursor:pointer;text-decoration:none;flex:1;min-width:160px;text-align:center;
+  display:inline-block
+}
+.btn-cta-sec{
+  padding:13px 28px;background:transparent;
+  border:1px solid var(--border);border-radius:8px;
+  color:var(--text);font-weight:600;font-size:.93rem;
+  cursor:pointer;text-decoration:none;flex:1;min-width:160px;text-align:center;
+  display:inline-block
+}
+
+/* Crisis modal */
+.crisis-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px}
+.crisis-modal{background:var(--bg2);border:2px solid #ef4444;border-radius:16px;padding:32px 28px;max-width:520px;width:100%;position:relative}
+.crisis-modal h3{font-size:1.2rem;font-weight:800;color:#ef4444;margin-bottom:12px}
+.crisis-modal p{color:var(--muted);font-size:.92rem;line-height:1.65;margin-bottom:16px}
+.crisis-modal ul{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.crisis-modal ul li{background:var(--bg3);border-radius:8px;padding:10px 14px;font-size:.88rem;color:var(--text)}
+.crisis-modal ul li strong{display:block;color:var(--text);margin-bottom:2px}
+.crisis-modal ul li span{color:var(--muted2)}
+.crisis-close{width:100%;padding:12px;background:linear-gradient(135deg,#ef4444,#dc2626);border:none;border-radius:8px;color:#fff;font-weight:700;font-size:.95rem;cursor:pointer}
+
+/* Toast */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);padding:12px 24px;border-radius:10px;font-size:.88rem;font-weight:600;z-index:9998;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1}
+.toast.ok{background:#22c55e;color:#fff}
+.toast.err{background:#ef4444;color:#fff}
+.toast.info{background:var(--purple);color:#fff}
+
+/* Nivel colors */
+.nivel-bajo{background:rgba(34,197,94,.15);color:#22c55e;border-color:rgba(34,197,94,.4)}
+.nivel-moderado{background:rgba(245,158,11,.15);color:#f59e0b;border-color:rgba(245,158,11,.4)}
+.nivel-alto{background:rgba(249,115,22,.15);color:#f97316;border-color:rgba(249,115,22,.4)}
+.nivel-critico{background:rgba(239,68,68,.15);color:#ef4444;border-color:rgba(239,68,68,.4)}
+.border-bajo{border-color:#22c55e}
+.border-moderado{border-color:#f59e0b}
+.border-alto{border-color:#f97316}
+.border-critico{border-color:#ef4444}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="logo-icon">V</span>
+      <span class="logo-text">VetConnect <span class="logo-pro">Pro</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="test.html">Test iScore</a>
+      <a href="programa.html">Programa</a>
+      <a href="recursos.html">Recursos</a>
+      <a href="metodologia.html">Metodología</a>
+      <a href="nosotros.html">Nosotros</a>
+    </div>
+    <a href="iscore.html" class="nav-cta" style="color:var(--text);">Realizar Test →</a>
+  </div>
+</nav>
+
+<div class="test-hero">
+  <h1>iScore LATAM · Test de Desgaste Profesional</h1>
+  <p>41 preguntas · 5 dimensiones · 12–15 minutos<br>Tus respuestas son confidenciales y el resultado llega a tu correo.</p>
+</div>
+
+<main class="test-main">
+
+  <!-- ──────────────── STEP 0: Registration ──────────────── -->
+  <div class="test-step active" id="step-0">
+    <div class="progress-bar-outer"><div class="progress-bar-inner" id="pbar" style="width:0%"></div></div>
+    <div class="progress-label"><span id="plabel">Registro · Paso 0 de 5</span><span id="pct">0%</span></div>
+
+    <div class="dim-header">
+      <div class="dim-badge" style="background:rgba(139,92,246,.15);color:var(--purple);">Antes de comenzar</div>
+      <h2>Cuéntanos un poco de ti</h2>
+      <p>Tus datos son necesarios para enviarte el resultado y personalizar tu análisis. No compartimos tu información con terceros.</p>
+    </div>
+
+    <div class="form-grid">
+      <div class="form-field">
+        <label for="f-nombre">Nombre completo *</label>
+        <input type="text" id="f-nombre" placeholder="Tu nombre" required>
+      </div>
+      <div class="form-field">
+        <label for="f-email">Correo electrónico *</label>
+        <input type="email" id="f-email" placeholder="tu@correo.com" required>
+      </div>
+      <div class="form-field">
+        <label for="f-telefono">Teléfono / WhatsApp <span style="color:var(--muted2);font-weight:400">(opcional)</span></label>
+        <input type="tel" id="f-telefono" placeholder="Ej: 573001234567">
+      </div>
+      <div class="form-field">
+        <label for="f-pais">País *</label>
+        <select id="f-pais">
+          <option value="">— Selecciona tu país —</option>
+          <option>México</option><option>Guatemala</option><option>Belice</option>
+          <option>El Salvador</option><option>Honduras</option><option>Nicaragua</option>
+          <option>Costa Rica</option><option>Panamá</option><option>Cuba</option>
+          <option>República Dominicana</option><option>Haití</option><option>Puerto Rico</option>
+          <option>Colombia</option><option>Venezuela</option><option>Ecuador</option>
+          <option>Perú</option><option>Bolivia</option><option>Brasil</option>
+          <option>Paraguay</option><option>Uruguay</option><option>Argentina</option>
+          <option>Chile</option><option>España</option><option>Otro</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label for="f-tiempo">Años ejerciendo la profesión *</label>
+        <input type="text" id="f-tiempo" placeholder="Ej: 5 años">
+      </div>
+      <div class="form-field">
+        <label>Perfil profesional</label>
+        <div class="checkbox-group">
+          <label class="chk-opt"><input type="checkbox" id="f-estudiante" value="Estudiante"> Estudiante</label>
+          <label class="chk-opt"><input type="checkbox" id="f-profesional" value="Profesional"> Profesional</label>
+          <label class="chk-opt"><input type="checkbox" id="f-especialista" value="Especialista"> Especialista</label>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;padding:14px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;font-size:.82rem;color:var(--muted2);line-height:1.5">
+      <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer">
+        <input type="checkbox" id="f-consent" style="accent-color:var(--purple);margin-top:2px;flex-shrink:0">
+        <span>Acepto que mis datos personales (nombre, email, resultados del test) sean almacenados y usados por VetConnect Pro LATAM para enviarte tu resultado, recursos personalizados y comunicaciones relacionadas con tu bienestar profesional. Puedes solicitar su eliminación a <a href="mailto:ivancho1am@gmail.com" style="color:var(--purple)">ivancho1am@gmail.com</a> en cualquier momento. Los datos de salud mental son tratados con confidencialidad y nunca se comparten con terceros.</span>
+      </label>
+    </div>
+    <div id="val-0" class="val-notice">Por favor completa nombre, email, país y acepta el tratamiento de datos.</div>
+    <div class="test-nav">
+      <span></span>
+      <button class="btn-next" onclick="goNext(0)">Comenzar Test →</button>
+    </div>
+  </div>
+
+  <!-- ──────────────── STEP 1: Q1–Q11 ──────────────── -->
+  <div class="test-step" id="step-1">
+    <div class="progress-bar-outer"><div class="progress-bar-inner" id="pbar-1" style="width:0%"></div></div>
+    <div class="progress-label"><span>Bloque 1 · Preguntas 1–11 de 41</span><span id="pct-1">0 / 11</span></div>
+    <div class="dim-header">
+      <div class="dim-badge" style="background:rgba(139,92,246,.15);color:var(--purple);">Dimensiones 1 y 2</div>
+      <h2>Conciencia del desgaste y agotamiento emocional</h2>
+      <p>Las primeras preguntas evalúan tu nivel de conciencia sobre el desgaste y cómo te ha afectado emocionalmente. <em style="font-size:.85em;color:var(--muted);">Las preguntas 1–3 son de orientación diagnóstica y no suman puntos al puntaje final.</em></p>
+    </div>
+    <div id="qs-0-10"></div>
+    <div id="val-1" class="val-notice">Por favor responde todas las preguntas antes de continuar.</div>
+    <div class="test-nav">
+      <button class="btn-prev" onclick="goPrev(1)">← Anterior</button>
+      <button class="btn-next" onclick="goNext(1)">Siguiente →</button>
+    </div>
+  </div>
+
+  <!-- ──────────────── STEP 2: Q12–Q18 ──────────────── -->
+  <div class="test-step" id="step-2">
+    <div class="progress-bar-outer"><div class="progress-bar-inner" id="pbar-2" style="width:27%"></div></div>
+    <div class="progress-label"><span>Bloque 2 · Preguntas 12–18 de 41</span><span id="pct-2">0 / 7</span></div>
+    <div class="dim-header">
+      <div class="dim-badge" style="background:rgba(6,182,212,.15);color:var(--cyan);">Dimensión 3</div>
+      <h2>Despersonalización y distanciamiento</h2>
+      <p>Evalúa tu relación con tutores, colegas y las decisiones difíciles del ejercicio veterinario.</p>
+    </div>
+    <div id="qs-11-17"></div>
+    <div id="val-2" class="val-notice">Por favor responde todas las preguntas antes de continuar.</div>
+    <div class="test-nav">
+      <button class="btn-prev" onclick="goPrev(2)">← Anterior</button>
+      <button class="btn-next" onclick="goNext(2)">Siguiente →</button>
+    </div>
+  </div>
+
+  <!-- ──────────────── STEP 3: Q19–Q31 ──────────────── -->
+  <div class="test-step" id="step-3">
+    <div class="progress-bar-outer"><div class="progress-bar-inner" id="pbar-3" style="width:44%"></div></div>
+    <div class="progress-label"><span>Bloque 3 · Preguntas 19–31 de 41</span><span id="pct-3">0 / 13</span></div>
+    <div class="dim-header">
+      <div class="dim-badge" style="background:rgba(212,175,55,.15);color:var(--gold);">Dimensiones 4 y física</div>
+      <h2>Realización profesional y manifestaciones físicas</h2>
+      <p>Cómo percibes tu impacto, reconocimiento y los efectos físicos del estrés crónico en tu cuerpo.</p>
+    </div>
+    <div id="qs-18-30"></div>
+    <div id="val-3" class="val-notice">Por favor responde todas las preguntas antes de continuar.</div>
+    <div class="test-nav">
+      <button class="btn-prev" onclick="goPrev(3)">← Anterior</button>
+      <button class="btn-next" onclick="goNext(3)">Siguiente →</button>
+    </div>
+  </div>
+
+  <!-- ──────────────── STEP 4: Q32–Q41 ──────────────── -->
+  <div class="test-step" id="step-4">
+    <div class="progress-bar-outer"><div class="progress-bar-inner" id="pbar-4" style="width:76%"></div></div>
+    <div class="progress-label"><span>Bloque 4 · Preguntas 32–41 de 41</span><span id="pct-4">0 / 10</span></div>
+    <div class="dim-header">
+      <div class="dim-badge" style="background:rgba(239,68,68,.12);color:#ef4444;">Dimensión 5 · Final</div>
+      <h2>Dinero, valor profesional y señales de alerta</h2>
+      <p>Las últimas preguntas abordan tu relación económica con la profesión y señales de alerta que merecen atención inmediata.</p>
+    </div>
+    <div id="qs-31-40"></div>
+    <div id="val-4" class="val-notice">Por favor responde todas las preguntas antes de continuar.</div>
+    <div class="test-nav">
+      <button class="btn-prev" onclick="goPrev(4)">← Anterior</button>
+      <button class="btn-next" id="btn-submit" onclick="submitTest()">Calcular mi iScore →</button>
+    </div>
+  </div>
+
+  <!-- ──────────────── LOADER ──────────────── -->
+  <div class="test-step" id="step-loader">
+    <div class="test-loader">
+      <div class="spinner"></div>
+      <p style="color:var(--muted);font-size:.95rem;">Analizando tus respuestas y calculando tu iScore LATAM…</p>
+    </div>
+  </div>
+
+  <!-- ──────────────── RESULT ──────────────── -->
+  <div class="test-step" id="step-result">
+    <div class="result-hero">
+      <div class="result-score" id="res-score-circle">
+        <span class="score-num" id="res-score-num">—</span>
+        <span class="score-max">/ 114</span>
+      </div>
+      <div class="result-nivel" id="res-nivel-badge"></div>
+      <h2 id="res-titulo"></h2>
+      <p id="res-subtitulo"></p>
+    </div>
+
+    <div class="dims-grid" id="res-dims"></div>
+
+    <div class="result-rec" id="res-rec">
+      <h3 id="res-rec-title"></h3>
+      <p id="res-rec-body"></p>
+      <ul id="res-rec-list"></ul>
+      <div class="result-ctas" id="res-ctas"></div>
+    </div>
+
+    <div class="result-rec" style="background:rgba(139,92,246,.04);border-color:rgba(139,92,246,.2);">
+      <h3 style="color:var(--purple);">¿Qué sigue ahora?</h3>
+      <p>El Dr. Iván Durán ha preparado recursos específicos según tu nivel de iScore. Revisa tu correo electrónico — en los próximos minutos recibirás tu resultado detallado y los siguientes pasos recomendados.</p>
+      <div class="result-ctas">
+        <a href="recursos.html" class="btn-cta-sec">📚 Ver Recursos Gratuitos</a>
+        <a href="programa.html" class="btn-cta-prim">🎯 Conocer el Programa</a>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:16px">
+      <button onclick="location.reload()" style="background:transparent;border:none;color:var(--muted2);font-size:.82rem;cursor:pointer;text-decoration:underline">Repetir el test desde el inicio</button>
+    </div>
+  </div>
+
+</main>
+
+<!-- ── Crisis modal (Q40-Q41 altos) ── -->
+<div class="crisis-overlay" id="crisisModal" style="display:none">
+  <div class="crisis-modal">
+    <h3>⚠️ Estamos aquí contigo</h3>
+    <p>Tus respuestas indican que podrías estar atravesando un momento muy difícil. Lo que sientes es real, y mereces apoyo. Antes de continuar con tu resultado, queremos que sepas que no estás solo/a.</p>
+    <ul>
+      <li><strong>Colombia</strong> <span>Línea 106 — Atención gratuita 24/7</span></li>
+      <li><strong>México</strong> <span>SAPTEL: 55 5259-8121 — 24 horas</span></li>
+      <li><strong>Argentina</strong> <span>Centro de Asistencia: 135 — gratuito</span></li>
+      <li><strong>España</strong> <span>Teléfono de la Esperanza: 717 003 717</span></li>
+      <li><strong>Otro país</strong> <span>findahelpline.com — directorio global</span></li>
+    </ul>
+    <p style="font-size:.82rem;color:var(--muted2)">Tu resultado seguirá disponible. Si en este momento necesitas hablar con alguien antes de verlo, por favor llama a una de estas líneas.</p>
+    <button class="crisis-close" onclick="closeCrisisModal()">Entendido — ver mi resultado</button>
+  </div>
+</div>
+
+<!-- ── Toast ── -->
+<div class="toast" id="toast"></div>
+
+<footer style="background:var(--bg2);border-top:1px solid var(--border);padding:40px 20px;text-align:center;margin-top:0;">
+  <p style="color:var(--muted2);font-size:.82rem;">© 2026 VetConnect Pro LATAM · <a href="index.html" style="color:var(--purple);">Inicio</a> · <a href="test.html" style="color:var(--purple);">Test iScore</a> · <a href="recursos.html" style="color:var(--purple);">Recursos</a> · <a href="programa.html" style="color:var(--purple);">Programa</a></p>
+</footer>
+
+<script>
+// ────────────────────────────────────────────────────────────────
+//  CONFIG
+// ────────────────────────────────────────────────────────────────
+const SUPA_URL  = 'https://xpjjolrznelyejflctvh.supabase.co';
+const SUPA_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhwampvbHJ6bmVseWVqZmxjdHZoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY2OTUzNzUsImV4cCI6MjA5MjI3MTM3NX0._mVLoF5b9Fj8h1Wj_RThJOuo6nrSNqDoya7M7eGjqWA';
+const WP_EMAIL  = 'https://www.vitalvetcrv.com.co/wp-json/vitalvet/v1/send-email';
+const WP_KEY    = 'vc2026';
+
+// ────────────────────────────────────────────────────────────────
+//  QUESTIONS DATA  (41 questions, exact text + options + pts)
+// ────────────────────────────────────────────────────────────────
+const QS = [
+  // dim: 0=conciencia, 1=agotamiento, 2=despersonalizacion, 3=logro, 4=dinero
+  {dim:0, text:"¿Conoces qué es el síndrome de desgaste emocional (burnout) en veterinarios?", opts:[
+    {l:"Sí, lo conozco y sé cómo me afecta.",p:0},{l:"He oído hablar de él, pero no estoy seguro de cómo me impacta.",p:0},{l:"No, no estoy familiarizado con el término.",p:0}]},
+  {dim:0, text:"¿Consideras que podrías estar desgastado actualmente sin haberlo reconocido antes?", opts:[
+    {l:"Sí",p:0},{l:"Tal vez",p:0},{l:"No",p:0}]},
+  {dim:0, text:"¿Conoces herramientas concretas para prevenir el síndrome de desgaste en tu ejercicio (trabajo) profesional?", opts:[
+    {l:"Sí",p:0},{l:"No",p:0}]},
+  {dim:1, text:"¿Te sientes emocionalmente agotado al terminar tu jornada de trabajo?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:1, text:"¿Sientes que ya no tienes nada que dar cuando terminas el día?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:1, text:"¿Te resulta difícil desconectarte del trabajo cuando estás en casa?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:1, text:"¿Sientes que trabajar directamente con personas (tutores) te consume?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Si, ahora que lo pienso",p:3}]},
+  {dim:1, text:"¿Te sientes al límite de lo que puedes soportar emocionalmente en tu trabajo?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:1, text:"¿Has pensado en dejar la profesión veterinaria por el desgaste que te genera?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:1, text:"¿Te cuesta encontrar motivación para ir a trabajar al día siguiente?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:1, text:"¿Sientes que el trabajo veterinario te está afectando emocionalmente de forma negativa?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:2, text:"¿Tratas a los tutores de forma mecánica, sin involucrarte emocionalmente?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:2, text:"¿Te has mostrado brusco o impaciente con un tutor que solo necesitaba información?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:2, text:"¿Has culpado a un colega en público por un error durante un procedimiento?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:2, text:"¿Evitas interactuar con tutores o colegas porque te sientes irritado?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:2, text:"¿Has hablado negativamente de otro veterinario frente a un tutor?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:2, text:"¿Te duele al comunicar decisiones difíciles como una eutanasia?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:2, text:"¿Sientes que los tutores exigentes son un problema?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:3, text:"¿Sientes que tu trabajo no es valorado por los clientes ni por la comunidad?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:3, text:"¿Crees que estás estancado profesionalmente a pesar de todo tu esfuerzo?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:3, text:"¿Te resulta difícil sentir satisfacción u orgullo en tu trabajo diario?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:3, text:"¿Te frustras cuando te comparas con colegas que parecen más exitosos?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:3, text:"¿Sientes que las metas que tienes para tu carrera siguen muy lejos de alcanzar?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:3, text:"¿Crees que tu impacto en salud pública (Una Salud) no es reconocido ni valorado?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:3, text:"¿Has pensado que elegiste la profesión equivocada por falta de reconocimiento?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:3, text:"¿Sientes que trabajas mucho pero los resultados financieros no reflejan ese esfuerzo?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:3, text:"¿Presentas con frecuencia dolores de cabeza, musculares o molestias digestivas sin causa clara?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:3, text:"¿Tu calidad de sueño ha empeorado como consecuencia del estrés del trabajo?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:3, text:"¿Tu apetito ha cambiado (comer de más o de menos) asociado al estrés laboral?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:3, text:"¿Sientes que tu cuerpo ya no responde igual que antes durante la jornada laboral?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:3, text:"¿Tienes dificultades para mantener energía constante a lo largo del día?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:4, text:"¿Sientes culpa o incomodidad al cobrar el precio real de tus servicios profesionales?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:4, text:"¿Has aplicado descuentos no justificados por presión emocional del tutor?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:4, text:"¿Evitas hablar de dinero con los tutores porque te genera ansiedad o conflicto?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:4, text:"¿Crees que cobrar bien por tu trabajo entra en conflicto con tu vocación?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:4, text:"¿Has dejado de cobrar servicios realizados para evitar conflicto con el tutor?", opts:[
+    {l:"Nunca",p:0},{l:"Rara vez",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:4, text:"¿Sientes que los precios que cobras no reflejan el valor real de tu trabajo?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:4, text:"¿Has sentido que nada va a mejorar sin importar cuánto te esfuerces?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:4, text:"¿Has experimentado un vacío emocional profundo que se prolonga por días?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:4, text:"¿Has sentido que las personas a tu alrededor estarían mejor sin ti?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]},
+  {dim:4, text:"En momentos de estrés extremo, ¿has tenido pensamientos o ideación suicida, sin llegar a cometer el acto?", opts:[
+    {l:"Nunca",p:0},{l:"A veces",p:1},{l:"Frecuentemente",p:2},{l:"Siempre",p:3}]}
+];
+
+// ────────────────────────────────────────────────────────────────
+//  STATE
+// ────────────────────────────────────────────────────────────────
+const ans = new Array(41).fill(null); // answer index per question
+let startTime = null;
+
+// ────────────────────────────────────────────────────────────────
+//  RENDER QUESTIONS
+// ────────────────────────────────────────────────────────────────
+function renderBlock(containerId, from, to) {
+  const el = document.getElementById(containerId);
+  let html = '';
+  for (let i = from; i <= to; i++) {
+    const q = QS[i];
+    html += `<div class="q-card" id="qcard-${i}">
+      <div class="q-num">Pregunta ${i+1} de 41</div>
+      <div class="q-text">${q.text}</div>
+      <div class="q-opts">`;
+    q.opts.forEach((o, j) => {
+      html += `<div class="q-opt">
+        <input type="radio" name="q${i}" id="q${i}o${j}" value="${j}" onchange="selectAns(${i},${j})">
+        <label for="q${i}o${j}">${o.l}</label>
+      </div>`;
+    });
+    html += `</div></div>`;
+  }
+  el.innerHTML = html;
+}
+
+// Block ranges per step
+const STEP_RANGES = {1:[0,10], 2:[11,17], 3:[18,30], 4:[31,40]};
+const STEP_BASE_PCT = {1:0, 2:27, 3:44, 4:76};
+
+function selectAns(qi, oi) {
+  ans[qi] = oi;
+  document.getElementById('qcard-'+qi).classList.add('answered');
+
+  // Update dynamic progress bar
+  for (const [step, [from, to]] of Object.entries(STEP_RANGES)) {
+    const el = document.getElementById('step-'+step);
+    if (el && el.classList.contains('active')) {
+      const total = to - from + 1;
+      const done  = ans.slice(from, to+1).filter(a => a !== null).length;
+      const base  = STEP_BASE_PCT[step];
+      const range = (step == 4) ? 24 : (step == 3 ? 32 : (step == 2 ? 17 : 27));
+      const pct   = base + Math.round((done/total)*range);
+      const bar   = document.getElementById('pbar-'+step);
+      const lbl   = document.getElementById('pct-'+step);
+      if (bar) bar.style.width = pct + '%';
+      if (lbl) lbl.textContent = done + ' / ' + total;
+    }
+  }
+
+  // Auto-scroll to next unanswered question
+  const [from, to] = (() => {
+    for (const [s, r] of Object.entries(STEP_RANGES)) {
+      if (qi >= r[0] && qi <= r[1]) return r;
+    }
+    return [0, 0];
+  })();
+  for (let i = qi + 1; i <= to; i++) {
+    if (ans[i] === null) {
+      setTimeout(() => {
+        document.getElementById('qcard-'+i).scrollIntoView({behavior:'smooth', block:'center'});
+      }, 150);
+      break;
+    }
+  }
+}
+
+// Restore from localStorage if available
+function restoreProgress() {
+  try {
+    const saved = localStorage.getItem('iscore_progress');
+    if (!saved) return;
+    const data = JSON.parse(saved);
+    if (!data.ans || !Array.isArray(data.ans) || data.ans.length !== 41) return;
+    data.ans.forEach((v, i) => {
+      if (v !== null) {
+        ans[i] = v;
+        const radio = document.querySelector(`input[name="q${i}"][value="${v}"]`);
+        if (radio) { radio.checked = true; radio.dispatchEvent(new Event('change')); }
+      }
+    });
+    if (data.nombre) document.getElementById('f-nombre').value = data.nombre;
+    if (data.email)  document.getElementById('f-email').value  = data.email;
+    if (data.pais)   document.getElementById('f-pais').value   = data.pais;
+    if (data.telefono) document.getElementById('f-telefono').value = data.telefono;
+    if (data.tiempo) document.getElementById('f-tiempo').value = data.tiempo;
+  } catch(e) {}
+}
+
+function saveProgress() {
+  try {
+    const data = {
+      ans: [...ans],
+      nombre: document.getElementById('f-nombre').value,
+      email:  document.getElementById('f-email').value,
+      pais:   document.getElementById('f-pais').value,
+      telefono: document.getElementById('f-telefono').value,
+      tiempo: document.getElementById('f-tiempo').value,
+      ts: Date.now()
+    };
+    localStorage.setItem('iscore_progress', JSON.stringify(data));
+  } catch(e) {}
+}
+
+// Render all blocks on load
+renderBlock('qs-0-10',  0, 10);
+renderBlock('qs-11-17', 11, 17);
+renderBlock('qs-18-30', 18, 30);
+renderBlock('qs-31-40', 31, 40);
+
+// ────────────────────────────────────────────────────────────────
+//  NAVIGATION
+// ────────────────────────────────────────────────────────────────
+function showStep(n) {
+  document.querySelectorAll('.test-step').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById('step-' + n) || document.getElementById('step-loader');
+  if (el) el.classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function showToast(msg, type='info', ms=3500) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast ' + type + ' show';
+  setTimeout(() => t.classList.remove('show'), ms);
+}
+
+function closeCrisisModal() {
+  document.getElementById('crisisModal').style.display = 'none';
+  showCrisisShown = true;
+  renderResultFn();
+}
+
+let renderResultFn = null;
+let showCrisisShown = false;
+
+function goNext(step) {
+  if (step === 0) {
+    const nm = document.getElementById('f-nombre').value.trim();
+    const em = document.getElementById('f-email').value.trim();
+    const pa = document.getElementById('f-pais').value;
+    const consent = document.getElementById('f-consent').checked;
+    if (!nm || !em || !pa || !consent) {
+      document.getElementById('val-0').style.display = 'block'; return;
+    }
+    document.getElementById('val-0').style.display = 'none';
+    startTime = Date.now();
+    showStep(1); return;
+  }
+
+  const [from, to] = STEP_RANGES[step];
+  for (let i = from; i <= to; i++) {
+    if (ans[i] === null) {
+      document.getElementById('val-'+step).style.display = 'block';
+      document.getElementById('qcard-'+i).scrollIntoView({behavior:'smooth', block:'center'});
+      return;
+    }
+  }
+  document.getElementById('val-'+step).style.display = 'none';
+  saveProgress();
+  showStep(step + 1);
+}
+
+function goPrev(step) { showStep(step - 1); }
+
+// ────────────────────────────────────────────────────────────────
+//  SCORING
+// ────────────────────────────────────────────────────────────────
+function calcScore() {
+  // dims: conciencia(Q1-3,idx0-2), agotamento(Q4-11,idx3-10),
+  // despersonalizacion(Q12-18,idx11-17), logro+fisico(Q19-31,idx18-30),
+  // dinero+crisis(Q32-41,idx31-40)
+  let total = 0;
+  const dims = {conciencia:0, agotamiento:0, despersonalizacion:0, logro:0, dinero:0};
+  for (let i = 0; i < 41; i++) {
+    const val = ans[i] !== null ? QS[i].opts[ans[i]].p : 0;
+    if (i <= 2)  dims.conciencia      += ans[i] !== null ? ans[i] : 0;
+    else if (i <= 10) { dims.agotamiento      += val; total += val; }
+    else if (i <= 17) { dims.despersonalizacion += val; total += val; }
+    else if (i <= 30) { dims.logro             += val; total += val; }
+    else              { dims.dinero            += val; total += val; }
+  }
+  return { total, dims };
+}
+
+function getLevel(p) {
+  if (p <= 25) return {nivel:'Bajo',   cls:'bajo',   color:'#22c55e'};
+  if (p <= 50) return {nivel:'Moderado',cls:'moderado',color:'#f59e0b'};
+  if (p <= 65) return {nivel:'Alto',   cls:'alto',   color:'#f97316'};
+  return              {nivel:'Crítico', cls:'critico', color:'#ef4444'};
+}
+
+function fmtTime(ms) {
+  const s = Math.round(ms/1000);
+  const m = Math.floor(s/60), sec = s%60;
+  return `${m}m ${sec}s`;
+}
+
+// ────────────────────────────────────────────────────────────────
+//  SUBMIT
+// ────────────────────────────────────────────────────────────────
+async function submitTest() {
+  // Final validation
+  for (let i = 31; i <= 40; i++) {
+    if (ans[i] === null) {
+      document.getElementById('val-4').style.display = 'block';
+      document.getElementById('qcard-'+i).scrollIntoView({behavior:'smooth', block:'center'});
+      return;
+    }
+  }
+  document.getElementById('val-4').style.display = 'none';
+
+  // Rate limiting: block re-submit within 30s
+  const lastSubmit = parseInt(localStorage.getItem('iscore_last_submit') || '0');
+  if (Date.now() - lastSubmit < 30000) {
+    showToast('Ya enviaste recientemente. Espera unos segundos.', 'err');
+    return;
+  }
+  localStorage.setItem('iscore_last_submit', Date.now());
+  document.getElementById('btn-submit').disabled = true;
+
+  showStep('loader');
+
+  const {total, dims} = calcScore();
+  const level = getLevel(total);
+  const elapsed = startTime ? fmtTime(Date.now() - startTime) : null;
+
+  const nombre   = document.getElementById('f-nombre').value.trim();
+  const email    = document.getElementById('f-email').value.trim();
+  const telefono = document.getElementById('f-telefono').value.trim();
+  const pais     = document.getElementById('f-pais').value;
+  const tiempo   = document.getElementById('f-tiempo').value.trim();
+  const perfils  = ['f-estudiante','f-profesional','f-especialista']
+    .filter(id => document.getElementById(id).checked)
+    .map(id => document.getElementById(id).value);
+  const perfil   = perfils.length ? perfils.join('+') : null;
+
+  const payload = {
+    nombre, email,
+    telefono: telefono || null,
+    pais, perfil,
+    tiempo_ejerciendo: tiempo || null,
+    puntaje: total,
+    nivel_desgaste: level.nivel,
+    dim_conciencia: dims.conciencia,
+    dim_agotamiento: dims.agotamiento,
+    dim_despersonalizacion: dims.despersonalizacion,
+    dim_logro: dims.logro,
+    dim_dinero: dims.dinero,
+    tiempo_completacion: elapsed
+  };
+
+  // Upsert by email (no duplicates)
+  let supaOk = false;
+  try {
+    const res = await fetch(SUPA_URL + '/rest/v1/iscore_responses', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPA_KEY,
+        'Authorization': 'Bearer ' + SUPA_KEY,
+        'Prefer': 'return=minimal,resolution=merge-duplicates',
+        'on_conflict': 'email'
+      },
+      body: JSON.stringify(payload)
+    });
+    supaOk = res.ok || res.status === 201 || res.status === 204;
+  } catch(e) { console.warn('Supabase:', e); }
+
+  // Send email
+  let emailOk = false;
+  try {
+    const emailMsg = buildEmailMsg(nombre, total, level.nivel, dims, elapsed);
+    const res = await fetch(WP_EMAIL, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'X-VC-Key': WP_KEY},
+      body: JSON.stringify({
+        to: email,
+        subject: `Tu iScore LATAM: ${total} pts — Nivel ${level.nivel} | VetConnect Pro`,
+        message: emailMsg
+      })
+    });
+    const d = await res.json().catch(() => ({}));
+    emailOk = d.success === true;
+  } catch(e) { console.warn('Email:', e); }
+
+  await new Promise(r => setTimeout(r, 1200));
+
+  // Crisis detection: Q39 (idx 39) or Q40 (idx 40) >= 2 (Frecuentemente/Siempre)
+  const crisisScore = (ans[39] || 0) + (ans[40] || 0);
+  const needsCrisis = crisisScore >= 2 && !showCrisisShown;
+
+  // Prepare render function
+  renderResultFn = () => {
+    renderResult(nombre, total, level, dims, elapsed, emailOk);
+    // Clear saved progress on successful completion
+    localStorage.removeItem('iscore_progress');
+  };
+
+  if (needsCrisis) {
+    document.getElementById('crisisModal').style.display = 'flex';
+  } else {
+    renderResultFn();
+  }
+}
+
+// ────────────────────────────────────────────────────────────────
+//  RENDER RESULT
+// ────────────────────────────────────────────────────────────────
+function renderResult(nombre, total, level, dims, elapsed, emailOk) {
+  const circle = document.getElementById('res-score-circle');
+  circle.style.borderColor = level.color;
+  document.getElementById('res-score-num').textContent = total;
+
+  const badge = document.getElementById('res-nivel-badge');
+  badge.textContent = level.nivel;
+  badge.className = 'result-nivel nivel-' + level.cls;
+
+  const titulosMap = {
+    bajo:     `${nombre.split(' ')[0]}, tu desgaste es manejable — actúa ahora antes de que avance`,
+    moderado: `${nombre.split(' ')[0]}, ya estás sintiendo el peso — es el momento de actuar`,
+    alto:     `${nombre.split(' ')[0]}, el desgaste es significativo — necesitas un plan real`,
+    critico:  `${nombre.split(' ')[0]}, esto es una señal de alerta — no lo dejes pasar más`
+  };
+  const subtitulosMap = {
+    bajo:     'Tu puntaje indica que tienes conciencia del problema y aún tienes reservas. Con las herramientas correctas, puedes fortalecer tu bienestar de manera sostenible.',
+    moderado: 'Estás en la zona de riesgo real. Muchos veterinarios en este rango son los que más tarde desarrollan agotamiento severo precisamente porque siguen ignorando las señales.',
+    alto:     'Tu puntaje refleja un desgaste activo en múltiples dimensiones. Esto afecta tu desempeño clínico, tus relaciones y tu salud. Requiere intervención estructurada.',
+    critico:  'Tu puntaje está en rango de crisis. Las preguntas de alerta indican que el impacto ya está en tu bienestar más profundo. Es fundamental buscar apoyo de inmediato.'
+  };
+  document.getElementById('res-titulo').textContent = titulosMap[level.cls];
+  document.getElementById('res-subtitulo').textContent = subtitulosMap[level.cls];
+
+  // Dimension bars
+  const dimConfig = [
+    {key:'agotamiento',    label:'Agotamiento emocional',   max:24, color:'var(--purple)'},
+    {key:'despersonalizacion', label:'Despersonalización',  max:21, color:'var(--cyan)'},
+    {key:'logro',          label:'Logro profesional',       max:39, color:'var(--gold)'},
+    {key:'dinero',         label:'Dinero y crisis',         max:30, color:'#f97316'}
+  ];
+  let dimsHtml = '';
+  dimConfig.forEach(d => {
+    const pct = Math.round((dims[d.key] / d.max) * 100);
+    const lv = pct <= 33 ? 'Bajo' : pct <= 66 ? 'Moderado' : 'Alto';
+    dimsHtml += `<div class="dim-card">
+      <div class="dim-card-name">${d.label}</div>
+      <div class="dim-bar-outer"><div class="dim-bar-inner" style="width:${pct}%;background:${d.color}"></div></div>
+      <div class="dim-card-val">${dims[d.key]} / ${d.max} — ${lv}</div>
+    </div>`;
+  });
+  document.getElementById('res-dims').innerHTML = dimsHtml;
+
+  // Recommendation block
+  const recsMap = {
+    bajo: {
+      title: 'Tu siguiente paso: fortalecer y prevenir',
+      body: 'Estás en el mejor momento para intervenir: antes de que el desgaste se instale. Aprovecha los recursos gratuitos y considera el programa de mentoría si quieres un camino estructurado.',
+      list: ['Descarga el PDF gratuito de rentabilidad clínica','Mira la masterclass de 45min sobre burnout en veterinarios','Únete a la comunidad VetConnect Pro LATAM']
+    },
+    moderado: {
+      title: 'Tu siguiente paso: salir de la zona de riesgo',
+      body: 'El nivel Moderado es el más engañoso: te sientes "bien" pero las señales están ahí. El 75% de los veterinarios que llegan al nivel Crítico pasaron por este punto sin tomar acción. Tienes una ventana de oportunidad.',
+      list: ['Completa el mini-curso de 3 videos sobre bienestar veterinario','Descarga el PDF sobre manejo de clientes conflictivos','Agenda una llamada de diagnóstico gratuita con el equipo VetConnect']
+    },
+    alto: {
+      title: 'Tu siguiente paso: intervención real',
+      body: 'Con un iScore de nivel Alto, los cambios cosméticos no son suficientes. Necesitas un proceso estructurado que trabaje las 5 dimensiones de tu desgaste de manera simultánea. El programa Alfa está diseñado exactamente para esto.',
+      list: ['Accede inmediatamente a los recursos de emergencia en la sección Recursos','Revisa el Programa Alfa: está diseñado para tu nivel de iScore','Escribe a ivancho1am@gmail.com con asunto "Nivel Alto — Necesito apoyo"']
+    },
+    critico: {
+      title: 'Tu siguiente paso: no esperes más',
+      body: 'Las preguntas de alerta (Q40-Q41) en tu resultado indican que el desgaste ya está afectando tu bienestar emocional más profundo. Esto no es debilidad — es una señal que merece atención inmediata y apoyo profesional.',
+      list: ['Habla con alguien de confianza hoy — no mañana','Contacta directamente a ivancho1am@gmail.com con asunto "Nivel Crítico — Apoyo urgente"','Si tienes pensamientos de hacerte daño, contacta una línea de crisis en tu país']
+    }
+  };
+  const rec = recsMap[level.cls];
+  document.getElementById('res-rec-title').textContent = rec.title;
+  document.getElementById('res-rec-body').textContent = rec.body;
+  document.getElementById('res-rec-list').innerHTML = rec.list.map(l => `<li>${l}</li>`).join('');
+
+  const ctaMap = {
+    bajo:    `<a href="recursos.html" class="btn-cta-prim">Ver Recursos Gratuitos</a><a href="programa.html" class="btn-cta-sec">Conocer el Programa</a>`,
+    moderado:`<a href="programa.html" class="btn-cta-prim">Ver el Programa Alfa</a><a href="recursos.html" class="btn-cta-sec">Recursos Gratuitos</a>`,
+    alto:    `<a href="programa.html" class="btn-cta-prim">Quiero Salir del Desgaste</a><a href="mailto:ivancho1am@gmail.com?subject=Nivel%20Alto%20-%20Necesito%20apoyo" class="btn-cta-sec">Escribir a Iván</a>`,
+    critico: `<a href="mailto:ivancho1am@gmail.com?subject=Nivel%20Critico%20-%20Apoyo%20urgente" class="btn-cta-prim" style="background:linear-gradient(135deg,#ef4444,#dc2626)">Contactar Ahora</a><a href="programa.html" class="btn-cta-sec">Ver el Programa</a>`
+  };
+  document.getElementById('res-ctas').innerHTML = ctaMap[level.cls];
+
+  const oldTs = document.getElementById('res-timestamp');
+  if (oldTs) oldTs.remove();
+  if (elapsed) {
+    const ts = document.createElement('p');
+    ts.id = 'res-timestamp';
+    ts.style.cssText = 'color:var(--muted2);font-size:.78rem;margin-top:6px;';
+    ts.textContent = `Completado en ${elapsed} · ${new Date().toLocaleDateString('es-CO',{day:'numeric',month:'long',year:'numeric'})}`;
+    document.getElementById('res-subtitulo').insertAdjacentElement('afterend', ts);
+  }
+
+  showStep('result');
+
+  // Toast feedback
+  setTimeout(() => {
+    if (emailOk) {
+      showToast('✅ Resultado guardado. Revisa tu correo electrónico.', 'ok', 5000);
+    } else {
+      showToast('Resultado calculado. El email podría tardar unos minutos.', 'info', 5000);
+    }
+  }, 600);
+}
+
+// ────────────────────────────────────────────────────────────────
+//  EMAIL BODY
+// ────────────────────────────────────────────────────────────────
+function buildEmailMsg(nombre, total, nivel, dims, elapsed) {
+  const firstName = nombre.split(' ')[0];
+  return `Hola ${firstName},
+
+Gracias por completar el iScore LATAM — Test de Desgaste Profesional en Medicina Veterinaria.
+
+📊 TU RESULTADO:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Puntaje total: ${total} / 114 pts
+Nivel de desgaste: ${nivel}
+${elapsed ? `Tiempo de completación: ${elapsed}` : ''}
+
+📐 DESGLOSE POR DIMENSIONES:
+• Agotamiento emocional: ${dims.agotamiento} / 24
+• Despersonalización: ${dims.despersonalizacion} / 21
+• Logro profesional: ${dims.logro} / 39
+• Dinero y señales de crisis: ${dims.dinero} / 30
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Este resultado fue desarrollado por el Dr. Iván Durán, médico veterinario y fundador de VetConnect Pro LATAM, basado en más de 40 respuestas reales de veterinarios en LATAM.
+
+Tu resultado completo y los recursos recomendados para tu nivel están disponibles en:
+https://vetconnect.pro (próximamente)
+
+Si tienes preguntas o necesitas apoyo, escríbeme directamente:
+ivancho1am@gmail.com
+
+Con respeto y compromiso,
+Dr. Iván Durán
+VetConnect Pro LATAM`;
+}
+
+// ────────────────────────────────────────────────────────────────
+//  INIT
+// ────────────────────────────────────────────────────────────────
+// Restore any saved in-progress answers
+restoreProgress();
+
+// Save answers on page unload to preserve progress
+window.addEventListener('beforeunload', () => {
+  const hasAns = ans.some(a => a !== null);
+  if (hasAns) saveProgress();
+});
+
+// NAV scroll
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('nav--scrolled', window.scrollY > 40);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>¿Quiero dejar la veterinaria? El pensamiento que el sistema genera — y cómo procesarlo | VetConnect Pro LATAM</title>
+  <meta name="description" content="Querer abandonar la profesión no es debilidad ni ingratitud. Es la respuesta lógica de un sistema nervioso en modo supervivencia. Los datos preliminares del iScore LATAM confirman lo que muchos no se atreven a decir." />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="es_LA" />
+  <meta property="og:site_name" content="VetConnect Pro LATAM" />
+  <meta property="og:url" content="https://vetconnectpro.vitalvetcrv.com.co/articulo-5.html" />
+  <meta property="og:title" content="¿Quiero dejar la veterinaria? El pensamiento que el sistema genera — y cómo procesarlo" />
+  <meta property="og:description" content="La brecha entre lo que la carrera prometía y la realidad clínica genera disonancia cognitiva profunda. Datos del iScore LATAM y herramientas para procesarlo." />
+  <meta property="og:image" content="https://vetconnectpro.vitalvetcrv.com.co/logos/og-preview.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="¿Quiero dejar la veterinaria? El pensamiento que el sistema genera" />
+  <meta name="twitter:description" content="No es debilidad. Es la respuesta lógica de un sistema nervioso en modo supervivencia." />
+  <meta name="twitter:image" content="https://vetconnectpro.vitalvetcrv.com.co/logos/og-preview.jpg" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="vetconnect.css" />
+  <style>
+    /* ── ARTICLE-SPECIFIC STYLES ── */
+    .art-hero {
+      position: relative;
+      padding: 160px 60px 100px;
+      background-image:
+        linear-gradient(rgba(123,47,190,0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(123,47,190,0.045) 1px, transparent 1px);
+      background-size: 64px 64px;
+      overflow: hidden;
+    }
+    .art-hero .orb-purple { top: -100px; right: -60px; animation: drift2 14s ease-in-out infinite alternate; }
+    .art-hero .orb-cyan   { bottom: -80px; left: 160px; animation: drift1 18s ease-in-out infinite alternate; }
+    .art-hero-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 2; }
+    .art-category-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(123,47,190,0.12); border: 1px solid rgba(123,47,190,0.35);
+      padding: 6px 16px; border-radius: 50px; margin-bottom: 22px;
+      font-size: 12px; font-weight: 600; color: var(--purple-l);
+    }
+    .art-hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(30px, 4.2vw, 54px);
+      font-weight: 800; line-height: 1.1; letter-spacing: -1.5px;
+      margin-bottom: 24px;
+    }
+    .art-lead {
+      font-size: 18px; line-height: 1.78; color: var(--muted2);
+      max-width: 720px; margin-bottom: 32px;
+    }
+    .art-meta {
+      display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+      font-size: 13px; color: var(--muted); padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .art-back {
+      display: inline-flex; align-items: center; gap: 7px;
+      color: var(--cyan); text-decoration: none; font-size: 13.5px; font-weight: 600;
+      transition: gap 0.2s;
+    }
+    .art-back:hover { gap: 11px; }
+
+    /* ── CHART ── */
+    .chart-wrap {
+      max-width: 700px; margin: 0 auto;
+      background: rgba(255,255,255,0.80);
+      border: 1px solid rgba(12,12,38,.09);
+      border-radius: 20px; padding: 36px 32px;
+    }
+    .chart-wrap canvas { max-height: 320px; }
+    .chart-caption {
+      text-align: center; margin-top: 18px;
+      font-size: 13px; color: var(--muted2); line-height: 1.6;
+    }
+    .chart-insight {
+      max-width: 700px; margin: 18px auto 0;
+      background: rgba(123,47,190,0.07); border: 1px solid rgba(123,47,190,0.22);
+      border-radius: 14px; padding: 18px 22px;
+      font-size: 14px; color: var(--muted2); line-height: 1.7;
+    }
+    .chart-insight strong { color: #0C0C26; }
+
+    /* ── CONTENT BLOCKS ── */
+    .art-body { max-width: 860px; margin: 0 auto; }
+    .art-body h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(22px, 2.8vw, 32px); font-weight: 800;
+      letter-spacing: -0.8px; margin-bottom: 18px; line-height: 1.2;
+    }
+    .art-body p { font-size: 15.5px; line-height: 1.85; margin-bottom: 16px; color: var(--muted2); }
+    .art-body p strong { color: var(--text); }
+    .art-body ul { margin: 16px 0 20px 0; display: flex; flex-direction: column; gap: 10px; }
+    .art-body ul li {
+      font-size: 15px; color: var(--muted2); line-height: 1.7;
+      padding-left: 22px; position: relative;
+    }
+    .art-body ul li::before {
+      content: '→'; position: absolute; left: 0;
+      color: var(--cyan); font-weight: 700; font-size: 13px;
+    }
+    .art-body ul li strong { color: var(--text); }
+
+    /* ── QUOTE ── */
+    .art-quote {
+      border-left: 3px solid var(--purple-l);
+      padding: 16px 22px;
+      background: rgba(123,47,190,0.07); border-radius: 0 14px 14px 0;
+      margin: 24px 0; font-size: 16.5px; font-style: italic;
+      color: var(--text); line-height: 1.7;
+    }
+    .sl .art-quote {
+      background: rgba(123,47,190,0.07); color: #0C0C26;
+      border-left-color: var(--purple);
+    }
+
+    /* ── GENDER GAP BOX ── */
+    .gap-box {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+      margin: 28px 0;
+    }
+    .gap-card {
+      border-radius: 18px; padding: 28px 22px; text-align: center;
+      border: 1px solid;
+    }
+    .gap-card.mujeres {
+      background: rgba(157,80,232,0.09); border-color: rgba(157,80,232,0.28);
+    }
+    .gap-card.hombres {
+      background: rgba(0,212,255,0.07); border-color: rgba(0,212,255,0.22);
+    }
+    .gap-num {
+      font-family: 'Space Grotesk', sans-serif; font-size: 52px; font-weight: 900;
+      letter-spacing: -2px; line-height: 1; display: block; margin-bottom: 6px;
+    }
+    .gap-card.mujeres .gap-num { color: var(--purple-l); }
+    .gap-card.hombres .gap-num { color: var(--cyan); }
+    .gap-label { font-size: 13px; color: var(--muted2); font-weight: 600; margin-bottom: 6px; display: block; }
+    .gap-sub { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+    /* ── BELIEF CARDS ── */
+    .belief-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 24px 0; }
+    .belief-card {
+      background: rgba(255,255,255,0.80); border: 1px solid rgba(12,12,38,.09);
+      border-radius: 16px; padding: 22px 20px;
+      border-left: 3px solid var(--purple);
+    }
+    .belief-card p { font-size: 14px; font-style: italic; color: #3A3A65; margin-bottom: 8px; line-height: 1.6; }
+    .belief-card span { font-size: 12px; color: var(--muted); display: block; }
+
+    /* ── DISTRESS BOX ── */
+    .distress-box {
+      background: linear-gradient(135deg, rgba(255,69,96,0.06), rgba(123,47,190,0.05));
+      border: 1px solid rgba(255,69,96,0.2); border-radius: 18px;
+      padding: 28px 26px; margin: 24px 0;
+    }
+    .distress-box h4 { font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 700; margin-bottom: 10px; color: #FF4560; }
+    .distress-box p { font-size: 14px; color: var(--muted2); line-height: 1.75; margin: 0; }
+    .distress-box p strong { color: var(--text); }
+
+    /* ── TOOL CARDS ── */
+    .tool-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-top: 28px; }
+    .tool-card {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 20px; padding: 28px 22px; position: relative; overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
+    .tool-card:hover { border-color: rgba(123,47,190,0.45); transform: translateY(-6px); box-shadow: 0 20px 56px rgba(0,0,0,0.3); }
+    .tool-top { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--purple), var(--cyan)); }
+    .tool-icon { font-size: 28px; margin-bottom: 14px; display: block; }
+    .tool-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 9px; }
+    .tool-card p { font-size: 13px; color: var(--muted); line-height: 1.7; }
+    .tool-tag {
+      display: inline-block; margin-top: 12px;
+      background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.25);
+      color: var(--cyan); font-size: 10.5px; font-weight: 600;
+      padding: 3px 11px; border-radius: 50px;
+    }
+
+    /* ── BIBLIOGRAPHY ── */
+    .biblio-list { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
+    .biblio-item {
+      font-size: 13px; line-height: 1.7; color: var(--muted2);
+      padding-left: 18px; position: relative;
+    }
+    .biblio-item::before { content: '—'; position: absolute; left: 0; color: var(--purple); font-weight: 700; }
+    .note-box {
+      margin-top: 28px; padding: 18px 22px;
+      background: rgba(123,47,190,0.07); border: 1px solid rgba(123,47,190,0.2);
+      border-radius: 14px; font-size: 12.5px; color: var(--muted2); line-height: 1.7;
+    }
+    .note-box strong { color: var(--text); display: block; margin-bottom: 4px; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; }
+    .sl .note-box strong { color: #0C0C26; }
+
+    /* ── FOOTER ── */
+    .art-footer {
+      background: var(--bg2); border-top: 1px solid var(--border);
+      padding: 40px 60px 30px; text-align: center;
+    }
+    .art-footer p { font-size: 13px; color: var(--muted); }
+    .art-footer a { color: var(--cyan); text-decoration: none; }
+    .art-footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 1024px) {
+      .art-hero { padding: 120px 24px 70px; }
+      .tool-grid { grid-template-columns: 1fr; }
+      .belief-grid, .gap-box { grid-template-columns: 1fr; }
+      .chart-wrap { padding: 24px 18px; }
+      .art-footer { padding: 30px 24px 24px; }
+    }
+    @media (max-width: 640px) {
+      .art-hero h1 { font-size: 26px; }
+      .art-lead { font-size: 16px; }
+      .gap-num { font-size: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="noise-overlay" aria-hidden="true"></div>
+
+<!-- ═══ NAV ═══ -->
+<nav id="nav">
+  <a href="index.html"><img src="logos/1.svg" alt="VetConnect Pro LATAM" class="nav-logo" /></a>
+  <ul class="nav-links">
+    <li><a href="test.html">Test Score</a></li>
+    <li><a href="programa.html">Programa</a></li>
+    <li><a href="recursos.html">Recursos</a></li>
+    <li><a href="metodologia.html">Metodología</a></li>
+    <li><a href="nosotros.html">Nosotros</a></li>
+  </ul>
+  <a href="programa.html" class="nav-cta">Ver Programa →</a>
+</nav>
+
+<!-- ═══ SECCIÓN 1: HERO (dark) ═══ -->
+<section class="art-hero">
+  <div class="orb orb-purple"></div>
+  <div class="orb orb-cyan"></div>
+
+  <div class="art-hero-inner">
+    <span class="eyebrow">VOCACIÓN · PROPÓSITO</span>
+    <div class="art-category-badge">💭 Desarrollo Personal</div>
+
+    <h1 class="fade-up">
+      ¿Quiero dejar la veterinaria?<br/>
+      El pensamiento que el sistema genera<br/>
+      — y <span class="grad-text">cómo procesarlo</span>
+    </h1>
+
+    <p class="art-lead fade-up">
+      Querer abandonar la profesión no es debilidad ni ingratitud. Es la respuesta lógica
+      de un sistema nervioso que lleva demasiado tiempo en modo supervivencia.
+      Los datos preliminares del iScore LATAM confirman lo que muchos no se atreven a decir en voz alta.
+    </p>
+
+    <div class="art-meta fade-up">
+      <span>🕒 Lectura: ~6 min</span>
+      <span>📊 Datos: iScore LATAM</span>
+      <span>🧠 PNL · Distress Moral · Vocación</span>
+      <a href="blog.html" class="art-back">← Volver al blog</a>
+    </div>
+  </div>
+</section>
+
+<div class="grad-divider"></div>
+
+<!-- ═══ SECCIÓN 2: CHART + BRECHA DE GÉNERO (light) ═══ -->
+<section class="sl">
+  <div class="section-inner" style="padding-top:80px; padding-bottom:80px;">
+    <div class="art-body fade-up">
+      <span class="eyebrow">DATOS iSCORE LATAM</span>
+      <h2 class="section-title" style="margin-bottom:10px;">
+        La brecha que los datos<br/>
+        <span class="grad-text">no dejan ignorar</span>
+      </h2>
+      <p style="color:var(--muted2); font-size:15px; margin-bottom:28px;">
+        El iScore LATAM revela una diferencia de 6.5 puntos entre género femenino y masculino.
+        No es casualidad. Es el resultado de dos cargas profesionales distintas
+        operando en el mismo sistema.
+      </p>
+
+      <div class="chart-wrap">
+        <canvas id="chartGenero"></canvas>
+        <p class="chart-caption">
+          Puntaje promedio iScore LATAM por género. Escala 0–114 (mayor puntaje = mayor nivel de desgaste).<br/>
+          Datos exploratorios — muestra voluntaria.
+        </p>
+      </div>
+
+      <div class="chart-insight">
+        <strong>Interpretación:</strong> La diferencia de 6.5 puntos entre mujeres (41.8) y hombres (35.3)
+        no indica que las mujeres sean más vulnerables. Indica que cargan con una doble exigencia —
+        la profesional y la social — sin que el sistema les haya dado herramientas específicas para gestionarla.
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="grad-divider"></div>
+
+<!-- ═══ SECCIÓN 3: EL PROBLEMA (dark) ═══ -->
+<section>
+  <div class="section-inner">
+    <div class="art-body">
+      <span class="eyebrow fade-up">EL PROBLEMA SISTÉMICO</span>
+      <h2 class="fade-up">
+        La distancia entre lo que<br/>
+        <span class="grad-text">pensabas que sería</span> y lo que es
+      </h2>
+
+      <p class="fade-up">
+        La formación universitaria veterinaria está diseñada para crear profesionales técnicamente
+        sólidos. Pero también construye, de forma implícita, un perfil emocional muy específico:
+        <strong>alta vocación, alta sensibilidad, baja tolerancia a la decepción del sistema.</strong>
+      </p>
+
+      <p class="fade-up">
+        El resultado es una disonancia cognitiva profunda. La distancia entre "lo que pensaba que sería
+        ser veterinario" y "lo que es realmente ser veterinario en LATAM" genera frustración crónica
+        que — si no se procesa — se convierte en el pensamiento de abandono.
+      </p>
+
+      <h2 class="fade-up" style="margin-top:40px;">La brecha de género: datos que piden explicación</h2>
+
+      <div class="gap-box fade-up">
+        <div class="gap-card mujeres">
+          <span class="gap-num">41.8</span>
+          <span class="gap-label">Puntaje promedio — Mujeres</span>
+          <span class="gap-sub">Mayor nivel de desgaste reportado. Carga emocional profesional + expectativas sociales de cuidado y disponibilidad.</span>
+        </div>
+        <div class="gap-card hombres">
+          <span class="gap-num">35.3</span>
+          <span class="gap-label">Puntaje promedio — Hombres</span>
+          <span class="gap-sub">Menor nivel reportado, pero no exento. La presión económica y de autoridad clínica tiene su propio peso.</span>
+        </div>
+      </div>
+
+      <p class="fade-up">
+        Esta brecha de 6.5 puntos no es menor. Es la intersección de la carga emocional profesional
+        con las expectativas sociales de cuidado y disponibilidad que recaen desproporcionadamente
+        sobre las veterinarias — desde las consultas que "necesitan más tiempo" hasta la gestión
+        emocional de tutores angustiados.
+      </p>
+
+      <div class="distress-box fade-up">
+        <h4>Distress Moral (Jameton, 1984)</h4>
+        <p>
+          Es la tensión entre lo que el veterinario <strong>sabe que debería hacer</strong>
+          y lo que <strong>puede hacer</strong> dados los recursos, el sistema y los clientes.
+          Cuando esa brecha es crónica y no tiene salida, el pensamiento de abandono no es irracionalidad —
+          es la respuesta más lógica del sistema nervioso.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="grad-divider"></div>
+
+<!-- ═══ SECCIÓN 4: CREENCIAS (light) ═══ -->
+<section class="sl">
+  <div class="section-inner" style="padding-top:80px; padding-bottom:80px;">
+    <div class="art-body">
+      <span class="eyebrow fade-up">LAS CREENCIAS QUE ATRAPAN</span>
+      <h2 class="section-title fade-up">
+        Lo que el sistema te hizo<br/>
+        <span class="grad-text">creer sobre ti</span>
+      </h2>
+
+      <p class="fade-up" style="color:var(--muted2); font-size:15.5px; margin-bottom:28px;">
+        Estas no son verdades sobre tu capacidad. Son narrativas que el sistema genera
+        cuando sus demandas superan sus recursos. Identificarlas es el primer acto de desintoxicación.
+      </p>
+
+      <div class="belief-grid stagger">
+        <div class="belief-card fade-up">
+          <p>"Si me rindo soy un fracaso."</p>
+          <span>Identidad fusionada con la profesión — sin distinción entre ser y hacer</span>
+        </div>
+        <div class="belief-card fade-up">
+          <p>"No puedo fallarle a los animales."</p>
+          <span>El rescatador sobreexigido — responsabilidad sin límites sostenibles</span>
+        </div>
+        <div class="belief-card fade-up">
+          <p>"Pensé que amarlos era suficiente."</p>
+          <span>La vocación sin herramientas — amor como sustituto de estrategia</span>
+        </div>
+        <div class="belief-card fade-up">
+          <p>"No sirvo para esto."</p>
+          <span>Atribución interna de un problema sistémico — la peor trampa cognitiva</span>
+        </div>
+      </div>
+
+      <div class="art-quote fade-up" style="margin-top:32px;">
+        "El problema no es que no sirvas para esto. El problema es que nadie te enseñó
+        cómo sostenerlo a largo plazo — y llevas años haciéndolo solo."
+      </div>
+
+      <p class="fade-up" style="color:var(--muted2);">
+        Mastenbroek et al. (2015) documentaron que el bienestar emocional de estudiantes veterinarios
+        se deteriora significativamente a lo largo de la carrera — no por falta de vocación,
+        sino por ausencia de herramientas de autorregulación. El sistema forma clínicos,
+        no sostenibilidad profesional.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="grad-divider"></div>
+
+<!-- ═══ SECCIÓN 5: HERRAMIENTAS (dark) ═══ -->
+<section>
+  <div class="section-inner">
+    <div class="art-body">
+      <span class="eyebrow fade-up">LAS HERRAMIENTAS</span>
+      <h2 class="fade-up">
+        Procesar el pensamiento de abandono<br/>
+        sin <span class="grad-text">ignorarlo ni rendirte</span>
+      </h2>
+
+      <p class="fade-up">
+        Querer dejar no significa que debas dejar. Pero tampoco significa que debas ignorar
+        la señal. El pensamiento de abandono es información — y merece ser procesado con
+        herramientas reales, no con culpa.
+      </p>
+
+      <div class="tool-grid stagger">
+        <div class="tool-card fade-up">
+          <div class="tool-top"></div>
+          <span class="tool-icon">🗺️</span>
+          <h3>Clarificación de valores (PNL)</h3>
+          <p>
+            La línea del tiempo de Bandler y Grinder (1975) permite distinguir
+            qué parte del "yo veterinario" es vocación genuina y qué parte es expectativa
+            heredada. Ejercicio: escribe 3 momentos en que la profesión te dio sentido —
+            antes de que el sistema te agotara.
+          </p>
+          <span class="tool-tag">PNL · Bandler & Grinder 1975</span>
+        </div>
+
+        <div class="tool-card fade-up">
+          <div class="tool-top"></div>
+          <span class="tool-icon">⚖️</span>
+          <h3>Vocación vs. martirio</h3>
+          <p>
+            La vocación es el "para qué". El martirio es cuando el "para qué"
+            se usa para justificar el autosacrificio crónico. Aprender a distinguir
+            ambos — con la ayuda de Rollin (2011) sobre ética veterinaria y bienestar —
+            es lo que permite rediseñar el rol sin abandonarlo.
+          </p>
+          <span class="tool-tag">Ética · Rollin 2011</span>
+        </div>
+
+        <div class="tool-card fade-up">
+          <div class="tool-top"></div>
+          <span class="tool-icon">🤲</span>
+          <h3>Grupos de soporte entre pares</h3>
+          <p>
+            Nett et al. (2015) encontraron que el aislamiento profesional es uno de los
+            predictores más fuertes de depresión en veterinarios. Los grupos de pares
+            reducen el distress moral al normalizar la experiencia y crear red de
+            recursos compartidos — la base de la sostenibilidad profesional.
+          </p>
+          <span class="tool-tag">Bartram & Baldwin 2010</span>
+        </div>
+      </div>
+
+      <div class="art-quote fade-up" style="margin-top:40px;">
+        El límite emocional no es un acto de egoísmo. Es un acto de amor propio
+        y profesional — porque solo desde la integridad se puede servir bien.
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="grad-divider"></div>
+
+<!-- ═══ SECCIÓN 6: BIBLIOGRAFÍA (light) ═══ -->
+<section class="sl">
+  <div class="section-inner" style="padding-top:70px; padding-bottom:80px;">
+    <div class="art-body">
+      <span class="eyebrow fade-up">REFERENCIAS ACADÉMICAS</span>
+      <h2 class="section-title fade-up" style="font-size: clamp(22px, 2.5vw, 30px);">
+        Bibliografía
+      </h2>
+
+      <div class="biblio-list fade-up">
+        <div class="biblio-item">Jameton, A. (1984). <em>Nursing Practice: The Ethical Issues.</em> Prentice-Hall. [Concepto de distress moral — aplicado a profesiones sanitarias]</div>
+        <div class="biblio-item">Rollin, B.E. (2011). <em>Veterinary Ethics: Theory and Cases.</em> Wiley-Blackwell.</div>
+        <div class="biblio-item">Nett, R.J., Witte, T.K., Holzbauer, S.M., Elchos, B.L., Campagnolo, E.R., et al. (2015). <em>Risk factors for suicide, attitudes toward mental illness, and practice-related stressors among US veterinarians.</em> JAVMA, 247(8), 945–955.</div>
+        <div class="biblio-item">Bartram, D.J. & Baldwin, D.S. (2010). <em>Veterinary surgeons and suicide: a structured review of possible influences on increased risk.</em> Veterinary Record, 166(13), 388–397.</div>
+        <div class="biblio-item">Mastenbroek, N.J.J.M., Jaarsma, A.D.C., Demerouti, E., Muijtjens, A.M.M., Scherpbier, A.J.J.A. & van Beukelen, P. (2014). <em>Burnout and engagement, and its predictors in young veterinary professionals.</em> Veterinary Record, 174(6), 144.</div>
+        <div class="biblio-item">Bandler, R. & Grinder, J. (1975). <em>The Structure of Magic I: A Book About Language and Therapy.</em> Science and Behavior Books.</div>
+      </div>
+
+      <div class="note-box fade-up">
+        <strong>Nota metodológica</strong>
+        Datos preliminares del instrumento iScore LATAM, adaptado de la escala de Maslach (1981)
+        para medicina veterinaria clínica de mascotas en LATAM. Muestra voluntaria, carácter exploratorio.
+        Las diferencias por género presentadas son descriptivas y no implican causalidad ni representatividad
+        estadística de la población veterinaria latinoamericana.
+      </div>
+
+      <div style="margin-top:36px; text-align:center;">
+        <a href="blog.html" class="btn-primary" style="background: linear-gradient(135deg, var(--purple), var(--purple-l));">
+          ← Volver al Blog
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="art-footer" style="background: var(--bg2); border-top: 1px solid var(--border); padding: 40px 60px 30px; text-align: center;">
+  <p style="font-size:13px; color:var(--muted);">© 2025 VetConnect Pro LATAM · <a href="blog.html" style="color:var(--cyan); text-decoration:none;">Blog</a> · <a href="programa.html" style="color:var(--cyan); text-decoration:none;">Programa Alfa</a> · <a href="nosotros.html" style="color:var(--cyan); text-decoration:none;">Nosotros</a></p>
+  <p style="margin-top:8px; font-size:12px; color:var(--muted);">Contenido con fines educativos. No sustituye orientación clínica ni psicológica profesional.</p>
+</footer>
+
+<!-- ═══ CHART.JS ═══ -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  // ── CHART: BRECHA DE GÉNERO ──
+  const ctxGenero = document.getElementById('chartGenero').getContext('2d');
+  new Chart(ctxGenero, {
+    type: 'bar',
+    data: {
+      labels: ['Veterinarias', 'Veterinarios'],
+      datasets: [{
+        label: 'Puntaje promedio iScore',
+        data: [41.8, 35.3],
+        backgroundColor: [
+          'rgba(157,80,232,0.65)',
+          'rgba(0,212,255,0.55)'
+        ],
+        borderColor: [
+          'rgba(157,80,232,1)',
+          'rgba(0,212,255,1)'
+        ],
+        borderWidth: 2,
+        borderRadius: 12,
+        borderSkipped: false,
+        barThickness: 80
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => ` ${ctx.parsed.y} pts promedio (escala 0–114)`
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: false,
+          min: 28,
+          max: 50,
+          ticks: {
+            callback: v => v + ' pts',
+            color: '#55558A',
+            font: { size: 12 }
+          },
+          grid: { color: 'rgba(12,12,38,0.07)' }
+        },
+        x: {
+          ticks: {
+            color: '#3A3A65',
+            font: { size: 14, weight: '700' }
+          },
+          grid: { display: false }
+        }
+      }
+    }
+  });
+
+  // ── NAV SCROLL ──
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // ── FADE-UP OBSERVER ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
