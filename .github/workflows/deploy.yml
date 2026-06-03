@@ -24,14 +24,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Install Railway CLI
-        run: npm install -g @railway/cli
-
       - name: Deploy to Railway
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
         run: |
-          railway up \
-            --service vetconnect-pro-latam \
+          npx @railway/cli@latest up \
+            --service "vetconnect-pro-latam" \
             --environment production \
+            --project "f756c800-94ac-415f-836f-4204636343db" \
             --detach
