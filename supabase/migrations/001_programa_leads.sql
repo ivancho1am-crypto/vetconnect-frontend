@@ -1,5 +1,5 @@
 -- ============================================================
--- VetConnect Pro LATAM — Migración 001
+-- Veterinario Alfa Latinoamérica — Migración 001
 -- Tabla: programa_leads (Registro de Interés Programa Alfa)
 -- ============================================================
 
@@ -58,6 +58,6 @@ CREATE POLICY "delete_service_only" ON programa_leads
   FOR DELETE TO service_role USING (true);
 
 -- ── Comentarios para documentación ───────────────────────────
-COMMENT ON TABLE  programa_leads IS 'Registros de interés en el Programa Alfa — VetConnect Pro LATAM';
+COMMENT ON TABLE  programa_leads IS 'Registros de interés en el Programa Alfa — Veterinario Alfa Latinoamérica';
 COMMENT ON COLUMN programa_leads.fuente IS 'Origen del registro: programa_alfa_web, whatsapp, etc.';
 COMMENT ON COLUMN programa_leads.estado IS 'Estado CRM: pendiente → contactado → inscrito / descartado';

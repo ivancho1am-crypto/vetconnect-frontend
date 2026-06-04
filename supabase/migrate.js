@@ -1,5 +1,5 @@
 /**
- * VetConnect Pro LATAM — Script de migración Supabase
+ * Veterinario Alfa Latinoamérica — Script de migración Supabase
  *
  * Uso:
  *   SUPABASE_SERVICE_ROLE_KEY=tu_service_role_key node supabase/migrate.js
@@ -63,7 +63,7 @@ async function runSQL(sql, label) {
 }
 
 async function migrate() {
-  console.log('🚀  VetConnect Pro LATAM — Migraciones Supabase');
+  console.log('🚀  Veterinario Alfa Latinoamérica — Migraciones Supabase');
   console.log(`    Proyecto: xpjjolrznelyejflctvh\n`);
 
   for (const file of migrations) {

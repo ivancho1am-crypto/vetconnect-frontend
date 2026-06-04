@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VetConnect Pro LATAM · Panel Central</title>
+<title>Dashboard Analytics — Veterinario Alfa Latinoamérica</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
   :root{--azul:#0e188e;--verde:#1a7a3c;--naranja:#e67e22;--rojo:#c0392b;--gris:#f5f7fa;--blanco:#fff;--texto:#2c3e50;--sombra:0 4px 20px rgba(0,0,0,.1);}
@@ -101,7 +101,7 @@
 <body>
 
 <nav class="sidebar">
-  <div class="logo"><div class="dot"></div>VetConnect Pro LATAM</div>
+  <div class="logo"><div class="dot"></div>Veterinario Alfa Latinoamérica</div>
   <div class="nav-section">Análisis</div>
   <div class="nav-item active" onclick="showSection('overview')">📊 Resumen General</div>
   <div class="nav-item" onclick="showSection('responses')">👥 Respuestas del Test</div>
@@ -111,12 +111,12 @@
   <div class="nav-item" onclick="showSection('crm')">📲 CRM · Contactos</div>
   <div class="nav-section">Proyecto</div>
   <div class="nav-item" onclick="window.open('https://www.vitalvetcrv.com.co/iscore-latam-test-desgaste/','_blank')">🔗 Test en WordPress</div>
-  <div class="nav-item" onclick="window.open('https://www.vitalvetcrv.com.co/programa-vetconnect-pro/','_blank')">🎓 VetConnect Pro</div>
+  <div class="nav-item" onclick="window.open('https://www.vitalvetcrv.com.co/programa-veterinario-alfa/','_blank')">🎓 Veterinario Alfa</div>
 </nav>
 
 <main class="main">
   <div class="topbar">
-    <h1>VetConnect Pro LATAM · Panel Central</h1>
+    <h1>Veterinario Alfa Latinoamérica · Panel Central</h1>
     <div class="date" id="topbar-date">⏳ Cargando datos...</div>
   </div>
 
@@ -346,7 +346,7 @@
       </div>
       <div class="article-card" style="border-top-color:var(--azul);">
         <div class="art-tag">Artículo 6 · Caso de Éxito</div>
-        <h4>"De 77 a libre: la historia de una veterinaria que recuperó su energía con VetConnect Pro"</h4>
+        <h4>"De 77 a libre: la historia de una veterinaria que recuperó su energía con Veterinario Alfa"</h4>
         <p>Con el puntaje más alto registrado en el iScore LATAM, esta veterinaria de España representó el perfil de desgaste crítico. Su historia — de agotamiento total a reconectar con su propósito — es el caso real detrás del programa Veterinario Alfa del Dr. Iván Durán...</p>
         <div class="art-stat">📊 Fuente: Caso real (score 77) · Seguimiento post-test</div>
       </div>
@@ -451,11 +451,11 @@
         <h3>📧 Email · WordPress SMTP</h3>
         <div style="margin-bottom:10px;">
           <label class="crm-label">Asunto</label>
-          <input type="text" id="email-subject" class="crm-input" placeholder="Tu resultado iScore LATAM — VetConnect Pro">
+          <input type="text" id="email-subject" class="crm-input" placeholder="Tu resultado iScore LATAM — Veterinario Alfa">
         </div>
         <div style="margin-bottom:12px;">
           <label class="crm-label">Mensaje</label>
-          <textarea id="email-body-area" class="crm-textarea" rows="5" placeholder="Hola {{nombre}},&#10;&#10;Gracias por completar el iScore LATAM. Tu puntaje fue {{score}} pts (nivel: {{nivel}}).&#10;&#10;El Dr. Iván Durán diseñó VetConnect Pro exactamente para veterinarios en tu situación..."></textarea>
+          <textarea id="email-body-area" class="crm-textarea" rows="5" placeholder="Hola {{nombre}},&#10;&#10;Gracias por completar el iScore LATAM. Tu puntaje fue {{score}} pts (nivel: {{nivel}}).&#10;&#10;El Dr. Iván Durán diseñó Veterinario Alfa exactamente para veterinarios en tu situación..."></textarea>
           <p style="font-size:.72rem;color:#aaa;margin-top:4px;">Variables: <code>{{nombre}}</code> <code>{{score}}</code> <code>{{nivel}}</code></p>
         </div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;">
@@ -1134,7 +1134,7 @@ function exportarSnapshot(idx) {
     '── Países ────────────────────────────────────',
     s.paises,
     '═══════════════════════════════════════════════',
-    'VetConnect Pro LATAM · Dr. Iván Durán Monroy',
+    'Veterinario Alfa Latinoamérica · Dr. Iván Durán Monroy',
     `Generado: ${new Date().toLocaleString('es-CO')}`,
   ].join('\n');
   navigator.clipboard.writeText(txt).then(()=>alert('✅ Snapshot copiado al portapapeles — listo para pegar en un documento.')).catch(()=>alert(txt));
@@ -1152,16 +1152,16 @@ let crmFiltered = [];
 let waAttachment = null;
 
 const WP_PHP_SNIPPET = `<?php
-// VetConnect Pro — Email REST Endpoint v2 (con CORS fix para X-VC-Key)
+// Veterinario Alfa — Email REST Endpoint v2 (con CORS fix para X-VC-Key)
 // Agregar en: WordPress Admin → Code Snippets → + Agregar nuevo → PHP
 // IMPORTANTE: reemplaza o actualiza el snippet anterior con este.
 
-// 1. CORS: permite X-VC-Key desde el subdominio vetconnectpro
+// 1. CORS: permite X-VC-Key desde el subdominio veterinarioalfa
 add_filter('rest_pre_serve_request', function($served, $result, $request, $server) {
   $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
   $allowed = [
-    'https://vetconnectpro.vitalvetcrv.com.co',
-    'https://www.vetconnectpro.vitalvetcrv.com.co',
+    'https://veterinarioalfa.vitalvetcrv.com.co',
+    'https://www.veterinarioalfa.vitalvetcrv.com.co',
     'http://localhost:5500',
     'http://127.0.0.1:5500',
   ];
@@ -1200,7 +1200,7 @@ add_action('rest_api_init', function() {
       }
       $headers = [
         'Content-Type: text/html; charset=UTF-8',
-        'From: VetConnect Pro LATAM <noreply@vitalvetcrv.com.co>',
+        'From: Veterinario Alfa Latinoamérica <noreply@vitalvetcrv.com.co>',
       ];
       $result = wp_mail($to, $subject, nl2br($body), $headers);
       return ['success' => $result, 'to' => $to];
@@ -1413,7 +1413,7 @@ async function sendWaToOne(idx) {
   if (!r) return;
   if (!r.telefono) { alert(`${r.nombre} no tiene teléfono registrado.`); return; }
   const tpl = document.getElementById('wa-msg-area').value.trim();
-  const def = `Hola ${r.nombre}, vi que completaste el iScore LATAM con ${r.puntaje} puntos. Me gustaría compartirte algo importante de VetConnect Pro.`;
+  const def = `Hola ${r.nombre}, vi que completaste el iScore LATAM con ${r.puntaje} puntos. Me gustaría compartirte algo importante de Veterinario Alfa.`;
   const msg = prompt(`Mensaje para ${r.nombre} (${r.telefono}):`, tpl ? replaceVars(tpl,r) : def);
   if (msg===null) return;
   const phone = r.telefono.replace(/\D/g,'');
@@ -1468,7 +1468,7 @@ async function sendEmailToOne(idx) {
   const r = crmFiltered[idx];
   if (!r) return;
   if (!r.email) { alert(`${r.nombre} no tiene email registrado.`); return; }
-  const subject = prompt(`Asunto para ${r.nombre}:`, `Tu resultado iScore LATAM — VetConnect Pro`);
+  const subject = prompt(`Asunto para ${r.nombre}:`, `Tu resultado iScore LATAM — Veterinario Alfa`);
   if (!subject) return;
   const body = prompt(`Mensaje para ${r.nombre} (${r.email}):`,
     `Hola ${r.nombre},\n\nGracias por completar el iScore LATAM. Tu puntaje fue ${r.puntaje} pts (${r.nivel_desgaste}).\n\nEl Dr. Iván Durán ha preparado algo especial para ti.`);

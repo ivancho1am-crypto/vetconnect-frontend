@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vetconnectpro.vitalvetcrv.com.co/sitemap.xml
+Sitemap: https://veterinarioalfa.vitalvetcrv.com.co/sitemap.xml

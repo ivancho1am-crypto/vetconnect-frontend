@@ -3,21 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>iScore LATAM · Test de Desgaste Profesional — VetConnect Pro</title>
-<meta name="description" content="Test iScore: 41 preguntas para medir tu nivel de burnout veterinario. Resultado inmediato, gratuito y confidencial. ¿Cuánto te está costando ser veterinario?" />
+<title>iScore LATAM — Test de 41 preguntas | Veterinario Alfa</title>
+<meta name="description" content="Programa de desarrollo profesional, empresarial y mental para veterinarios de Latinoamérica. Cobra lo que vales. Lidera tu clínica. Cuida tu mente." />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="es_LA" />
-<meta property="og:site_name" content="VetConnect Pro LATAM" />
-<meta property="og:url" content="https://vetconnectpro.vitalvetcrv.com.co/iscore.html" />
+<meta property="og:site_name" content="Veterinario Alfa Latinoamérica" />
+<meta property="og:url" content="https://veterinarioalfa.vitalvetcrv.com.co/iscore.html" />
 <meta property="og:title" content="iScore — Test de Desgaste Profesional Veterinario" />
-<meta property="og:description" content="41 preguntas para medir tu nivel de burnout. Resultado inmediato, gratuito y confidencial. ¿Cuánto te está costando ser veterinario?" />
-<meta property="og:image" content="https://vetconnectpro.vitalvetcrv.com.co/logos/og-preview.jpg" />
+<meta property="og:description" content="Programa de desarrollo profesional, empresarial y mental para veterinarios de Latinoamérica. Cobra lo que vales. Lidera tu clínica. Cuida tu mente." />
+<meta property="og:image" content="https://veterinarioalfa.vitalvetcrv.com.co/logos/og-preview.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="iScore — Test de Desgaste Profesional Veterinario" />
-<meta name="twitter:description" content="41 preguntas para medir tu nivel de burnout. Resultado inmediato, gratuito y confidencial." />
-<meta name="twitter:image" content="https://vetconnectpro.vitalvetcrv.com.co/logos/og-preview.jpg" />
+<meta name="twitter:description" content="Programa de desarrollo profesional, empresarial y mental para veterinarios de Latinoamérica. Cobra lo que vales. Lidera tu clínica. Cuida tu mente." />
+<meta name="twitter:image" content="https://veterinarioalfa.vitalvetcrv.com.co/logos/og-preview.jpg" />
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-<link rel="stylesheet" href="vetconnect.css">
+<link rel="stylesheet" href="veterinario-alfa.css">
 <style>
 /* ── Test-specific overrides ── */
 .test-hero{padding:60px 20px 40px;text-align:center;background:var(--bg2);border-bottom:1px solid var(--border)}
@@ -215,7 +215,7 @@
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
       <span class="logo-icon">V</span>
-      <span class="logo-text">VetConnect <span class="logo-pro">Pro</span></span>
+      <span class="logo-text">Veterinario Alfa <span class="logo-pro">Pro</span></span>
     </a>
     <div class="nav-links">
       <a href="test.html">Test iScore</a>
@@ -290,7 +290,7 @@
     <div style="margin-top:20px;padding:14px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;font-size:.82rem;color:var(--muted2);line-height:1.5">
       <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer">
         <input type="checkbox" id="f-consent" style="accent-color:var(--purple);margin-top:2px;flex-shrink:0">
-        <span>Acepto que mis datos personales (nombre, email, resultados del test) sean almacenados y usados por VetConnect Pro LATAM para enviarte tu resultado, recursos personalizados y comunicaciones relacionadas con tu bienestar profesional. Puedes solicitar su eliminación a <a href="mailto:ivancho1am@gmail.com" style="color:var(--purple)">ivancho1am@gmail.com</a> en cualquier momento. Los datos de salud mental son tratados con confidencialidad y nunca se comparten con terceros.</span>
+        <span>Acepto que mis datos personales (nombre, email, resultados del test) sean almacenados y usados por Veterinario Alfa Latinoamérica para enviarte tu resultado, recursos personalizados y comunicaciones relacionadas con tu bienestar profesional. Puedes solicitar su eliminación a <a href="mailto:ivancho1am@gmail.com" style="color:var(--purple)">ivancho1am@gmail.com</a> en cualquier momento. Los datos de salud mental son tratados con confidencialidad y nunca se comparten con terceros.</span>
       </label>
     </div>
     <div id="val-0" class="val-notice">Por favor completa nombre, email, país y acepta el tratamiento de datos.</div>
@@ -434,7 +434,7 @@
 <div class="toast" id="toast"></div>
 
 <footer style="background:var(--bg2);border-top:1px solid var(--border);padding:40px 20px;text-align:center;margin-top:0;">
-  <p style="color:var(--muted2);font-size:.82rem;">© 2026 VetConnect Pro LATAM · <a href="index.html" style="color:var(--purple);">Inicio</a> · <a href="test.html" style="color:var(--purple);">Test iScore</a> · <a href="recursos.html" style="color:var(--purple);">Recursos</a> · <a href="programa.html" style="color:var(--purple);">Programa</a></p>
+  <p style="color:var(--muted2);font-size:.82rem;">© 2026 Veterinario Alfa Latinoamérica · Todos los derechos reservados<a href="index.html" style="color:var(--purple);">Inicio</a> · <a href="test.html" style="color:var(--purple);">Test iScore</a> · <a href="recursos.html" style="color:var(--purple);">Recursos</a> · <a href="programa.html" style="color:var(--purple);">Programa</a></p>
 </footer>
 
 <script>
@@ -816,7 +816,7 @@ async function submitTest() {
       headers: {'Content-Type': 'application/json', 'X-VC-Key': WP_KEY},
       body: JSON.stringify({
         to: email,
-        subject: `Tu iScore LATAM: ${total} pts — Nivel ${level.nivel} | VetConnect Pro`,
+        subject: `Tu iScore LATAM: ${total} pts — Nivel ${level.nivel} | Veterinario Alfa`,
         message: emailMsg
       })
     });
@@ -895,12 +895,12 @@ function renderResult(nombre, total, level, dims, elapsed, emailOk) {
     bajo: {
       title: 'Tu siguiente paso: fortalecer y prevenir',
       body: 'Estás en el mejor momento para intervenir: antes de que el desgaste se instale. Aprovecha los recursos gratuitos y considera el programa de mentoría si quieres un camino estructurado.',
-      list: ['Descarga el PDF gratuito de rentabilidad clínica','Mira la masterclass de 45min sobre burnout en veterinarios','Únete a la comunidad VetConnect Pro LATAM']
+      list: ['Descarga el PDF gratuito de rentabilidad clínica','Mira la masterclass de 45min sobre burnout en veterinarios','Únete a la comunidad Veterinario Alfa Latinoamérica']
     },
     moderado: {
       title: 'Tu siguiente paso: salir de la zona de riesgo',
       body: 'El nivel Moderado es el más engañoso: te sientes "bien" pero las señales están ahí. El 75% de los veterinarios que llegan al nivel Crítico pasaron por este punto sin tomar acción. Tienes una ventana de oportunidad.',
-      list: ['Completa el mini-curso de 3 videos sobre bienestar veterinario','Descarga el PDF sobre manejo de clientes conflictivos','Agenda una llamada de diagnóstico gratuita con el equipo VetConnect']
+      list: ['Completa el mini-curso de 3 videos sobre bienestar veterinario','Descarga el PDF sobre manejo de clientes conflictivos','Agenda una llamada de diagnóstico gratuita con el equipo Veterinario Alfa']
     },
     alto: {
       title: 'Tu siguiente paso: intervención real',
@@ -971,17 +971,17 @@ ${elapsed ? `Tiempo de completación: ${elapsed}` : ''}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Este resultado fue desarrollado por el Dr. Iván Durán, médico veterinario y fundador de VetConnect Pro LATAM, basado en más de 40 respuestas reales de veterinarios en LATAM.
+Este resultado fue desarrollado por el Dr. Iván Durán, médico veterinario y fundador de Veterinario Alfa Latinoamérica, basado en más de 40 respuestas reales de veterinarios en LATAM.
 
 Tu resultado completo y los recursos recomendados para tu nivel están disponibles en:
-https://vetconnect.pro (próximamente)
+https://veterinario-alfa.pro (próximamente)
 
 Si tienes preguntas o necesitas apoyo, escríbeme directamente:
 ivancho1am@gmail.com
 
 Con respeto y compromiso,
 Dr. Iván Durán
-VetConnect Pro LATAM`;
+Veterinario Alfa Latinoamérica`;
 }
 
 // ────────────────────────────────────────────────────────────────

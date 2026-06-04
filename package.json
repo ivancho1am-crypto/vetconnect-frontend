@@ -1,8 +1,8 @@
 {
-  "name": "vetconnect-pro-latam",
+  "name": "veterinario-alfa-latam",
   "version": "1.0.0",
   "type": "module",
-  "description": "Sitio web VetConnect Pro LATAM — Plataforma de desarrollo profesional para médicos veterinarios",
+  "description": "Sitio web Veterinario Alfa Latinoamérica — Plataforma de desarrollo profesional para médicos veterinarios",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

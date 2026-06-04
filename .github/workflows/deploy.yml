@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    name: Deploy VetConnect Pro LATAM
+    name: Deploy Veterinario Alfa Latinoamérica
     runs-on: ubuntu-latest
     timeout-minutes: 10
 

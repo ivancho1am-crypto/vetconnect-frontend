@@ -4,7 +4,8 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT    = process.env.PORT    || 3000;
+const NODE_ID = process.env.NODE_ID || 'latam';
 
 // Serve static files from public/
 app.use(express.static(path.join(__dirname, 'public'), {
@@ -18,5 +19,5 @@ app.get('*', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`VetConnect Pro LATAM → http://localhost:${PORT}`);
+  console.log(`Veterinario Alfa Latinoamérica [node:${NODE_ID}] → http://localhost:${PORT}`);
 });

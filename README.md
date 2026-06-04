@@ -1,4 +1,4 @@
-# VetConnect Pro LATAM
+# Veterinario Alfa Latinoamérica
 
 Plataforma de desarrollo profesional para médicos veterinarios de Latinoamérica.
 
@@ -15,7 +15,7 @@ Plataforma de desarrollo profesional para médicos veterinarios de Latinoaméric
 ## Estructura
 
 ```
-vetconnect-pro-latam/
+veterinario-alfa-latam/
 ├── public/               ← Sitio estático completo
 │   ├── index.html        ← Home principal
 │   ├── test.html         ← Landing del test iScore
@@ -27,7 +27,7 @@ vetconnect-pro-latam/
 │   ├── blog.html         ← 6 artículos basados en datos
 │   ├── articulo-1..6.html
 │   ├── dashboard.html    ← Dashboard analytics (privado)
-│   ├── vetconnect.css    ← CSS compartido
+│   ├── veterinario-alfa.css    ← CSS compartido
 │   └── logos/            ← Logos del ecosistema
 ├── supabase/
 │   ├── migrations/
@@ -69,7 +69,7 @@ git push origin main
 
 ## Dominio
 
-`vetconnectpro.vitalvetcrv.com.co` → CNAME → Railway domain
+`veterinarioalfa.vitalvetcrv.com.co` → CNAME → Railway domain
 
 ## Edge Functions (Supabase)
 
@@ -77,4 +77,4 @@ git push origin main
 
 ---
 
-© 2026 VetConnect Pro LATAM · Ivan Durán Monroy, MV
+© 2026 Veterinario Alfa Latinoamérica · Ivan Durán Monroy, MV
