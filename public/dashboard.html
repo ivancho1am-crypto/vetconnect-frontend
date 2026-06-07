@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dashboard Analytics — Veterinario Alfa Latinoamérica</title>
+  <meta name="robots" content="noindex, nofollow" />
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
   :root{--azul:#0e188e;--verde:#1a7a3c;--naranja:#e67e22;--rojo:#c0392b;--gris:#f5f7fa;--blanco:#fff;--texto:#2c3e50;--sombra:0 4px 20px rgba(0,0,0,.1);}
@@ -1162,8 +1163,6 @@ add_filter('rest_pre_serve_request', function($served, $result, $request, $serve
   $allowed = [
     'https://veterinarioalfa.vitalvetcrv.com.co',
     'https://www.veterinarioalfa.vitalvetcrv.com.co',
-    'http://localhost:5500',
-    'http://127.0.0.1:5500',
   ];
   if (in_array($origin, $allowed)) {
     header('Access-Control-Allow-Origin: ' . esc_url_raw($origin));
