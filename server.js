@@ -1,4 +1,3 @@
-import * as Sentry from '@sentry/node';
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -6,13 +5,6 @@ import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
 import basicAuth from 'express-basic-auth';
 import compression from 'compression';
-
-// ── Sentry — init antes de todo lo demás ─────────────────────────────────────
-Sentry.init({
-  dsn: process.env.SENTRY_DSN || '',
-  environment: process.env.NODE_ENV || 'development',
-  tracesSampleRate: 0.2,
-});
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app  = express();
@@ -143,9 +135,6 @@ app.use(express.static(path.join(__dirname, 'public'), {
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
-
-// ── Sentry error handler (debe ir después de todas las rutas) ─────────────────
-Sentry.setupExpressErrorHandler(app);
 
 app.listen(PORT, () => {
   console.log(`Veterinario Alfa Latinoamérica [node:${NODE_ID}] → http://localhost:${PORT}`);
