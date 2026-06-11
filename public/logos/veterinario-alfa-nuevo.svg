@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800">
+<defs>
+<linearGradient id="gold" x1="0" x2="1">
+<stop offset="0%" stop-color="#D4AF37"/>
+<stop offset="100%" stop-color="#E6C75A"/>
+</linearGradient>
+</defs>
+<polygon points="400,80 680,700 560,700 400,340 240,700 120,700" fill="#0047AB"/>
+<path d="M360 250 C430 180,530 190,580 260 C540 245,500 250,470 280 C510 285,540 310,560 350 C520 330,480 330,450 350 C420 370,390 410,370 470 C340 430,330 380,335 330 C340 300,348 275,360 250 Z" fill="white"/>
+<polygon points="470,430 560,700 650,700" fill="url(#gold)"/>
+</svg>
