@@ -43,10 +43,30 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background: var(--blanco);
-      color: var(--text-dark);
+      background: #04040F;
+      color: #F0F0FA;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Dark section variants ── */
+    .section-dark {
+      background: #04040F;
+      padding: 100px 60px;
+      position: relative; overflow: hidden;
+    }
+    .section-dark::before {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(27,63,160,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(27,63,160,0.05) 1px, transparent 1px);
+      background-size: 56px 56px;
+    }
+    .section-dark2 {
+      background: #07071A;
+      padding: 100px 60px;
+      position: relative; overflow: hidden;
     }
 
     /* ══ NAV ══ */
@@ -288,37 +308,36 @@
       color: var(--text-dark); margin-bottom: 18px;
     }
     .gold-text { color: var(--oro-claro); }
-    .blue-text { color: var(--azul); }
+    .blue-text { color: var(--azul-l); }
     .section-sub-light { font-size: 16px; color: rgba(255,255,255,0.7); line-height: 1.75; max-width: 560px; }
     .section-sub-dark { font-size: 16px; color: var(--gris-muted); line-height: 1.75; max-width: 560px; }
 
-    /* ══ TEMAS — sección blanca ══ */
+    /* ══ TEMAS — dark ══ */
     .topics-grid {
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 52px;
     }
     .topic-card {
-      background: #fff; border: 1px solid #E4E8F5;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09);
       border-radius: 20px; padding: 32px 26px;
-      box-shadow: 0 2px 16px rgba(27,63,160,0.06);
       transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
       position: relative; overflow: hidden;
     }
     .topic-card::before {
       content: '';
       position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, var(--azul), var(--azul-l));
+      background: linear-gradient(90deg, var(--oro), var(--oro-claro));
       transform: scaleX(0); transform-origin: left;
       transition: transform 0.35s ease;
     }
-    .topic-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(27,63,160,0.14); border-color: rgba(27,63,160,0.2); }
+    .topic-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(27,63,160,0.3); border-color: rgba(201,150,46,0.35); }
     .topic-card:hover::before { transform: scaleX(1); }
     .topic-icon { font-size: 36px; margin-bottom: 16px; display: block; }
-    .topic-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 17px; font-weight: 800; color: var(--azul-prof); margin-bottom: 10px; }
-    .topic-card p { font-size: 13.5px; color: var(--gris-muted); line-height: 1.65; }
+    .topic-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 17px; font-weight: 800; color: #F0F0FA; margin-bottom: 10px; }
+    .topic-card p { font-size: 13.5px; color: rgba(255,255,255,0.6); line-height: 1.65; }
     .topic-dur {
       display: inline-block; margin-top: 14px;
-      background: var(--off-white); border: 1px solid #D8DDF0;
-      color: var(--azul); font-size: 10.5px; font-weight: 700;
+      background: rgba(201,150,46,0.1); border: 1px solid rgba(201,150,46,0.3);
+      color: var(--oro-claro); font-size: 10.5px; font-weight: 700;
       letter-spacing: 1.5px; text-transform: uppercase;
       padding: 4px 12px; border-radius: 20px;
     }
@@ -348,7 +367,7 @@
       color: var(--oro-claro);
     }
 
-    /* ══ SPEAKER BIO — sección off-white ══ */
+    /* ══ SPEAKER BIO — dark ══ */
     .bio-grid {
       display: grid; grid-template-columns: 380px 1fr; gap: 72px; align-items: center;
       margin-top: 60px;
@@ -356,7 +375,7 @@
     .bio-photo-wrap { position: relative; }
     .bio-photo {
       width: 100%; border-radius: 24px;
-      box-shadow: 0 24px 72px rgba(27,63,160,0.2);
+      box-shadow: 0 24px 72px rgba(0,0,0,0.6);
       display: block;
     }
     .bio-photo-accent {
@@ -370,16 +389,15 @@
     }
     .bio-cred {
       display: flex; align-items: flex-start; gap: 12px;
-      background: #fff; border: 1px solid #E4E8F5;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
       border-radius: 12px; padding: 14px 18px;
-      box-shadow: 0 2px 12px rgba(27,63,160,0.06);
     }
     .bio-cred-icon { font-size: 22px; flex-shrink: 0; }
-    .bio-cred-text strong { display: block; font-size: 13px; font-weight: 700; color: var(--text-dark); margin-bottom: 2px; }
-    .bio-cred-text span { font-size: 12px; color: var(--gris-muted); }
+    .bio-cred-text strong { display: block; font-size: 13px; font-weight: 700; color: #F0F0FA; margin-bottom: 2px; }
+    .bio-cred-text span { font-size: 12px; color: rgba(255,255,255,0.5); }
 
     .bio-content h2 { margin-bottom: 18px; }
-    .bio-content p { font-size: 16px; color: var(--gris-texto); line-height: 1.8; margin-bottom: 18px; }
+    .bio-content p { font-size: 16px; color: rgba(255,255,255,0.7); line-height: 1.8; margin-bottom: 18px; }
     .bio-quote {
       background: linear-gradient(135deg, var(--azul-prof), var(--azul));
       border-radius: 16px; padding: 28px 32px; margin-top: 28px;
@@ -421,28 +439,28 @@
     .territory-card h3 { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 4px; }
     .territory-card p { font-size: 12.5px; color: rgba(255,255,255,0.55); }
 
-    /* ══ CONTACTO FORM — blanca ══ */
+    /* ══ CONTACTO FORM — dark ══ */
     .contact-grid {
       display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 60px;
     }
     .contact-info h3 {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 24px; font-weight: 800; color: var(--azul-prof); margin-bottom: 16px;
+      font-size: 24px; font-weight: 800; color: #F0F0FA; margin-bottom: 16px;
     }
-    .contact-info p { font-size: 15px; color: var(--gris-muted); line-height: 1.8; margin-bottom: 28px; }
+    .contact-info p { font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 28px; }
     .contact-channels { display: flex; flex-direction: column; gap: 14px; }
     .contact-channel {
       display: flex; align-items: center; gap: 14px;
-      background: var(--off-white); border: 1px solid #E4E8F5;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
       border-radius: 14px; padding: 16px 20px;
-      text-decoration: none; color: var(--text-dark);
+      text-decoration: none; color: #F0F0FA;
       font-weight: 600; font-size: 14.5px;
-      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      transition: border-color 0.2s, transform 0.2s, background 0.2s;
     }
     .contact-channel:hover {
-      border-color: var(--azul-l);
+      border-color: rgba(201,150,46,0.4);
       transform: translateX(4px);
-      box-shadow: 0 4px 20px rgba(27,63,160,0.1);
+      background: rgba(255,255,255,0.08);
     }
     .channel-icon {
       width: 44px; height: 44px; border-radius: 12px;
@@ -453,40 +471,42 @@
     .channel-icon.email { background: var(--azul); }
     .channel-icon.ig { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
     .channel-label { display: flex; flex-direction: column; }
-    .channel-label strong { font-size: 14px; color: var(--text-dark); }
-    .channel-label span { font-size: 12px; color: var(--gris-muted); font-weight: 400; margin-top: 1px; }
+    .channel-label strong { font-size: 14px; color: #F0F0FA; }
+    .channel-label span { font-size: 12px; color: rgba(255,255,255,0.45); font-weight: 400; margin-top: 1px; }
 
-    /* form */
+    /* form — dark */
     .contact-form-wrap {
-      background: var(--off-white); border: 1px solid #E4E8F5;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
       border-radius: 24px; padding: 40px 36px;
     }
     .contact-form-wrap h3 {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 22px; font-weight: 800; color: var(--azul-prof); margin-bottom: 6px;
+      font-size: 22px; font-weight: 800; color: #F0F0FA; margin-bottom: 6px;
     }
-    .contact-form-wrap p { font-size: 13.5px; color: var(--gris-muted); margin-bottom: 28px; }
+    .contact-form-wrap p { font-size: 13.5px; color: rgba(255,255,255,0.5); margin-bottom: 28px; }
 
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     .form-group { display: flex; flex-direction: column; gap: 6px; }
     .form-group.full { grid-column: 1/-1; }
-    .form-group label { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--gris-muted); }
+    .form-group label { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.4); }
     .form-group input,
     .form-group select,
     .form-group textarea {
-      background: #fff; border: 1.5px solid #DDE1F0;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
       border-radius: 10px; padding: 12px 14px;
-      color: var(--text-dark); font-family: 'Inter', sans-serif; font-size: 14px;
-      outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+      color: #F0F0FA; font-family: 'Inter', sans-serif; font-size: 14px;
+      outline: none; transition: border-color 0.2s, background 0.2s;
       -webkit-appearance: none;
     }
     .form-group input:focus,
     .form-group select:focus,
     .form-group textarea:focus {
-      border-color: var(--azul-l);
-      box-shadow: 0 0 0 3px rgba(59,111,208,0.1);
+      border-color: rgba(201,150,46,0.5);
+      background: rgba(255,255,255,0.09);
     }
-    .form-group select option { background: #fff; color: var(--text-dark); }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(255,255,255,0.25); }
+    .form-group select option { background: #0A0A22; color: #F0F0FA; }
     .form-group textarea { resize: vertical; min-height: 100px; }
 
     .form-submit { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
@@ -596,7 +616,7 @@
 <!-- ═══ NAV ═══ -->
 <nav id="nav">
   <a href="index.html">
-    <img src="logos/va-logo.png" alt="Veterinario Alfa" class="nav-logo" />
+    <img src="logos/va-logo-t.png" alt="Veterinario Alfa" class="nav-logo" />
   </a>
   <ul class="nav-links">
     <li><a href="test.html">Test Score</a></li>
@@ -658,9 +678,9 @@
     <div class="hero-photo-wrap">
       <div class="hero-photo-frame reveal-right">
         <div class="hero-photo-bg"></div>
-        <img src="ivan-duran.png" alt="Dr. Iván Durán Monroy, MV" class="hero-photo" />
+        <img src="ivan-speaker.png" alt="Dr. Iván Durán Monroy, MV" class="hero-photo" />
         <div class="hero-logo-overlay">
-          <img src="logos/va-logo.png" alt="Veterinario Alfa" />
+          <img src="logos/va-logo-t.png" alt="Veterinario Alfa" />
         </div>
         <div class="hero-float-card reveal">
           <div class="float-card-name">Dr. Iván Durán Monroy</div>
@@ -675,13 +695,13 @@
 <div class="gold-divider"></div>
 
 <!-- ═══ TEMAS — blanca ═══ -->
-<section class="section-white" id="temas">
+<section class="section-dark" id="temas">
   <div class="section-inner">
-    <p class="eyebrow-dark reveal">Temas de Conferencia</p>
-    <h2 class="section-title-dark reveal">
+    <p class="eyebrow-light reveal">Temas de Conferencia</p>
+    <h2 class="section-title-light reveal">
       Lo que el veterinario<br/><span class="blue-text">necesita escuchar</span>
     </h2>
-    <p class="section-sub-dark reveal">Conferencias diseñadas con evidencia científica, datos reales del sector y metodología propia. No motivación vacía — herramientas accionables.</p>
+    <p class="section-sub-light reveal">Conferencias diseñadas con evidencia científica, datos reales del sector y metodología propia. No motivación vacía — herramientas accionables.</p>
 
     <div class="topics-grid">
       <div class="topic-card reveal">
@@ -762,11 +782,11 @@
 <div class="gold-divider"></div>
 
 <!-- ═══ SPEAKER BIO — off-white ═══ -->
-<section class="section-offwhite" id="bio">
+<section class="section-dark2" id="bio">
   <div class="section-inner">
     <div class="bio-grid">
       <div class="bio-photo-wrap reveal-left">
-        <img src="ivan-duran.png" alt="Dr. Iván Durán Monroy" class="bio-photo" />
+        <img src="ivan-speaker.png" alt="Dr. Iván Durán Monroy" class="bio-photo" />
         <div class="bio-photo-accent"></div>
         <div class="bio-credentials">
           <div class="bio-cred">
@@ -794,8 +814,8 @@
       </div>
 
       <div class="bio-content reveal-right">
-        <p class="eyebrow-dark">El Speaker</p>
-        <h2 class="section-title-dark">
+        <p class="eyebrow-light">El Speaker</p>
+        <h2 class="section-title-light">
           Dr. Iván Durán<br/><span class="blue-text">Monroy, MV</span>
         </h2>
         <p>Médico veterinario egresado de la Universidad de La Salle (Colombia), fundador de Veterinario Alfa Latinoamérica y del Observatorio Latinoamericano de Salud Veterinaria (OLSV).</p>
@@ -869,13 +889,13 @@
 <div class="gold-divider"></div>
 
 <!-- ═══ CONTACTO — blanca ═══ -->
-<section class="section-white" id="contacto">
+<section class="section-dark" id="contacto">
   <div class="section-inner">
-    <p class="eyebrow-dark reveal">Contáctanos</p>
-    <h2 class="section-title-dark reveal">
+    <p class="eyebrow-light reveal">Contáctanos</p>
+    <h2 class="section-title-light reveal">
       ¿Quieres llevar esto<br/><span class="blue-text">a tu evento?</span>
     </h2>
-    <p class="section-sub-dark reveal">Congresos, universidades, clínicas, empresas, asociaciones. Respondemos en menos de 48 horas hábiles.</p>
+    <p class="section-sub-light reveal">Congresos, universidades, clínicas, empresas, asociaciones. Respondemos en menos de 48 horas hábiles.</p>
 
     <div class="contact-grid">
       <div class="contact-info reveal-left">
@@ -992,7 +1012,7 @@
 <footer>
   <div class="footer-grid">
     <div>
-      <img src="logos/va-logo.png" alt="Veterinario Alfa" class="footer-logo" loading="lazy" />
+      <img src="logos/va-logo-t.png" alt="Veterinario Alfa" class="footer-logo" loading="lazy" />
       <p class="footer-tagline">Alfa no es un título. Es lo que construyes cuando dejas de sobrevivir.</p>
     </div>
     <div class="footer-col">

@@ -48,7 +48,7 @@
       transform: translateZ(0);
     }
     nav.scrolled { background: rgba(4,4,15,0.97); }
-    .nav-logo { height: 42px; display: block; }
+    .nav-logo { height: 44px; display: block; }
     .nav-links { display: flex; gap: 32px; list-style: none; }
     .nav-links a { color: var(--muted2); text-decoration: none; font-size: 13.5px; font-weight: 500; transition: color 0.2s; }
     .nav-links a:hover { color: var(--text); }
