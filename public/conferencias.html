@@ -600,6 +600,47 @@
       .footer-grid { grid-template-columns: 1fr 1fr; padding: 48px 40px 36px; }
       .footer-bottom { padding: 18px 40px; }
     }
+    /* ═══ LIGHT/BLUE OVERRIDES para componentes conferencias ═══ */
+    .sl .section-title-light, .sl .section-title-dark { color: #0B1E5E !important; }
+    .sl .section-sub-light,   .sl .section-sub-dark   { color: #3A3A65 !important; }
+    .sl .eyebrow-light, .sl .eyebrow-dark             { color: var(--azul) !important; }
+    .sl .eyebrow-light::before, .sl .eyebrow-dark::before { background: var(--oro) !important; }
+    .sl .topic-card, .sl .territory-card {
+      background: #F4F6FB !important; border-color: rgba(27,63,160,0.14) !important;
+    }
+    .sl .topic-card h3, .sl .territory-card h3 { color: #0B1E5E !important; }
+    .sl .topic-card p,  .sl .territory-card p  { color: #3A3A65 !important; }
+    .sl .topic-dur       { color: var(--oro) !important; }
+    .sl .contact-form-wrap { background: #F4F6FB !important; border-color: rgba(27,63,160,0.14) !important; }
+    .sl .contact-form-wrap label { color: #0B1E5E !important; }
+    .sl .contact-form-wrap input,
+    .sl .contact-form-wrap textarea,
+    .sl .contact-form-wrap select {
+      background: #FFFFFF !important; color: #0B1E5E !important;
+      border-color: rgba(27,63,160,0.25) !important;
+    }
+    .sl .contact-form-wrap input::placeholder,
+    .sl .contact-form-wrap textarea::placeholder { color: #8888A0 !important; }
+    .sl .contact-channel { background: #F4F6FB !important; border-color: rgba(27,63,160,0.14) !important; }
+    .sl .contact-channel strong { color: #0B1E5E !important; }
+    .sl .contact-channel p { color: #3A3A65 !important; }
+
+    .sb .section-title-light, .sb .section-title-dark { color: #FFFFFF !important; }
+    .sb .section-sub-light,   .sb .section-sub-dark   { color: rgba(255,255,255,0.82) !important; }
+    .sb .eyebrow-light, .sb .eyebrow-dark             { color: var(--oro-claro) !important; }
+    .sb .eyebrow-light::before, .sb .eyebrow-dark::before { background: var(--oro-claro) !important; }
+    .sb .format-card {
+      background: rgba(255,255,255,0.10) !important; border-color: rgba(255,255,255,0.2) !important;
+    }
+    .sb .format-card h3, .sb .format-icon, .sb .format-dur { color: #FFFFFF !important; }
+    .sb .format-card p { color: rgba(255,255,255,0.82) !important; }
+    .sb .bio-content p { color: rgba(255,255,255,0.85) !important; }
+    .sb .bio-quote { background: rgba(255,255,255,0.08) !important; border-left-color: var(--oro-claro) !important; }
+    .sb .bio-quote p, .sb .bio-quote cite { color: rgba(255,255,255,0.9) !important; }
+    .sb .credential-item { background: rgba(255,255,255,0.10) !important; }
+    .sb .credential-icon, .sb .credential-item h4 { color: #FFFFFF !important; }
+    .sb .credential-item p { color: rgba(255,255,255,0.78) !important; }
+
     @media (max-width: 768px) {
       .section-blue, .section-dark, .section-white, .section-offwhite, #cta-final { padding: 72px 24px; }
       .topics-grid, .formats-grid, .territory-grid { grid-template-columns: 1fr; }
@@ -695,7 +736,7 @@
 <div class="gold-divider"></div>
 
 <!-- ═══ TEMAS — blanca ═══ -->
-<section class="section-dark" id="temas">
+<section class="sl" id="temas">
   <div class="section-inner">
     <p class="eyebrow-light reveal">Temas de Conferencia</p>
     <h2 class="section-title-light reveal">
@@ -747,7 +788,7 @@
 <div class="gold-divider"></div>
 
 <!-- ═══ FORMATOS — azul ═══ -->
-<section class="section-blue" id="formatos">
+<section class="sb" id="formatos">
   <div class="section-inner">
     <p class="eyebrow-light reveal">Modalidades</p>
     <h2 class="section-title-light reveal">
@@ -782,7 +823,7 @@
 <div class="gold-divider"></div>
 
 <!-- ═══ SPEAKER BIO — off-white ═══ -->
-<section class="section-dark2" id="bio">
+<section class="sb" id="bio">
   <div class="section-inner">
     <div class="bio-grid">
       <div class="bio-photo-wrap reveal-left">
@@ -833,7 +874,7 @@
 <div class="gold-divider"></div>
 
 <!-- ═══ TERRITORIOS — azul oscuro ═══ -->
-<section class="section-dark" id="territorios">
+<section class="sl" id="territorios">
   <div class="section-inner">
     <p class="eyebrow-light reveal" style="justify-content:center; text-align:center;">Cobertura Geográfica</p>
     <h2 class="section-title-light reveal" style="text-align:center; max-width:600px; margin:0 auto 16px;">
@@ -889,7 +930,7 @@
 <div class="gold-divider"></div>
 
 <!-- ═══ CONTACTO — blanca ═══ -->
-<section class="section-dark" id="contacto">
+<section class="sl" id="contacto">
   <div class="section-inner">
     <p class="eyebrow-light reveal">Contáctanos</p>
     <h2 class="section-title-light reveal">
@@ -990,7 +1031,7 @@
 </section>
 
 <!-- ═══ CTA FINAL ═══ -->
-<section id="cta-final">
+<section id="cta-final" class="sl">
   <div class="cta-orb"></div>
   <div class="cta-inner">
     <p class="eyebrow-light reveal" style="justify-content:center;">Una sola conferencia</p>
