@@ -28,8 +28,8 @@
       display: flex; align-items: center;
       overflow: hidden; padding: 140px 60px 90px;
       background-image:
-        linear-gradient(rgba(123,47,190,0.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(123,47,190,0.045) 1px, transparent 1px);
+        linear-gradient(rgba(27,63,160,0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(27,63,160,0.045) 1px, transparent 1px);
       background-size: 64px 64px;
     }
     .article-back {
@@ -37,15 +37,15 @@
       color: var(--muted2); text-decoration: none; font-size: 13px; font-weight: 500;
       margin-bottom: 28px; transition: color 0.2s;
     }
-    .article-back:hover { color: var(--cyan); }
+    .article-back:hover { color: var(--oro-claro); }
     .article-back:hover svg { transform: translateX(-3px); }
     .article-back svg { transition: transform 0.2s; }
     .article-category-badge {
       display: inline-flex; align-items: center; gap: 7px;
-      background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.35);
+      background: rgba(201,150,46,0.1); border: 1px solid rgba(201,150,46,0.35);
       padding: 6px 16px; border-radius: 50px; margin-bottom: 22px;
       font-size: 11.5px; font-weight: 700; letter-spacing: 1.5px;
-      text-transform: uppercase; color: var(--cyan);
+      text-transform: uppercase; color: var(--oro-claro);
     }
     .article-hero-title {
       font-family: 'Space Grotesk', sans-serif;
@@ -88,11 +88,11 @@
       border-radius: 16px; padding: 22px 22px;
       transition: border-color 0.25s, transform 0.25s;
     }
-    .signal-card:hover { border-color: rgba(0,212,255,0.3); transform: translateX(4px); }
+    .signal-card:hover { border-color: rgba(201,150,46,0.3); transform: translateX(4px); }
     .signal-num {
       font-family: 'Space Grotesk', sans-serif; font-size: 32px; font-weight: 900;
       line-height: 1; flex-shrink: 0; width: 48px; text-align: center;
-      background: linear-gradient(135deg, var(--purple-l), var(--cyan));
+      background: linear-gradient(135deg, var(--azul-l), var(--oro-claro));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
     .signal-body strong { display: block; font-size: 16px; font-weight: 700; margin-bottom: 6px; color: var(--text); }
@@ -106,7 +106,7 @@
       font-style: italic;
     }
     .belief-list li::before {
-      content: '"'; font-size: 28px; color: var(--cyan);
+      content: '"'; font-size: 28px; color: var(--oro-claro);
       font-family: Georgia, serif; line-height: 1; flex-shrink: 0; margin-top: -4px;
     }
     .tool-card {
@@ -115,23 +115,23 @@
       margin-bottom: 14px; display: flex; gap: 16px; align-items: flex-start;
       transition: border-color 0.25s, transform 0.25s;
     }
-    .tool-card:hover { border-color: rgba(0,212,255,0.35); transform: translateX(4px); }
+    .tool-card:hover { border-color: rgba(201,150,46,0.35); transform: translateX(4px); }
     .tool-icon {
       width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
-      background: linear-gradient(135deg, rgba(0,212,255,0.2), rgba(123,47,190,0.15));
-      border: 1px solid rgba(0,212,255,0.3);
+      background: linear-gradient(135deg, rgba(201,150,46,0.2), rgba(27,63,160,0.15));
+      border: 1px solid rgba(201,150,46,0.3);
       display: flex; align-items: center; justify-content: center; font-size: 18px;
     }
     .tool-body strong { display: block; font-size: 15px; font-weight: 700; margin-bottom: 4px; }
     .tool-body span { font-size: 13.5px; color: var(--muted); line-height: 1.55; }
     .neuro-box {
-      background: linear-gradient(135deg, rgba(0,212,255,0.06), rgba(123,47,190,0.05));
-      border: 1px solid rgba(0,212,255,0.2); border-radius: 20px;
+      background: linear-gradient(135deg, rgba(201,150,46,0.06), rgba(27,63,160,0.05));
+      border: 1px solid rgba(201,150,46,0.2); border-radius: 20px;
       padding: 28px 32px; margin: 28px 0;
     }
     .neuro-box-label {
       font-size: 10.5px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
-      color: var(--cyan); margin-bottom: 12px; display: block;
+      color: var(--oro-claro); margin-bottom: 12px; display: block;
     }
     .neuro-box p { font-size: 15px; color: var(--muted2); line-height: 1.85; margin: 0 0 10px; }
     .neuro-box p:last-child { margin-bottom: 0; }
@@ -141,9 +141,9 @@
       font-size: 13.5px; color: var(--muted2); line-height: 1.7;
       padding-left: 20px; position: relative;
     }
-    .bib-list li::before { content: '—'; position: absolute; left: 0; color: var(--purple); }
+    .bib-list li::before { content: '—'; position: absolute; left: 0; color: var(--azul); }
     .data-disclaimer {
-      background: rgba(123,47,190,0.06); border: 1px solid rgba(123,47,190,0.18);
+      background: rgba(27,63,160,0.06); border: 1px solid rgba(27,63,160,0.18);
       border-radius: 12px; padding: 16px 20px; margin-top: 40px;
       font-size: 12px; color: var(--muted); line-height: 1.7;
     }
@@ -222,7 +222,7 @@
 <section class="sl">
   <div class="section-inner">
     <span class="eyebrow fade-up">Perfil iScore</span>
-    <h2 class="section-title fade-up">El perfil típico del veterinario<br/><span style="background:linear-gradient(135deg,#7B2FBE,#0099CC);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">en zona moderada-alta.</span></h2>
+    <h2 class="section-title fade-up">El perfil típico del veterinario<br/><span style="background:linear-gradient(135deg,var(--azul),var(--oro));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">en zona moderada-alta.</span></h2>
     <p class="section-sub fade-up" style="color:var(--muted2);">
       El gráfico radar muestra las 5 dimensiones del iScore para un perfil típico en zona moderada-alta de desgaste. La forma no es uniforme — y eso es información clínica útil.
     </p>
@@ -242,8 +242,8 @@
           <span style="font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:#FF4560; display:block; margin-bottom:6px;">Zona crítica</span>
           <span style="font-size:14px; color:var(--muted2); line-height:1.5;">Dinero/Crisis y Agotamiento emocional son las dimensiones más elevadas en el perfil promedio.</span>
         </div>
-        <div style="background:rgba(240,165,0,0.07); border:1px solid rgba(240,165,0,0.22); border-radius:14px; padding:16px 18px;">
-          <span style="font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:#F0A500; display:block; margin-bottom:6px;">Dato relevante</span>
+        <div style="background:rgba(156,114,24,0.07); border:1px solid rgba(156,114,24,0.22); border-radius:14px; padding:16px 18px;">
+          <span style="font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--oro-prof); display:block; margin-bottom:6px;">Dato relevante</span>
           <span style="font-size:14px; color:var(--muted2); line-height:1.5;">La Conciencia (48%) es alta — el veterinario siente que algo no funciona, pero no siempre puede nombrarlo.</span>
         </div>
         <div style="background:rgba(0,227,150,0.07); border:1px solid rgba(0,227,150,0.22); border-radius:14px; padding:16px 18px;">
@@ -297,7 +297,7 @@
   <div class="section-inner">
     <div class="article-body">
       <span class="eyebrow fade-up">Las 5 Señales</span>
-      <h2 class="section-title fade-up">Tu cuerpo ya<br/><span style="background:linear-gradient(135deg,#7B2FBE,#0099CC);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">lleva tiempo hablando.</span></h2>
+      <h2 class="section-title fade-up">Tu cuerpo ya<br/><span style="background:linear-gradient(135deg,var(--azul),var(--oro));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">lleva tiempo hablando.</span></h2>
 
       <p class="fade-up" style="color:var(--muted2);">
         Estas señales no son diagnóstico clínico — son indicadores. Si te identificas con 3 o más, tu sistema nervioso te está enviando información que vale la pena atender.
@@ -454,7 +454,7 @@
       </ul>
 
       <div class="data-disclaimer fade-up">
-        <strong>Nota metodológica:</strong> Datos preliminares del instrumento iScore LATAM, adaptado de la Escala de Maslach (1981) para medicina veterinaria clínica de mascotas en Latinoamérica. Muestra voluntaria de carácter exploratorio. Los resultados reflejan tendencias preliminares y no deben interpretarse como estadísticas poblacionales definitivas. Para información completa sobre el diseño del instrumento, ver <a href="metodologia.html" style="color:var(--purple);">nota metodológica completa</a>.
+        <strong>Nota metodológica:</strong> Datos preliminares del instrumento iScore LATAM, adaptado de la Escala de Maslach (1981) para medicina veterinaria clínica de mascotas en Latinoamérica. Muestra voluntaria de carácter exploratorio. Los resultados reflejan tendencias preliminares y no deben interpretarse como estadísticas poblacionales definitivas. Para información completa sobre el diseño del instrumento, ver <a href="metodologia.html" style="color:var(--azul);">nota metodológica completa</a>.
       </div>
     </div>
   </div>
@@ -530,10 +530,10 @@
           {
             label: 'Perfil moderado-alto (zona de riesgo)',
             data: [36, 32, 48, 26, 25],
-            backgroundColor: 'rgba(123,47,190,0.18)',
-            borderColor: '#9D50E8',
+            backgroundColor: 'rgba(27,63,160,0.18)',
+            borderColor: 'var(--azul-l)',
             borderWidth: 2,
-            pointBackgroundColor: '#9D50E8',
+            pointBackgroundColor: 'var(--azul-l)',
             pointBorderColor: '#fff',
             pointBorderWidth: 1.5,
             pointRadius: 5,

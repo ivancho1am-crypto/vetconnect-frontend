@@ -27,8 +27,8 @@
       position: relative;
       padding: 160px 60px 100px;
       background-image:
-        linear-gradient(rgba(123,47,190,0.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(123,47,190,0.045) 1px, transparent 1px);
+        linear-gradient(rgba(27,63,160,0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(27,63,160,0.045) 1px, transparent 1px);
       background-size: 64px 64px;
       overflow: hidden;
     }
@@ -38,9 +38,9 @@
     .art-hero-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 2; }
     .art-category-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(240,165,0,0.1); border: 1px solid rgba(240,165,0,0.35);
+      background: rgba(156,114,24,0.1); border: 1px solid rgba(156,114,24,0.35);
       padding: 6px 16px; border-radius: 50px; margin-bottom: 22px;
-      font-size: 12px; font-weight: 600; color: var(--gold);
+      font-size: 12px; font-weight: 600; color: var(--oro-prof);
     }
     .art-hero h1 {
       font-family: 'Space Grotesk', sans-serif;
@@ -59,7 +59,7 @@
     }
     .art-back {
       display: inline-flex; align-items: center; gap: 7px;
-      color: var(--cyan); text-decoration: none; font-size: 13.5px; font-weight: 600;
+      color: var(--oro-claro); text-decoration: none; font-size: 13.5px; font-weight: 600;
       transition: gap 0.2s;
     }
     .art-back:hover { gap: 11px; }
@@ -93,21 +93,21 @@
     }
     .art-body ul li::before {
       content: '→'; position: absolute; left: 0;
-      color: var(--cyan); font-weight: 700; font-size: 13px;
+      color: var(--oro-claro); font-weight: 700; font-size: 13px;
     }
     .art-body ul li strong { color: var(--text); }
 
     /* ── QUOTE ── */
     .art-quote {
-      border-left: 3px solid var(--purple-l);
+      border-left: 3px solid var(--azul-l);
       padding: 16px 22px;
-      background: rgba(123,47,190,0.07); border-radius: 0 14px 14px 0;
+      background: rgba(27,63,160,0.07); border-radius: 0 14px 14px 0;
       margin: 24px 0; font-size: 16.5px; font-style: italic;
       color: var(--text); line-height: 1.7;
     }
     .sl .art-quote {
-      background: rgba(123,47,190,0.07); color: #0C0C26;
-      border-left-color: var(--purple);
+      background: rgba(27,63,160,0.07); color: #0C0C26;
+      border-left-color: var(--azul);
     }
 
     /* ── PALANCA CARDS (big) ── */
@@ -117,17 +117,17 @@
       position: relative; overflow: hidden;
       transition: border-color 0.3s, box-shadow 0.3s;
     }
-    .palanca-section:hover { border-color: rgba(123,47,190,0.35); box-shadow: 0 18px 50px rgba(0,0,0,0.2); }
+    .palanca-section:hover { border-color: rgba(27,63,160,0.35); box-shadow: 0 18px 50px rgba(0,0,0,0.2); }
     .palanca-top { position: absolute; top: 0; left: 0; right: 0; height: 3px; }
-    .palanca-top-1 { background: linear-gradient(90deg, #F0A500, #FF4560); }
-    .palanca-top-2 { background: linear-gradient(90deg, var(--purple), var(--cyan)); }
-    .palanca-top-3 { background: linear-gradient(90deg, #00E396, var(--cyan)); }
+    .palanca-top-1 { background: linear-gradient(90deg, var(--oro-prof), #FF4560); }
+    .palanca-top-2 { background: linear-gradient(90deg, var(--azul), var(--oro-claro)); }
+    .palanca-top-3 { background: linear-gradient(90deg, #00E396, var(--oro-claro)); }
     .palanca-num {
       font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 700;
       letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px;
     }
-    .palanca-num-1 { color: var(--gold); }
-    .palanca-num-2 { color: var(--purple-l); }
+    .palanca-num-1 { color: var(--oro-prof); }
+    .palanca-num-2 { color: var(--azul-l); }
     .palanca-num-3 { color: var(--green); }
     .palanca-section h3 {
       font-family: 'Space Grotesk', sans-serif;
@@ -146,8 +146,8 @@
       font-size: 9px; top: 4px;
     }
     .palanca-section ul li strong { color: var(--text); }
-    .palanca-num-1 + * ul li::before { color: var(--gold); }
-    .palanca-num-2 + * ul li::before { color: var(--purple-l); }
+    .palanca-num-1 + * ul li::before { color: var(--oro-prof); }
+    .palanca-num-2 + * ul li::before { color: var(--azul-l); }
 
     /* ── TOOL PILL ── */
     .tool-pill {
@@ -155,25 +155,25 @@
       padding: 8px 16px; border-radius: 50px;
       font-size: 12px; font-weight: 600; margin-top: 14px;
     }
-    .tool-pill-gold { background: rgba(240,165,0,0.1); border: 1px solid rgba(240,165,0,0.3); color: var(--gold); }
-    .tool-pill-purple { background: rgba(123,47,190,0.1); border: 1px solid rgba(123,47,190,0.3); color: var(--purple-l); }
+    .tool-pill-gold { background: rgba(156,114,24,0.1); border: 1px solid rgba(156,114,24,0.3); color: var(--oro-prof); }
+    .tool-pill-purple { background: rgba(27,63,160,0.1); border: 1px solid rgba(27,63,160,0.3); color: var(--azul-l); }
     .tool-pill-green { background: rgba(0,227,150,0.1); border: 1px solid rgba(0,227,150,0.3); color: var(--green); }
 
     /* ── SCRIPT BOX ── */
     .script-box {
-      background: rgba(123,47,190,0.07); border: 1px solid rgba(123,47,190,0.22);
+      background: rgba(27,63,160,0.07); border: 1px solid rgba(27,63,160,0.22);
       border-radius: 14px; padding: 18px 22px; margin: 16px 0;
       font-size: 14.5px; font-style: italic; color: var(--text); line-height: 1.75;
     }
     .script-label {
       font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
-      text-transform: uppercase; color: var(--purple-l); margin-bottom: 8px; display: block;
+      text-transform: uppercase; color: var(--azul-l); margin-bottom: 8px; display: block;
     }
 
     /* ── CIERRE ── */
     .cierre-box {
-      background: linear-gradient(135deg, rgba(123,47,190,0.13), rgba(0,212,255,0.06));
-      border: 1px solid rgba(123,47,190,0.3); border-radius: 24px;
+      background: linear-gradient(135deg, rgba(27,63,160,0.13), rgba(201,150,46,0.06));
+      border: 1px solid rgba(27,63,160,0.3); border-radius: 24px;
       padding: 40px 36px; text-align: center; margin-top: 40px;
     }
     .cierre-box h3 {
@@ -189,10 +189,10 @@
       font-size: 13px; line-height: 1.7; color: var(--muted2);
       padding-left: 18px; position: relative;
     }
-    .biblio-item::before { content: '—'; position: absolute; left: 0; color: var(--purple); font-weight: 700; }
+    .biblio-item::before { content: '—'; position: absolute; left: 0; color: var(--azul); font-weight: 700; }
     .note-box {
       margin-top: 28px; padding: 18px 22px;
-      background: rgba(123,47,190,0.07); border: 1px solid rgba(123,47,190,0.2);
+      background: rgba(27,63,160,0.07); border: 1px solid rgba(27,63,160,0.2);
       border-radius: 14px; font-size: 12.5px; color: var(--muted2); line-height: 1.7;
     }
     .note-box strong { color: var(--text); display: block; margin-bottom: 4px; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; }
@@ -204,7 +204,7 @@
       padding: 40px 60px 30px; text-align: center;
     }
     .art-footer p { font-size: 13px; color: var(--muted); }
-    .art-footer a { color: var(--cyan); text-decoration: none; }
+    .art-footer a { color: var(--oro-claro); text-decoration: none; }
     .art-footer a:hover { text-decoration: underline; }
 
     @media (max-width: 1024px) {
@@ -488,7 +488,7 @@
       </div>
 
       <div style="margin-top:36px; text-align:center;">
-        <a href="blog.html" class="btn-primary" style="background: linear-gradient(135deg, var(--purple), var(--cyan-d));">
+        <a href="blog.html" class="btn-primary" style="background: linear-gradient(135deg, var(--azul), var(--oro));">
           ← Volver al Blog
         </a>
       </div>

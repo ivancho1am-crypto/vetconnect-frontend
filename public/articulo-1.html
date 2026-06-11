@@ -28,8 +28,8 @@
       display: flex; align-items: center;
       overflow: hidden; padding: 140px 60px 90px;
       background-image:
-        linear-gradient(rgba(123,47,190,0.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(123,47,190,0.045) 1px, transparent 1px);
+        linear-gradient(rgba(27,63,160,0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(27,63,160,0.045) 1px, transparent 1px);
       background-size: 64px 64px;
     }
     .article-back {
@@ -37,15 +37,15 @@
       color: var(--muted2); text-decoration: none; font-size: 13px; font-weight: 500;
       margin-bottom: 28px; transition: color 0.2s;
     }
-    .article-back:hover { color: var(--cyan); }
+    .article-back:hover { color: var(--oro-claro); }
     .article-back svg { transition: transform 0.2s; }
     .article-back:hover svg { transform: translateX(-3px); }
     .article-category-badge {
       display: inline-flex; align-items: center; gap: 7px;
-      background: rgba(123,47,190,0.12); border: 1px solid rgba(123,47,190,0.35);
+      background: rgba(27,63,160,0.12); border: 1px solid rgba(27,63,160,0.35);
       padding: 6px 16px; border-radius: 50px; margin-bottom: 22px;
       font-size: 11.5px; font-weight: 700; letter-spacing: 1.5px;
-      text-transform: uppercase; color: var(--purple-l);
+      text-transform: uppercase; color: var(--azul-l);
     }
     .article-hero-title {
       font-family: 'Space Grotesk', sans-serif;
@@ -99,7 +99,7 @@
       font-style: italic;
     }
     .belief-list li::before {
-      content: '"'; font-size: 28px; color: var(--purple-l);
+      content: '"'; font-size: 28px; color: var(--azul-l);
       font-family: Georgia, serif; line-height: 1; flex-shrink: 0; margin-top: -4px;
     }
     .tool-card {
@@ -108,25 +108,25 @@
       margin-bottom: 14px; display: flex; gap: 16px; align-items: flex-start;
       transition: border-color 0.25s, transform 0.25s;
     }
-    .tool-card:hover { border-color: rgba(123,47,190,0.35); transform: translateX(4px); }
+    .tool-card:hover { border-color: rgba(27,63,160,0.35); transform: translateX(4px); }
     .tool-icon {
       width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
-      background: linear-gradient(135deg, rgba(123,47,190,0.25), rgba(0,212,255,0.15));
-      border: 1px solid rgba(123,47,190,0.3);
+      background: linear-gradient(135deg, rgba(27,63,160,0.25), rgba(201,150,46,0.15));
+      border: 1px solid rgba(27,63,160,0.3);
       display: flex; align-items: center; justify-content: center; font-size: 18px;
     }
     .tool-body strong { display: block; font-size: 15px; font-weight: 700; margin-bottom: 4px; }
     .tool-body span { font-size: 13.5px; color: var(--muted); line-height: 1.55; }
     .stat-highlight {
       display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
-      background: linear-gradient(135deg, rgba(123,47,190,0.1), rgba(0,212,255,0.05));
-      border: 1px solid rgba(123,47,190,0.3); border-radius: 20px;
+      background: linear-gradient(135deg, rgba(27,63,160,0.1), rgba(201,150,46,0.05));
+      border: 1px solid rgba(27,63,160,0.3); border-radius: 20px;
       padding: 28px 32px; margin: 28px 0;
     }
     .stat-highlight-num {
       font-family: 'Space Grotesk', sans-serif; font-size: 56px; font-weight: 900;
       line-height: 1; letter-spacing: -3px; flex-shrink: 0;
-      background: linear-gradient(135deg, var(--purple-l), var(--cyan));
+      background: linear-gradient(135deg, var(--azul-l), var(--oro-claro));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
     .stat-highlight-text strong { display: block; font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
@@ -136,9 +136,9 @@
       font-size: 13.5px; color: var(--muted2); line-height: 1.7;
       padding-left: 20px; position: relative;
     }
-    .bib-list li::before { content: '—'; position: absolute; left: 0; color: var(--purple); }
+    .bib-list li::before { content: '—'; position: absolute; left: 0; color: var(--azul); }
     .data-disclaimer {
-      background: rgba(123,47,190,0.06); border: 1px solid rgba(123,47,190,0.18);
+      background: rgba(27,63,160,0.06); border: 1px solid rgba(27,63,160,0.18);
       border-radius: 12px; padding: 16px 20px; margin-top: 40px;
       font-size: 12px; color: var(--muted); line-height: 1.7;
     }
@@ -224,7 +224,7 @@
 <section class="sl">
   <div class="section-inner">
     <span class="eyebrow fade-up">Los Números</span>
-    <h2 class="section-title fade-up">No es un caso aislado.<br/><span style="background:linear-gradient(135deg,#7B2FBE,#0099CC);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Es un patrón sistémico.</span></h2>
+    <h2 class="section-title fade-up">No es un caso aislado.<br/><span style="background:linear-gradient(135deg,var(--azul),var(--oro));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Es un patrón sistémico.</span></h2>
     <p class="section-sub fade-up" style="color:var(--muted2);">Dos visualizaciones del mismo conjunto de datos. Una muestra la magnitud del problema; la otra, dónde radica su raíz.</p>
 
     <div class="charts-row stagger" style="margin-top:44px;">
@@ -251,13 +251,13 @@
       <div class="chart-title" style="color:var(--muted2); text-align:left; margin-bottom:20px;">Puntaje promedio por género</div>
       <div class="gender-bar-wrap">
         <span class="gender-label">Mujeres</span>
-        <div class="gender-bar-track"><div class="gender-bar-fill" style="width:73%; background:linear-gradient(90deg,#7B2FBE,#9D50E8);"></div></div>
-        <span class="gender-val" style="color:#9D50E8;">41.8 pts</span>
+        <div class="gender-bar-track"><div class="gender-bar-fill" style="width:73%; background:linear-gradient(90deg,var(--azul),var(--azul-l));"></div></div>
+        <span class="gender-val" style="color:var(--azul-l);">41.8 pts</span>
       </div>
       <div class="gender-bar-wrap">
         <span class="gender-label">Hombres</span>
-        <div class="gender-bar-track"><div class="gender-bar-fill" style="width:62%; background:linear-gradient(90deg,#0099CC,#00D4FF);"></div></div>
-        <span class="gender-val" style="color:#00D4FF;">35.3 pts</span>
+        <div class="gender-bar-track"><div class="gender-bar-fill" style="width:62%; background:linear-gradient(90deg,var(--oro),var(--oro-claro));"></div></div>
+        <span class="gender-val" style="color:var(--oro-claro);">35.3 pts</span>
       </div>
       <p style="font-size:12px; color:var(--muted); margin-top:14px; line-height:1.6;">
         Diferencia de 6.5 puntos entre géneros. Las mujeres muestran consistentemente mayor agotamiento emocional en datos preliminares — coincidiendo con literatura internacional sobre burnout femenino en profesiones de cuidado (Purvanova & Muros, 2010).
@@ -316,7 +316,7 @@
   <div class="section-inner">
     <div class="article-body">
       <span class="eyebrow fade-up">Las Creencias Limitantes</span>
-      <h2 class="section-title fade-up">Lo que el veterinario<br/><span style="background:linear-gradient(135deg,#7B2FBE,#0099CC);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">se dice a sí mismo.</span></h2>
+      <h2 class="section-title fade-up">Lo que el veterinario<br/><span style="background:linear-gradient(135deg,var(--azul),var(--oro));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">se dice a sí mismo.</span></h2>
 
       <p class="fade-up" style="color:var(--muted2);">
         Las creencias son el pegamento invisible que mantiene los patrones en su lugar. Antes de cualquier herramienta, es necesario nombrar lo que se piensa — porque lo que no se nombra no se puede cambiar.
@@ -415,7 +415,7 @@
       </ul>
 
       <div class="data-disclaimer fade-up">
-        <strong>Nota metodológica:</strong> Datos preliminares del instrumento iScore LATAM, adaptado de la Escala de Maslach (1981) para medicina veterinaria clínica de mascotas en Latinoamérica. Muestra voluntaria de carácter exploratorio. Los resultados reflejan tendencias preliminares y no deben interpretarse como estadísticas poblacionales definitivas. Para información completa sobre el diseño del instrumento, ver <a href="metodologia.html" style="color:var(--purple);">nota metodológica completa</a>.
+        <strong>Nota metodológica:</strong> Datos preliminares del instrumento iScore LATAM, adaptado de la Escala de Maslach (1981) para medicina veterinaria clínica de mascotas en Latinoamérica. Muestra voluntaria de carácter exploratorio. Los resultados reflejan tendencias preliminares y no deben interpretarse como estadísticas poblacionales definitivas. Para información completa sobre el diseño del instrumento, ver <a href="metodologia.html" style="color:var(--azul);">nota metodológica completa</a>.
       </div>
     </div>
   </div>
@@ -483,8 +483,8 @@
         labels: ['Bajo (15%)', 'Moderado (69%)', 'Alto (16%)'],
         datasets: [{
           data: [15, 69, 16],
-          backgroundColor: ['#00E396', '#7B2FBE', '#FF4560'],
-          borderColor: ['#00E396', '#9D50E8', '#FF4560'],
+          backgroundColor: ['#00E396', 'var(--azul)', '#FF4560'],
+          borderColor: ['#00E396', 'var(--azul-l)', '#FF4560'],
           borderWidth: 2,
           hoverOffset: 8
         }]
@@ -525,13 +525,13 @@
           data: [36, 32, 48, 26, 25],
           backgroundColor: [
             'rgba(255,69,96,0.75)',
-            'rgba(123,47,190,0.7)',
-            'rgba(240,165,0,0.65)',
-            'rgba(0,212,255,0.6)',
+            'rgba(27,63,160,0.7)',
+            'rgba(156,114,24,0.65)',
+            'rgba(201,150,46,0.6)',
             'rgba(0,227,150,0.6)'
           ],
           borderColor: [
-            '#FF4560', '#9D50E8', '#F0A500', '#00D4FF', '#00E396'
+            '#FF4560', 'var(--azul-l)', 'var(--oro-prof)', 'var(--oro-claro)', '#00E396'
           ],
           borderWidth: 1.5,
           borderRadius: 6

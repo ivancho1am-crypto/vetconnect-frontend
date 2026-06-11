@@ -27,8 +27,8 @@
       position: relative;
       padding: 160px 60px 100px;
       background-image:
-        linear-gradient(rgba(123,47,190,0.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(123,47,190,0.045) 1px, transparent 1px);
+        linear-gradient(rgba(27,63,160,0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(27,63,160,0.045) 1px, transparent 1px);
       background-size: 64px 64px;
       overflow: hidden;
     }
@@ -37,9 +37,9 @@
     .art-hero-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 2; }
     .art-category-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(123,47,190,0.12); border: 1px solid rgba(123,47,190,0.35);
+      background: rgba(27,63,160,0.12); border: 1px solid rgba(27,63,160,0.35);
       padding: 6px 16px; border-radius: 50px; margin-bottom: 22px;
-      font-size: 12px; font-weight: 600; color: var(--purple-l);
+      font-size: 12px; font-weight: 600; color: var(--azul-l);
     }
     .art-hero h1 {
       font-family: 'Space Grotesk', sans-serif;
@@ -58,7 +58,7 @@
     }
     .art-back {
       display: inline-flex; align-items: center; gap: 7px;
-      color: var(--cyan); text-decoration: none; font-size: 13.5px; font-weight: 600;
+      color: var(--oro-claro); text-decoration: none; font-size: 13.5px; font-weight: 600;
       transition: gap 0.2s;
     }
     .art-back:hover { gap: 11px; }
@@ -77,7 +77,7 @@
     }
     .chart-insight {
       max-width: 700px; margin: 18px auto 0;
-      background: rgba(123,47,190,0.07); border: 1px solid rgba(123,47,190,0.22);
+      background: rgba(27,63,160,0.07); border: 1px solid rgba(27,63,160,0.22);
       border-radius: 14px; padding: 18px 22px;
       font-size: 14px; color: var(--muted2); line-height: 1.7;
     }
@@ -99,21 +99,21 @@
     }
     .art-body ul li::before {
       content: '→'; position: absolute; left: 0;
-      color: var(--cyan); font-weight: 700; font-size: 13px;
+      color: var(--oro-claro); font-weight: 700; font-size: 13px;
     }
     .art-body ul li strong { color: var(--text); }
 
     /* ── QUOTE ── */
     .art-quote {
-      border-left: 3px solid var(--purple-l);
+      border-left: 3px solid var(--azul-l);
       padding: 16px 22px;
-      background: rgba(123,47,190,0.07); border-radius: 0 14px 14px 0;
+      background: rgba(27,63,160,0.07); border-radius: 0 14px 14px 0;
       margin: 24px 0; font-size: 16.5px; font-style: italic;
       color: var(--text); line-height: 1.7;
     }
     .sl .art-quote {
-      background: rgba(123,47,190,0.07); color: #0C0C26;
-      border-left-color: var(--purple);
+      background: rgba(27,63,160,0.07); color: #0C0C26;
+      border-left-color: var(--azul);
     }
 
     /* ── GENDER GAP BOX ── */
@@ -129,14 +129,14 @@
       background: rgba(157,80,232,0.09); border-color: rgba(157,80,232,0.28);
     }
     .gap-card.hombres {
-      background: rgba(0,212,255,0.07); border-color: rgba(0,212,255,0.22);
+      background: rgba(201,150,46,0.07); border-color: rgba(201,150,46,0.22);
     }
     .gap-num {
       font-family: 'Space Grotesk', sans-serif; font-size: 52px; font-weight: 900;
       letter-spacing: -2px; line-height: 1; display: block; margin-bottom: 6px;
     }
-    .gap-card.mujeres .gap-num { color: var(--purple-l); }
-    .gap-card.hombres .gap-num { color: var(--cyan); }
+    .gap-card.mujeres .gap-num { color: var(--azul-l); }
+    .gap-card.hombres .gap-num { color: var(--oro-claro); }
     .gap-label { font-size: 13px; color: var(--muted2); font-weight: 600; margin-bottom: 6px; display: block; }
     .gap-sub { font-size: 12px; color: var(--muted); line-height: 1.5; }
 
@@ -145,14 +145,14 @@
     .belief-card {
       background: rgba(255,255,255,0.80); border: 1px solid rgba(12,12,38,.09);
       border-radius: 16px; padding: 22px 20px;
-      border-left: 3px solid var(--purple);
+      border-left: 3px solid var(--azul);
     }
     .belief-card p { font-size: 14px; font-style: italic; color: #3A3A65; margin-bottom: 8px; line-height: 1.6; }
     .belief-card span { font-size: 12px; color: var(--muted); display: block; }
 
     /* ── DISTRESS BOX ── */
     .distress-box {
-      background: linear-gradient(135deg, rgba(255,69,96,0.06), rgba(123,47,190,0.05));
+      background: linear-gradient(135deg, rgba(255,69,96,0.06), rgba(27,63,160,0.05));
       border: 1px solid rgba(255,69,96,0.2); border-radius: 18px;
       padding: 28px 26px; margin: 24px 0;
     }
@@ -167,15 +167,15 @@
       border-radius: 20px; padding: 28px 22px; position: relative; overflow: hidden;
       transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
     }
-    .tool-card:hover { border-color: rgba(123,47,190,0.45); transform: translateY(-6px); box-shadow: 0 20px 56px rgba(0,0,0,0.3); }
-    .tool-top { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--purple), var(--cyan)); }
+    .tool-card:hover { border-color: rgba(27,63,160,0.45); transform: translateY(-6px); box-shadow: 0 20px 56px rgba(0,0,0,0.3); }
+    .tool-top { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--azul), var(--oro-claro)); }
     .tool-icon { font-size: 28px; margin-bottom: 14px; display: block; }
     .tool-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 9px; }
     .tool-card p { font-size: 13px; color: var(--muted); line-height: 1.7; }
     .tool-tag {
       display: inline-block; margin-top: 12px;
-      background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.25);
-      color: var(--cyan); font-size: 10.5px; font-weight: 600;
+      background: rgba(201,150,46,0.1); border: 1px solid rgba(201,150,46,0.25);
+      color: var(--oro-claro); font-size: 10.5px; font-weight: 600;
       padding: 3px 11px; border-radius: 50px;
     }
 
@@ -185,10 +185,10 @@
       font-size: 13px; line-height: 1.7; color: var(--muted2);
       padding-left: 18px; position: relative;
     }
-    .biblio-item::before { content: '—'; position: absolute; left: 0; color: var(--purple); font-weight: 700; }
+    .biblio-item::before { content: '—'; position: absolute; left: 0; color: var(--azul); font-weight: 700; }
     .note-box {
       margin-top: 28px; padding: 18px 22px;
-      background: rgba(123,47,190,0.07); border: 1px solid rgba(123,47,190,0.2);
+      background: rgba(27,63,160,0.07); border: 1px solid rgba(27,63,160,0.2);
       border-radius: 14px; font-size: 12.5px; color: var(--muted2); line-height: 1.7;
     }
     .note-box strong { color: var(--text); display: block; margin-bottom: 4px; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; }
@@ -200,7 +200,7 @@
       padding: 40px 60px 30px; text-align: center;
     }
     .art-footer p { font-size: 13px; color: var(--muted); }
-    .art-footer a { color: var(--cyan); text-decoration: none; }
+    .art-footer a { color: var(--oro-claro); text-decoration: none; }
     .art-footer a:hover { text-decoration: underline; }
 
     @media (max-width: 1024px) {
@@ -505,7 +505,7 @@
       </div>
 
       <div style="margin-top:36px; text-align:center;">
-        <a href="blog.html" class="btn-primary" style="background: linear-gradient(135deg, var(--purple), var(--purple-l));">
+        <a href="blog.html" class="btn-primary" style="background: linear-gradient(135deg, var(--azul), var(--azul-l));">
           ← Volver al Blog
         </a>
       </div>
@@ -515,7 +515,7 @@
 
 <!-- ═══ FOOTER ═══ -->
 <footer class="art-footer" style="background: var(--bg2); border-top: 1px solid var(--border); padding: 40px 60px 30px; text-align: center;">
-  <p style="font-size:13px; color:var(--muted);">© 2026 Veterinario Alfa Latinoamérica · Todos los derechos reservados<a href="blog.html" style="color:var(--cyan); text-decoration:none;">Blog</a> · <a href="programa.html" style="color:var(--cyan); text-decoration:none;">Programa Alfa</a> · <a href="nosotros.html" style="color:var(--cyan); text-decoration:none;">Nosotros</a></p>
+  <p style="font-size:13px; color:var(--muted);">© 2026 Veterinario Alfa Latinoamérica · Todos los derechos reservados<a href="blog.html" style="color:var(--oro-claro); text-decoration:none;">Blog</a> · <a href="programa.html" style="color:var(--oro-claro); text-decoration:none;">Programa Alfa</a> · <a href="nosotros.html" style="color:var(--oro-claro); text-decoration:none;">Nosotros</a></p>
   <p style="margin-top:8px; font-size:12px; color:var(--muted);">Contenido con fines educativos. No sustituye orientación clínica ni psicológica profesional.</p>
 </footer>
 
@@ -533,11 +533,11 @@
         data: [41.8, 35.3],
         backgroundColor: [
           'rgba(157,80,232,0.65)',
-          'rgba(0,212,255,0.55)'
+          'rgba(201,150,46,0.55)'
         ],
         borderColor: [
           'rgba(157,80,232,1)',
-          'rgba(0,212,255,1)'
+          'rgba(201,150,46,1)'
         ],
         borderWidth: 2,
         borderRadius: 12,
