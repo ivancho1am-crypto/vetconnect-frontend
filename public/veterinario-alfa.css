@@ -42,16 +42,20 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       display: flex; align-items: center; justify-content: space-between;
       padding: 16px 60px;
-      background: rgba(4,4,15,0.85);
-      border-bottom: 1px solid var(--border);
-      transition: background 0.3s ease;
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(27,63,160,0.08);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
       transform: translateZ(0);
     }
-    nav.scrolled { background: rgba(4,4,15,0.97); }
+    nav.scrolled {
+      background: rgba(255,255,255,0.97);
+      box-shadow: 0 4px 28px rgba(11,27,69,0.09);
+    }
     .nav-logo { height: 44px; display: block; }
     .nav-links { display: flex; gap: 32px; list-style: none; }
-    .nav-links a { color: var(--muted2); text-decoration: none; font-size: 13.5px; font-weight: 500; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--text); }
+    .nav-links a { color: #1B2B5A; text-decoration: none; font-size: 13.5px; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--azul); }
     .nav-cta {
       background: linear-gradient(135deg, var(--azul), var(--oro));
       color: #fff; border: none; padding: 10px 24px;
@@ -136,14 +140,25 @@
       position: relative; min-height: 100vh;
       display: flex; align-items: center;
       overflow: hidden; padding: 130px 60px 80px;
+      background-color: #FFFFFF;
       background-image:
-        linear-gradient(rgba(27,63,160,0.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(27,63,160,0.045) 1px, transparent 1px);
-      background-size: 64px 64px;
+        radial-gradient(1100px 600px at 85% -10%, rgba(27,63,160,0.09), transparent 60%),
+        radial-gradient(800px 500px at -5% 105%, rgba(201,150,46,0.08), transparent 55%),
+        linear-gradient(rgba(27,63,160,0.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(27,63,160,0.028) 1px, transparent 1px);
+      background-size: auto, auto, 64px 64px, 64px 64px;
     }
-    #hero .orb-azul { top: -120px; left: -100px; animation: drift1 13s ease-in-out infinite alternate; }
-    #hero .orb-oro   { bottom: -80px; right: 200px; animation: drift2 16s ease-in-out infinite alternate; }
-    #hero .orb-gold   { top: 38%; right: 44%; animation: drift3 19s ease-in-out infinite alternate; }
+    #hero .orb-azul { top: -120px; left: -100px; opacity: 0.22; animation: drift1 13s ease-in-out infinite alternate; }
+    #hero .orb-oro   { bottom: -80px; right: 200px; opacity: 0.18; animation: drift2 16s ease-in-out infinite alternate; }
+    #hero .orb-gold  { top: 38%; right: 44%; opacity: 0.12; animation: drift3 19s ease-in-out infinite alternate; }
+    /* Hero text — dark on light background */
+    #hero .hero-title             { color: #0B1E5E; }
+    #hero .hero-sub               { color: #5A6378; }
+    #hero .hero-sub strong        { color: #0B1E5E; }
+    #hero .hero-badge             { background: rgba(27,63,160,0.08); border-color: rgba(27,63,160,0.22); }
+    #hero .hero-proof             { border-top-color: rgba(27,63,160,0.12); }
+    #hero .proof-lbl              { color: #6B7280; }
+    #hero .proof-sep              { background: rgba(27,63,160,0.15); }
 
     .hero-content { position: relative; z-index: 2; max-width: 660px; }
 
@@ -186,8 +201,8 @@
     .hero-visual::after {
       content: ''; position: absolute; inset: 0; z-index: 2;
       background:
-        linear-gradient(90deg, var(--bg) 0%, rgba(4,4,15,0.6) 40%, rgba(4,4,15,0.1) 100%),
-        linear-gradient(180deg, rgba(4,4,15,0.4) 0%, transparent 20%, transparent 80%, var(--bg) 100%);
+        linear-gradient(90deg, #FFFFFF 0%, rgba(255,255,255,0.72) 40%, rgba(255,255,255,0.08) 100%),
+        linear-gradient(180deg, rgba(255,255,255,0.50) 0%, transparent 18%, transparent 82%, rgba(255,255,255,0.80) 100%);
     }
 
     /* ── HERO LOGO OVERLAY ── */
@@ -213,7 +228,8 @@
 
     .hero-float {
       position: absolute; bottom: 48px; right: 48px; z-index: 10;
-      background: rgba(7,7,26,0.9); border: 1px solid var(--border2);
+      background: rgba(255,255,255,0.92); border: 1px solid rgba(27,63,160,0.12);
+      box-shadow: 0 16px 40px rgba(11,27,69,0.12);
       border-radius: 16px; padding: 16px 20px;
       display: flex; align-items: center; gap: 14px;
       animation: floatY 5s ease-in-out infinite alternate;
@@ -225,8 +241,8 @@
       background: linear-gradient(135deg, var(--azul), var(--oro));
       display: flex; align-items: center; justify-content: center; font-size: 18px;
     }
-    .float-text strong { display: block; font-size: 14px; font-weight: 700; }
-    .float-text span { font-size: 11px; color: var(--muted); }
+    .float-text strong { display: block; font-size: 14px; font-weight: 700; color: #0B1E5E; }
+    .float-text span { font-size: 11px; color: #6B7280; }
 
     /* ══════════════ STATS ══════════════ */
     #stats { position: relative; z-index: 2; padding: 0 60px 72px; }
@@ -624,6 +640,40 @@
     .sb p                            { color: rgba(255,255,255,0.82); }
     .sb h3, .sb h4                   { color: #FFFFFF; }
     .sb a:not(.btn-primary):not(.btn-ghost) { color: var(--oro-claro); }
+
+    /* ══════════════ ARTICLE & OLSV HERO LIGHT ══════════════ */
+    .article-hero {
+      background-color: #FFFFFF !important;
+      background-image:
+        radial-gradient(900px 500px at 90% -5%, rgba(27,63,160,0.08), transparent 60%),
+        radial-gradient(600px 400px at -5% 100%, rgba(201,150,46,0.07), transparent 55%),
+        linear-gradient(rgba(27,63,160,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(27,63,160,0.025) 1px, transparent 1px) !important;
+      background-size: auto, auto, 64px 64px, 64px 64px !important;
+    }
+    .article-hero-title                { color: #0B1E5E !important; }
+    .article-lead                      { color: #5A6378 !important; }
+    .article-lead strong               { color: #0B1E5E !important; }
+    .article-back                      { color: #6B7280 !important; }
+    .article-back svg path             { stroke: #6B7280 !important; }
+    .article-back:hover                { color: var(--azul) !important; }
+    .article-category-badge            { background: rgba(27,63,160,0.08) !important; border-color: rgba(27,63,160,0.22) !important; }
+    .article-meta-bar                  { border-top-color: rgba(27,63,160,0.12) !important; }
+    .article-meta-bar span             { color: #6B7280 !important; }
+
+    .olsv-hero {
+      background-color: #FFFFFF !important;
+      background-image:
+        radial-gradient(1000px 500px at 80% -10%, rgba(27,63,160,0.09), transparent 60%),
+        radial-gradient(700px 400px at -5% 100%, rgba(201,150,46,0.07), transparent 55%) !important;
+    }
+    .olsv-hero-sigla                   { color: #0B1E5E !important; }
+    .olsv-hero-name, .olsv-hero-title  { color: #0B1E5E !important; }
+    .olsv-hero-tagline                 { color: #5A6378 !important; }
+    .olsv-hero-badge                   { background: rgba(27,63,160,0.08) !important; border-color: rgba(27,63,160,0.22) !important; color: #1B3FA0 !important; }
+    .olsv-sigla-badge                  { background: rgba(27,63,160,0.08) !important; border-color: rgba(27,63,160,0.22) !important; }
+    .olsv-isotipo                      { color: rgba(27,63,160,0.06) !important; }
+    .olsv-dot                          { background: var(--azul) !important; }
 
     /* ══════════════ RESPONSIVE ══════════════ */
     @media (max-width: 1024px) {
